@@ -1,0 +1,21 @@
+{
+  "expr": true,
+  "smarttabs": true,
+  "laxbreak": true,
+  "browser": true,
+  "devel": true,
+  "jquery": true,
+  "nonstandard": true,
+  "scripturl": true,
+  "multistr": true,
+  "eqnull": true,
+  "latedef": "nofunc",
+  "immed": true,
+  "globals": {
+    "define": false,
+    "require": false,
+    "angular": false,
+    "module": false,
+    "inject": false
+  }
+}
