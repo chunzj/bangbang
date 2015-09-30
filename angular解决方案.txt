@@ -1,0 +1,5 @@
+1、数据缓存：https://github.com/grevory/angular-local-storage
+2、表单验证信息：http://www.yearofmoo.com/2014/05/how-to-use-ngmessages-in-angularjs.html
+3、路由：https://github.com/angular-ui/ui-router
+4、文件懒加载：angular-loader.js
+5、angular常用解决方案：http://www.riafan.com/angularjs-learning/

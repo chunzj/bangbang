@@ -3,4 +3,4 @@
  *
  */
 angular
-  .module('bangbang.common', []);
+  .module('bb.cp.common', []); //cp: components

@@ -1,0 +1,4 @@
+# node_modules ignored by default
+
+# Ignore original javascript file
+src/app/base/scripts/*.js

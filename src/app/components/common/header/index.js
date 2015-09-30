@@ -3,16 +3,13 @@
  *
  */
 angular
-  .module('bangbang.common', [])
+  .module('bb.cp.common')
   .directive('header', function () {
     return {
       restrict: 'A',
       templateUrl: 'app/common/header/index.html',
       scope: {
         title: '@'
-      },
-      controller: NavbarController,
-      controllerAs: 'vm',
-      bindToController: true
+      }
     };
   });
