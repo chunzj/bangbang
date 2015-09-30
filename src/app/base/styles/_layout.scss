@@ -1,0 +1,46 @@
+/*
+  @author: chunzj
+  @description: defining some layout style
+*/
+
+@import 'variable';
+
+%fl {
+  float: $left;
+}
+%fr {
+  float: $right;
+}
+
+%block {
+  display: block;
+}
+
+%none {
+  display: none;
+}
+
+%hide {
+  overflow: hidden;
+}
+
+%pos-a {
+  position: absolute;
+}
+%pos-r {
+  position: relative;
+}
+%pos-f {
+  position: fixed;
+}
+
+%clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
