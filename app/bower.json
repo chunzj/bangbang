@@ -1,9 +1,0 @@
-{
-  "name": "bangbang",
-  "version": "1.0.0",
-  "description": "A private project for the service of bangbang by using angular",
-  "repository": "https://github.com/chunzj/bangbang",
-  "license": "MIT",
-  "private": true,
-  "dependencies": {}
-}
