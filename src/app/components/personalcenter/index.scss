@@ -1,0 +1,95 @@
+%list-text {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #fff;
+  padding-left: 19.4rem;
+}
+
+.personal-center-page {
+  .user-info {
+    padding: 1.6rem 0 1.6rem 7.8rem;
+    line-height: 1rem;
+  }
+
+  .photo {
+    border: 1rem solid #141415;
+    border-radius: 20.8rem;
+    width: 20.8rem;
+    height: 20.8rem;
+    overflow: hidden;
+    img {
+      border-radius: 20.8rem;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .detail {
+    margin-left: 3.4rem;
+    margin-top: 4.7rem;
+  }
+
+  .detail-wz {
+    line-height: 6.7rem;
+  }
+
+  .name {
+    color: #fff;
+    font-size: 5rem;
+    font-weight: bold;
+    line-height: 2.4rem;
+
+  }
+  .validation {
+    color: #ff7e00;
+    font-size: 4.4rem;
+    background: url("../../../assets/images/personal/grade.png") no-repeat right center/4.3rem 5rem;
+    padding-right: 5.2rem;
+    margin-left: 4rem;
+  }
+  .grade {
+    font-size: 4rem;
+    color: #c8c8c8;
+    margin-top: 1.7rem;
+  }
+  .setting {
+    background: url("../../../assets/images/personal/setting.png") no-repeat 0 0/4rem auto;
+    width: 4rem;
+    height: 4rem;
+    float: right;
+    margin: 2.3rem 2.7rem 0 0;
+  }
+
+  .exclude-order {
+    min-height: 80rem;
+    padding: 0 5.6rem;
+  }
+
+  .order, .exclude-order {
+    margin-top: 1rem;
+  }
+
+  .title {
+    background: url("../../../assets/images/personal/order.png") no-repeat 8.7rem center/6.3rem 7.4rem;
+    @extend %list-text;
+  }
+
+  .wallet {
+    background: url("../../../assets/images/personal/wallet.png") no-repeat 3.3rem center/6.3rem 8.2rem;
+    @extend %list-text;
+  }
+
+  .comment {
+    background: url("../../../assets/images/personal/coment.png") no-repeat 3.3rem  center/7.1rem 5.2rem;
+    @extend %list-text;
+  }
+
+  .exclude-order {
+    .wallet, .comment {
+      padding-left: 13.8rem;
+    }
+
+    .arrow-right {
+      right: 0.2rem;
+    }
+  }
+}

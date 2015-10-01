@@ -23,6 +23,12 @@
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      })
+      .state('personalCenter', {
+        url: '/personal',
+        templateUrl: 'app/components/personalcenter/index.html',
+        controller: 'PersonalCenterController',
+        controllerAs: 'personal'
       });
 
     $urlRouterProvider.otherwise('/');
@@ -40,7 +46,8 @@
       'ngMessages',
       'ngAria',
       'ui.router',
-      'toastr'
+      'toastr',
+      'bb.cp.common'
     ]).constant('moment', moment)
     .config(baseConfig)
     .config(routerConfig)

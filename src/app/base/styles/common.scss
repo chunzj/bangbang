@@ -1,50 +1,78 @@
+@import "layout";
+
 /*
   @author: chunzj
   @description: defining some common style
 */
 
-.html {
+html {
   font-size: 62.5%;
-  background: red;
 }
 
-.left {
-  float: left;
+body {
+  background: url("../../../assets/images/shared/bg.png") no-repeat;
+  background-size: 100%;
 }
-
-.right {
-  float: right;
-}
-
 
 .border-top {
-  padding-top: 1px;
-  background-image:linear-gradient(180deg, #D8D7DC 51%, transparent 51%);
-  background-size: 100% 1px;
+  background-image:linear-gradient(180deg, #FFF 51%, transparent 51%);
+  background-size: 100% 2px;
   background-repeat: no-repeat;
   background-position: center top;
 }
 
 .border-bottom {
-  padding-bottom: 1px;
-  background-image:linear-gradient(0deg, transparent 50%, #D8D7DC 50%);
-  background-size: 100% 1px;
+  background-image:linear-gradient(0deg, transparent 50%, #FFF 50%);
+  background-size: 100% 2px;
   background-repeat: no-repeat;
   background-position: center bottom;
 }
 
 /*top and bottom*/
 .border-tb {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  background-image:linear-gradient(180deg, #D8D7DC 51%, transparent 51%),
-  linear-gradient(0deg, transparent 50%, #D8D7DC 50%);
-  background-size: 100% 1px, 100% 1px;
+  background-image:linear-gradient(180deg, #FFF 51%, transparent 51%),
+  linear-gradient(0deg, transparent 50%, #FFF 50%);
+  background-size: 100% 2px, 100% 2px;
   background-repeat: no-repeat, no-repeat;
   background-position: center top, center bottom;
 }
 
 .border {
-  -webkit-box-shadow: 0 0 1px 0 gray;
-  box-shadow: 0 0 1px 0 gray;
+  -webkit-box-shadow: 0 0 1px 0 #FFF;
+  box-shadow: 0 0 1px 0 #FFF;
+}
+
+.bb-content {
+  padding: 9.2rem 5.5rem 6.2rem;
+}
+
+.item-bg {
+  @extend %item-bg;
+}
+
+.row {
+  line-height: 13.4rem;
+  position: relative;
+  .arrow-right {
+    display: inline-block;
+    width: 5.3rem;
+    height: 6.7rem;
+    background: url("../../../assets/images/personal/right-arrow.png") no-repeat 0 0/5.3rem auto;
+    position: absolute;
+    right: 5.7rem;
+    top: 50%;
+    margin-top: -3.35rem;
+  }
+}
+
+.left {
+  @extend %fl;
+}
+
+.right {
+  @extend %fr;
+}
+
+.clear {
+  @extend %clearfix;
 }
