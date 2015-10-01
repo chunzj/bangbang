@@ -29,6 +29,12 @@
         templateUrl: 'app/components/personalcenter/index.html',
         controller: 'PersonalCenterController',
         controllerAs: 'personal'
+      })
+      .state('personalEdit', {
+        url: '/personal_edit',
+        templateUrl: 'app/components/personaledit/index.html',
+        controller: 'PersonalEditController',
+        controllerAs: 'personalEdit'
       });
 
     $urlRouterProvider.otherwise('/');

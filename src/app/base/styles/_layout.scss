@@ -45,6 +45,18 @@
   }
 }
 
+@mixin arrow-style ($width, $height, $right, $bgUrl) {
+    display: inline-block;
+    width: $width;
+    height: $height;
+    background: url($bgUrl) no-repeat 0 0;
+    background-size: $width auto;
+    position: absolute;
+    right: $right;
+    top: 50%;
+    margin-top: -$height/2;
+}
+
 %item-bg {
   background: url("../../../assets/images/shared/bg2.png") repeat;
 }
