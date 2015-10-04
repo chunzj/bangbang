@@ -1,0 +1,224 @@
+.my-cash-page {
+  font-size: 5rem;
+  .cash {
+    @extend .wallet;
+    margin-left: 4rem;
+    font-weight: bolder;
+
+    .title {
+      margin-left: 9.3rem;
+    }
+
+    .charge, .withdraw {
+      text-align: center;
+      display: inline-block;
+      width: 15.6rem;
+      line-height: 9.1rem;
+      font-weight: normal;
+    }
+
+    .charge {
+      background-color: #d44e4b;
+      margin-left: 5.8rem;
+    }
+
+    .withdraw {
+      background-color: #b3d465;
+      margin-left: 3.3rem;
+    }
+  }
+
+  .records {
+    min-height: 80rem;
+    margin-top: 2.2rem;
+    padding: 0 5.2rem;
+
+    .title {
+      font-weight: bolder;
+      background: url("../../../assets/images/wallet/records.png") no-repeat left center;
+      background-size: 6.9rem auto;
+      margin-left: 3rem;
+      padding-left: 11.2rem;
+    }
+
+    .record {
+      padding: 2.4rem 4.6rem;
+      position: relative;
+      div {
+        line-height: 4.5rem;
+      }
+    }
+
+    .date {
+      font-size: 3.5rem;
+      color: #868686;
+    }
+
+    .quota {
+      font-weight: bolder;
+      position: absolute;
+      top: 50%;
+      right: 4.6rem;
+      margin-top: -2.3rem;
+    }
+  }
+
+  .operation {
+    color: #000;
+    text-align: center;
+    .main-title {
+      margin-top: 4.8rem;
+      color: #f30000;
+      font-size: 7.2rem;
+      font-weight: bolder;
+    }
+
+    .symbol {
+      padding: 2.4rem;
+      border-radius: 24rem;
+      border: 13px solid #ff0000;
+      margin: 3.2rem auto 0;
+      width: 24rem;
+      height: 24rem;
+      .icon {
+        display: block;
+        background: url("../../../assets/images/wallet/symbol.png") no-repeat;
+        background-size: 11.4rem auto;
+        background-position: center center;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+      }
+    }
+
+    .desc {
+      font-weight: bolder;
+      font-size: 5rem;
+      margin-top: 2.6rem;
+    }
+
+    .quota {
+      margin-top: 4.6rem;
+      padding: 0 8.8rem;
+      text-align: left;
+      .q-title {
+        font-size: 3rem;
+      }
+
+      .input-c {
+        margin-top: 1rem;
+        line-height: 7.4rem;
+        border: 5px solid #c8c8c8;
+      }
+
+      .character {
+        color: #616161;
+        margin-left: 2.7rem;
+      }
+
+      input {
+        margin-left: 3.8rem;
+      }
+    }
+
+    .caution {
+      margin-top: 6rem;
+
+      .amount {
+        color: #ff9e04;
+        font-weight: bolder;
+        font-size: 6rem;
+      }
+    }
+
+    .separator {
+      margin-top: 7.5rem;
+      height: 5px;
+      width: 100%;
+      background-color: #c8c8c8;
+    }
+
+    .payment {
+      margin: 7rem 5.2rem 0;
+      text-align: left;
+
+      .title {
+        font-size: 3rem;
+      }
+
+      .pay-item {
+        border: 5px solid #c8c8c8;
+        margin-top: 1.1rem;
+        padding: 4.4rem 2.6rem;
+        position: relative;
+
+        .icon {
+          background: url("../../../assets/images/wallet/card.png") no-repeat;
+          background-position: left center;
+          background-size: 12.5rem auto;
+          width: 12.5rem;
+          height: 8.7rem;
+          display: inline-block;
+          vertical-align: text-bottom;
+        }
+
+        .content {
+          display: inline-block;
+        }
+
+        .name {
+          font-size: 4rem;
+        }
+
+        .comment {
+          color: #c8c8c8;
+          font-size: 3rem;
+        }
+
+        .checkbox {
+          background-size: 3.9rem auto;
+          background-repeat: no-repeat;
+          background-position: left top;
+          width: 3.9rem;
+
+          position: absolute;
+          top: 50%;
+          right: 2.8rem;
+          outline: none;
+        }
+
+        .check {
+          background-image: url("../../../assets/images/shared/check.png");
+          height: 4rem;
+          margin-top: -2rem;
+        }
+
+        .checked {
+          background-image: url("../../../assets/images/shared/checked.png");
+          height: 4.4rem;
+          margin-top: -2.2rem;
+        }
+      }
+    }
+
+    .oper {
+      margin: 8rem 0 11.2rem;
+
+      .btn {
+        width: 28rem;
+        height: 11rem;
+        color: #fff;
+        padding: 3rem 4rem;
+      }
+
+      .pay {
+        background-color: #ff0000;
+      }
+
+      .cancel {
+        margin-left: 6rem;
+        background-color: #04b800;
+      }
+    }
+  }
+}

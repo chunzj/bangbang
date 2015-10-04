@@ -1,0 +1,20 @@
+<div class="my-cash-page container">
+  <bb-header title="E棒棒-当棒棒"></bb-header>
+  <div class="bb-content">
+    <div class="item-bg row">
+      <div class="cash">
+        <span class="title">我的现金 : {{cash | currencyCn}}</span>
+        <span class="charge" ng-click="openDialog(1)">充值</span>
+        <span class="withdraw" ng-click="openDialog(-1)">提现</span>
+      </div>
+    </div>
+    <div class="item-bg records">
+      <div class="row border-bottom record" ng-repeat="record in records">
+        <div class="cause">{{record.cause}}</div>
+        <div class="date">{{record.dateTitle}} : {{record.date}}</div>
+        <div class="quota">{{record.quota | currencyCn}}</div>
+      </div>
+    </div>
+  </div>
+  <div ui-view="operation" class="operation" ng-show="showDialog"></div>
+</div>

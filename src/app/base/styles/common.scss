@@ -13,6 +13,7 @@ body {
   background: url("../../../assets/images/shared/bg.png") no-repeat;
   background-size: 100%;
   color: #fff;
+  overflow-x: hidden;
 }
 
 input, select {
@@ -89,4 +90,36 @@ input, select {
 
 .hide {
   display: none;
+}
+
+.wallet {
+  background: url("../../../assets/images/personal/wallet.png") no-repeat left center/6.3rem 8.2rem;
+}
+
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    z-index: 1;
+    background-color: #353547;
+  }
+
+  .dialog-content {
+    position: relative;
+    margin: 15.3rem auto 0;
+    width: 78.15%;
+    background-color: #fff;
+    border: 5px solid #000;
+    z-index: 2;
+  }
 }

@@ -1,0 +1,22 @@
+<div class="my-wallet-page container">
+  <bb-header title="E棒棒-当棒棒"></bb-header>
+  <div class="bb-content">
+    <div class="item-bg row">
+      <a ui-sref="myCash">
+        <div class="cash">
+          <span class="title">我的现金 : {{cash | currencyCn}}</span>
+          <span class="arrow-right"></span>
+        </div>
+      </a>
+    </div>
+    <div class="item-bg records">
+      <div class="row border-bottom"><div class="title">棒棒券获得记录</div></div>
+      <div class="row border-bottom record" ng-repeat="record in records">
+        <div class="quota">棒棒券 : {{record.quota | currencyCn}}</div>
+        <div class="date">获得时间 : {{record.date}}</div>
+        <div class="expired-date">过期时间 : {{record.expiredDate}}</div>
+        <div class="status" ng-class="record.fontStyle">{{record.status}}</div>
+      </div>
+    </div>
+  </div>
+</div>

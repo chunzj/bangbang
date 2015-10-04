@@ -35,13 +35,37 @@
         templateUrl: 'app/components/personaledit/index.html',
         controller: 'PersonalEditController',
         controllerAs: 'personalEdit'
+      })
+      .state('myWallet', {
+        url: '/wallet',
+        templateUrl: 'app/components/mywallet/index.html',
+        controller: 'MyWalletController',
+        controllerAs: 'myWallet'
+      })
+      .state('myCash', {
+        url: '/cash',
+        views: {
+          '': {
+            templateUrl: 'app/components/mycash/index.html',
+            controller: 'MyCashController',
+            controllerAs: 'myCash'
+          },
+          'operation@myCash': {
+            templateUrl: 'app/components/mycash/operation.html',
+            controller: 'OperationController',
+            controllerAs: 'operation'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');
   }
 
   /** @ngInject */
-  function runBlock($log) {
+  function runBlock($rootScope, $state, $stateParams, $log) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
     $log.debug('runBlock end');
   }
 
@@ -53,6 +77,7 @@
       'ngAria',
       'ui.router',
       'toastr',
+      'bb.common.filter',
       'bb.cp.common'
     ]).constant('moment', moment)
     .config(baseConfig)

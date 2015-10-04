@@ -7,7 +7,8 @@
     .controller('PersonalCenterController', PersonalCenterController);
 
   /** @ngInject */
-  function PersonalCenterController() {
+  function PersonalCenterController($scope) {
+    var vm = $scope;
 
   }
 })();

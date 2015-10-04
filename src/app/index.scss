@@ -9,8 +9,10 @@
 // injector
 @import "base/styles/base.scss";
 @import "base/styles/common.scss";
+@import "components/mywallet/index.scss";
+@import "components/mycash/index.scss";
 @import "components/navbar/navbar.scss";
-@import "components/personalcenter/index.scss";
 @import "components/personaledit/index.scss";
+@import "components/personalcenter/index.scss";
 @import "components/common/header/index.scss";
 // endinjector

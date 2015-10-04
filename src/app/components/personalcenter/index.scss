@@ -74,20 +74,21 @@
   }
 
   .wallet {
-    background: url("../../../assets/images/personal/wallet.png") no-repeat 3.3rem center/6.3rem 8.2rem;
+    @extend .wallet;
     @extend %list-text;
+    margin-left: 3rem;
+    padding-left: 10.8rem;
   }
 
   .comment {
-    background: url("../../../assets/images/personal/coment.png") no-repeat 3.3rem  center/7.1rem 5.2rem;
+    background: url("../../../assets/images/personal/coment.png") no-repeat 3.3rem center/7.1rem 5.2rem;
     @extend %list-text;
   }
 
   .exclude-order {
-    .wallet, .comment {
+    .comment {
       padding-left: 13.8rem;
     }
-
     .arrow-right {
       right: 0.2rem;
     }

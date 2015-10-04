@@ -1,0 +1,58 @@
+.my-wallet-page {
+  font-size: 5rem;
+  .cash {
+    @extend .wallet;
+    margin-left: 8.7rem;
+    font-weight: bolder;
+
+    .title {
+      margin-left: 11.5rem;
+    }
+  }
+
+  .records {
+    min-height: 80rem;
+    margin-top: 2.2rem;
+    padding: 0 5.2rem;
+    .title {
+      font-weight: bolder;
+      background: url("../../../assets/images/wallet/records.png") no-repeat left center;
+      background-size: 6.9rem auto;
+      margin-left: 3rem;
+      padding-left: 11.2rem;
+    }
+
+    .record {
+      padding: 1.2rem 4.6rem;
+      position: relative;
+      div {
+        line-height: 4.5rem;
+      }
+    }
+
+    .date, .expired-date {
+      font-size: 3.5rem;
+      color: #868686;
+    }
+
+    .date {
+      margin-top: 1rem;
+    }
+
+    .status {
+      font-weight: bolder;
+      position: absolute;
+      top: 50%;
+      right: 4.6rem;
+      margin-top: -2.3rem;
+    }
+
+    .not-used {
+      color: #ff8a00;
+    }
+
+    .expired {
+      color: #6d6d6d;
+    }
+  }
+}
