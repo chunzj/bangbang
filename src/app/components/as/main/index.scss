@@ -1,0 +1,32 @@
+@mixin as-main-btn-bg ($marginTop, $marginBottom, $bgUrl) {
+
+  text-align: center;
+  width: 83.6rem;
+  height: 34.1rem;
+  margin: $marginTop auto $marginBottom;
+
+  .text {
+    background: url($bgUrl) no-repeat;
+    background-size: 83.6rem auto;
+    line-height: 34.1rem;
+    font-size: 10.427rem;
+    color: #fff;
+    font-weight: bolder;
+  }
+}
+
+.as-main-page {
+  .apply {
+    @include as-main-btn-bg(4.8rem, 11.8rem, "../../../../assets/images/as/apply.png");
+  }
+
+  .comment {
+    margin-top: 1.6rem;
+    text-align: left;
+    font-size: 3.773rem;
+  }
+
+  .login {
+    @include as-main-btn-bg(16.8rem, 0, "../../../../assets/images/as/login.png");
+  }
+}

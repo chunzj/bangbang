@@ -42,7 +42,7 @@
   .validation {
     color: #ff7e00;
     font-size: 4.4rem;
-    background: url("../../../assets/images/personal/grade.png") no-repeat right center/4.3rem 5rem;
+    background: url("../../../../assets/images/personal/grade.png") no-repeat right center/4.3rem 5rem;
     padding-right: 5.2rem;
     margin-left: 4rem;
   }
@@ -52,7 +52,7 @@
     margin-top: 1.7rem;
   }
   .setting {
-    background: url("../../../assets/images/personal/setting.png") no-repeat 0 0/4rem auto;
+    background: url("../../../../assets/images/personal/setting.png") no-repeat 0 0/4rem auto;
     width: 4rem;
     height: 4rem;
     float: right;
@@ -69,7 +69,7 @@
   }
 
   .title {
-    background: url("../../../assets/images/personal/order.png") no-repeat 8.7rem center/6.3rem 7.4rem;
+    background: url("../../../../assets/images/personal/order.png") no-repeat 8.7rem center/6.3rem 7.4rem;
     @extend %list-text;
   }
 
@@ -81,7 +81,7 @@
   }
 
   .comment {
-    background: url("../../../assets/images/personal/coment.png") no-repeat 3.3rem center/7.1rem 5.2rem;
+    background: url("../../../../assets/images/personal/coment.png") no-repeat 3.3rem center/7.1rem 5.2rem;
     @extend %list-text;
   }
 

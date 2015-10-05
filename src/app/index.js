@@ -1,5 +1,5 @@
 /* global moment:false */
-(function() {
+(function () {
   'use strict';
 
   /** @ngInject */
@@ -25,35 +25,55 @@
         controllerAs: 'main'
       })
       .state('personalCenter', {
-        url: '/personal',
-        templateUrl: 'app/components/personalcenter/index.html',
+        url: '/personal/index',
+        templateUrl: 'app/components/personal/personalcenter/index.html',
         controller: 'PersonalCenterController',
         controllerAs: 'personal'
       })
       .state('personalEdit', {
-        url: '/personal_edit',
-        templateUrl: 'app/components/personaledit/index.html',
+        url: '/personal/edit',
+        templateUrl: 'app/components/personal/personaledit/index.html',
         controller: 'PersonalEditController',
         controllerAs: 'personalEdit'
       })
       .state('myWallet', {
-        url: '/wallet',
-        templateUrl: 'app/components/mywallet/index.html',
+        url: '/personal/wallet',
+        templateUrl: 'app/components/personal/mywallet/index.html',
         controller: 'MyWalletController',
         controllerAs: 'myWallet'
       })
       .state('myCash', {
-        url: '/cash',
+        url: '/personal/cash',
         views: {
           '': {
-            templateUrl: 'app/components/mycash/index.html',
+            templateUrl: 'app/components/personal/mycash/index.html',
             controller: 'MyCashController',
             controllerAs: 'myCash'
           },
           'operation@myCash': {
-            templateUrl: 'app/components/mycash/operation.html',
+            templateUrl: 'app/components/personal/mycash/operation.html',
             controller: 'OperationController',
             controllerAs: 'operation'
+          }
+        }
+      }).
+      state('as', {
+        url: '/as/index',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/main/index.html',
+            controller: 'AsMainController',
+            controllerAs: 'asMain'
+          }
+        }
+      }).
+      state('asLogin', {
+        url: '/as/login',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/login/index.html',
+            controller: 'AsLoginController',
+            controllerAs: 'asLogin'
           }
         }
       });

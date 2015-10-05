@@ -35,7 +35,7 @@
 
     .title {
       font-weight: bolder;
-      background: url("../../../assets/images/wallet/records.png") no-repeat left center;
+      background: url("../../../../assets/images/wallet/records.png") no-repeat left center;
       background-size: 6.9rem auto;
       margin-left: 3rem;
       padding-left: 11.2rem;
@@ -82,7 +82,7 @@
       height: 24rem;
       .icon {
         display: block;
-        background: url("../../../assets/images/wallet/symbol.png") no-repeat;
+        background: url("../../../../assets/images/wallet/symbol.png") no-repeat;
         background-size: 11.4rem auto;
         background-position: center center;
         width: 100%;
@@ -153,7 +153,7 @@
         position: relative;
 
         .icon {
-          background: url("../../../assets/images/wallet/card.png") no-repeat;
+          background: url("../../../../assets/images/wallet/card.png") no-repeat;
           background-position: left center;
           background-size: 12.5rem auto;
           width: 12.5rem;
@@ -188,13 +188,13 @@
         }
 
         .check {
-          background-image: url("../../../assets/images/shared/check.png");
+          background-image: url("../../../../assets/images/shared/check.png");
           height: 4rem;
           margin-top: -2rem;
         }
 
         .checked {
-          background-image: url("../../../assets/images/shared/checked.png");
+          background-image: url("../../../../assets/images/shared/checked.png");
           height: 4.4rem;
           margin-top: -2.2rem;
         }
