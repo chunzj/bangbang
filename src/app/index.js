@@ -76,6 +76,16 @@
             controllerAs: 'asLogin'
           }
         }
+      }).
+      state('asRegister', {
+        url: '/as/register',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/register/index.html',
+            controller: 'AsRegisterController',
+            controllerAs: 'asRegister'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');

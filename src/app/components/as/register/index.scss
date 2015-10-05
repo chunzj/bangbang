@@ -1,0 +1,111 @@
+.as-register-page {
+  .bb-content {
+    text-align: center;
+    padding: 6rem 0 0;
+    font-size: 5rem;
+    min-height: 120rem;
+  }
+
+  .field {
+    padding: 0 7.5rem 0 5.5rem;
+    text-align: left;
+  }
+
+  .field:first-child {
+    .left, .right {
+      width: 45%;
+    }
+  }
+
+  .field:not(:first-child) {
+    margin-top: 3.8rem;
+  }
+
+  .label {
+    margin-bottom: 3rem;
+  }
+
+  input {
+    border: 5px solid #ff9000;
+    border-radius: 6px;
+    font-size: 4.4rem;
+    line-height: 9rem;
+    text-indent: 2rem;
+    width: 100%;
+    color: #000;
+
+    &::-webkit-input-placeholder {
+      color: #787878;
+    }
+  }
+
+  .separator {
+    margin-top: 3.8rem;
+    height: 0.5rem;
+    background-color: #c8c8c8;
+    width: 100%;
+  }
+
+  .demo {
+    font-size: 4.432rem;
+    background: url("../../../../assets/images/as/demo.png") no-repeat #acd598;
+    background-size: 64.9rem auto;
+    background-position: center 9.8rem;
+    width: 100%;
+    height: 48.7rem;
+    padding: 2.6rem 0 9rem 2.2rem;
+    margin: 0 auto;
+  }
+
+  .select-btn {
+    text-align: center;
+    margin: 6.4rem auto 7rem;
+    position: relative;
+    .text {
+      color: #ff9000;
+      border: 5px solid #ff9000;
+      border-radius: 5px;
+      padding: 2rem 3.4rem;
+      background-color: #fff;
+    }
+
+    input[type='file'] {
+      position: absolute;
+      top: -2.5rem;
+      left: 0;
+      opacity: 0;
+    }
+  }
+
+  .select-c {
+    display: inline-block;
+    line-height: 6rem;
+    border: 3px solid #ff9000;
+    border-radius: 3px;
+    padding: 0.8rem 4rem;
+    background-color: #fff;
+    font-size: 4rem;
+  }
+
+  .select-c:last-child {
+    margin-left: 4.4rem;
+  }
+
+  select {
+    color: #000;
+  }
+
+  .field:last-child {
+    text-align: center;
+  }
+
+  .confirm {
+    background-color: #fff;
+    color: #ff9000;
+    width: 27rem;
+    margin: 6rem auto 9.5rem;
+    padding: 2rem 3.4rem;
+    border: 5px solid #ff9000;
+    border-radius: 5px;
+  }
+}
