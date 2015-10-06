@@ -46,6 +46,10 @@
       font-size: 3.595rem;
     }
 
+    .link {
+      margin-right: 32rem;
+    }
+
     .date-title {
       color: #c8c8c8;
     }
@@ -66,7 +70,6 @@
       }
 
       .oper {
-        margin-top: 0.8rem;
         font-size: 4.313rem;
         color: #fff;
         padding: 1.6rem 2.4rem;
@@ -82,7 +85,7 @@
     }
 
     .hasOper {
-      margin-top: -8.5rem;
+      top: 10%;
     }
 
     .noOper {

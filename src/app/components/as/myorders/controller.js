@@ -10,14 +10,25 @@
   function AsMyOrdersController($scope, $log) {
     var vm = $scope;
 
-    vm.unfinished = false;
-    vm.finished = false;
-    vm.myOrder = true;
+
+
     vm.selectTab = function (tab) {
+      vm.setTabSelected(tab);
+      localStorage.setItem('asMyOrder.selectTab', tab);
+    };
+
+    vm.setTabSelected = function (tab) {
       vm.unfinished = (tab === 'unfinished');
       vm.finished = (tab === 'finished');
       vm.myOrder = (tab === 'myorder');
     };
+
+    var lastSelectTab = localStorage.getItem('asMyOrder.selectTab');
+    if (lastSelectTab) {
+      vm.setTabSelected(lastSelectTab);
+    } else {
+      vm.setTabSelected('myorder');
+    }
 
     vm.startProcessOrder = function (orderId) {
       $log.info('startProcessOrder current orderid = ' + orderId);

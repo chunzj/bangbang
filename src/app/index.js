@@ -98,12 +98,22 @@
         }
       }).
       state('asMyOrders', {
-        url: '/as/orders',
+        url: '/as/myOrders',
         views: {
           '': {
             templateUrl: 'app/components/as/myorders/index.html',
             controller: 'AsMyOrdersController',
             controllerAs: 'asMyOrders'
+          }
+        }
+      }).
+      state('asMyOrderDetail', {
+        url: '/as/myOrderDetail/:orderId',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/myOrderDetail/index.html',
+            controller: 'AsMyOrderDetailController',
+            controllerAs: 'asMyOrderDetail'
           }
         }
       });

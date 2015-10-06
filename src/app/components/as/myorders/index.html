@@ -6,14 +6,15 @@
       <div class="tab" ng-class="{true: 'active', false: ''}[myOrder]" ng-click="selectTab('myorder')">我的订单</div>
       <div class="tab" ng-class="{true: 'active', false: ''}[finished]" ng-click="selectTab('finished')">已完成</div>
     </div>
-    <div ng-if="unfinished">未完成</div>
-    <div ng-if="myOrder">
+    <div ng-if="unfinished">
       <div class="order-item" ng-repeat="order in myOrders">
-        <div class="theme">{{order.theme}}</div>
-        <div class="detail">
-          <div class="place">{{order.departure}}-{{order.arrival}}</div>
-          <div class="date-title">{{order.date.title}}</div>
-          <div class="date-text">{{order.date.time}}</div>
+        <div class="link" ui-sref="asMyOrderDetail({orderId:order.id})">
+          <div class="theme">{{order.theme}}</div>
+          <div class="detail">
+            <div class="place">{{order.departure}}-{{order.arrival}}</div>
+            <div class="date-title">{{order.date.title}}</div>
+            <div class="date-text">{{order.date.time}}</div>
+          </div>
         </div>
         <div class="status" ng-class="{true: 'hasOper', false: 'noOper'}[!!order.oper]">
           <div class="text">{{order.status}}</div>
@@ -22,6 +23,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div ng-if="myOrder">
+      我的订单
     </div>
     <div ng-if="finished">已完成</div>
   </div>
