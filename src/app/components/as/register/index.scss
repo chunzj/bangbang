@@ -82,9 +82,24 @@
     line-height: 6rem;
     border: 3px solid #ff9000;
     border-radius: 3px;
-    padding: 0.8rem 4rem;
     background-color: #fff;
     font-size: 4rem;
+
+    .arrow-down-sm {
+      background-image: url('../../../../assets/images/shared/arrow-down-bk.png');
+      transform: rotate(0deg);
+      width: 3.8rem;
+      height: 2.4rem;
+      background-size: 3.8rem auto;
+      margin-top: -1.2rem;
+      right: 2rem;
+    }
+
+    select {
+      text-indent: 4px;
+      outline: none;
+      width: 28rem;
+    }
   }
 
   .select-c:last-child {
@@ -97,6 +112,26 @@
 
   .field:last-child {
     text-align: center;
+
+    .label .text{
+      padding-left: 6.8rem;
+      background-repeat: no-repeat;
+      display: inline-block;
+      font-size: 3.864rem;
+      line-height: 6rem;
+      background-position: left center;
+      height: 5.5rem;
+    }
+
+    .notAgreed .text{
+      background-image: url('../../../../assets/images/as/notAgree.png');
+      background-size: 4.6rem auto;
+    }
+
+    .agreed .text{
+      background-image: url('../../../../assets/images/as/agreed.png');
+      background-size: 5.1rem auto;
+    }
   }
 
   .confirm {

@@ -62,7 +62,9 @@
       </div>
       <div class="separator"></div>
       <div class="field">
-        <div class="label">阅读《用户注册协议》</div>
+        <div class="label" ng-class="{false: 'notAgreed', true: 'agreed'}[user.agreed]" ng-click="agreeRegisterProtocol()">
+          <span class="text">阅读《用户注册协议》</span>
+        </div>
         <div class="input-c">
           <div class="confirm">确认注册</div>
         </div>

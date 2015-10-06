@@ -40,7 +40,8 @@
       certificate: '',
       photoUrl: '../../../../ass',
       area: '',
-      subArea: ''
+      subArea: '',
+      agreed: false
     };
 
     vm.areas = [
@@ -56,5 +57,9 @@
         vm.subAreas = SUB_AREAS[arguments[0].id];
       }
     });
+
+    vm.agreeRegisterProtocol = function () {
+      vm.user.agreed = !vm.user.agreed;
+    }
   }
 })();
