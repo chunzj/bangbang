@@ -86,6 +86,26 @@
             controllerAs: 'asRegister'
           }
         }
+      }).
+      state('asRegisterSuccess', {
+        url: '/as/registerSuccess',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/registerSuccess/index.html',
+            controller: 'AsRegisterSuccessController',
+            controllerAs: 'asRegisterSuccess'
+          }
+        }
+      }).
+      state('asMyOrders', {
+        url: '/as/orders',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/myorders/index.html',
+            controller: 'AsMyOrdersController',
+            controllerAs: 'asMyOrders'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');

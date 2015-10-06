@@ -1,0 +1,43 @@
+.as-register-success-page {
+  .bb-content {
+    text-align: center;
+    padding: 17.5rem 0 0;
+    font-size: 5.212rem;
+  }
+
+  .mark {
+    background: url("../../../../assets/images/as/registerSuccess.png") no-repeat;
+    background-size: 46.2rem auto;
+    background-position: center top;
+    width: 46.2rem;
+    height: 46.2rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .success-text {
+    margin-top: 8rem;
+    font-size: 9.625rem;
+    font-weight: bold;
+  }
+
+  .comment {
+    font-size: 5.212rem;
+    line-height: 9.8rem;
+  }
+
+  .back {
+    margin-top: 10.4rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12rem;
+
+    .text {
+      border: 3px solid #ff9000;
+      color: #ff9000;
+      font-size: 6.438rem;
+      background: #fff;
+      padding: 3.3rem 9rem;
+    }
+  }
+}

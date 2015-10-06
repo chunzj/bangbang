@@ -1,0 +1,92 @@
+.as-my-orders-page {
+  .bb-content {
+    padding: 0;
+    font-size: 5rem;
+    color: #ff9000;
+  }
+
+  .tabs {
+    border-bottom: 8px solid #959595;
+  }
+
+  .tab {
+    outline: none;
+    width: 32%;
+    text-align: center;
+    display: inline-block;
+    padding: 3.5rem 0;
+  }
+
+  .tab:not(:last-child) {
+    border-right: 4px solid #959595;
+  }
+
+  .active {
+    font-weight: bolder;
+  }
+
+  .order-item {
+    border-bottom: 5px solid #c8c8c8;
+    padding: 4.2rem 0 4.2rem 0;
+    position: relative;
+
+    .theme {
+      border-right: 3px solid #c8c8c8;
+      position: absolute;
+      top: 50%;
+      left: 3.7rem;
+      margin-top: -5.5rem;
+      padding: 2rem 2.6rem 2rem 0;
+      font-size: 5.833rem;
+      font-weight: bold;
+    }
+
+    .detail {
+      margin-left: 27.2rem;
+      font-size: 3.595rem;
+    }
+
+    .date-title {
+      color: #c8c8c8;
+    }
+
+    .date-text {
+      color: #fff;
+    }
+
+    .status {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      right: 5.5rem;
+
+      .text {
+        font-size: 5.833rem;
+        font-weight: bold;
+      }
+
+      .oper {
+        margin-top: 0.8rem;
+        font-size: 4.313rem;
+        color: #fff;
+        padding: 1.6rem 2.4rem;
+      }
+
+      .start-process {
+        background-color: #d44e4b;
+      }
+
+      .finish-order {
+        background-color: #8fc31f;
+      }
+    }
+
+    .hasOper {
+      margin-top: -8.5rem;
+    }
+
+    .noOper {
+      margin-top: -2.8rem;
+    }
+  }
+}
