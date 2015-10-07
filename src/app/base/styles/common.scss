@@ -124,3 +124,14 @@ input, select {
     z-index: 2;
   }
 }
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  img {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}

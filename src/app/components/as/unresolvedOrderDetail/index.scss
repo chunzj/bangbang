@@ -1,0 +1,28 @@
+@import "../myorders/detail";
+
+.as-my-order-detail-page {
+  .oper {
+    text-align: center;
+    font-size: 6.684rem;
+    margin-bottom: 5rem;
+
+    .btn {
+      display: inline-block;
+      span {
+        padding: 2.8rem 4.4rem;
+      }
+    }
+
+    .btn:nth-child(2) {
+      margin-left: 13.6rem;
+    }
+
+    .start-process {
+      background-color: #d44e4b;
+    }
+
+    .finish-order {
+      background-color: #8fc31f;
+    }
+  }
+}

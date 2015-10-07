@@ -2,31 +2,12 @@
   <bb-header title="E棒棒-我的订单"></bb-header>
   <div class="bb-content">
     <div class="tabs">
-      <div class="tab" ng-class="{true: 'active', false: ''}[unfinished]" ng-click="selectTab('unfinished')">未完成</div>
-      <div class="tab" ng-class="{true: 'active', false: ''}[myOrder]" ng-click="selectTab('myorder')">我的订单</div>
-      <div class="tab" ng-class="{true: 'active', false: ''}[finished]" ng-click="selectTab('finished')">已完成</div>
+      <div class="tab" ng-class="{true: 'active', false: ''}[unresolved]" ng-click="selectTab('unresolved')">未完成</div>
+      <div class="tab" ng-class="{true: 'active', false: ''}[latest]" ng-click="selectTab('latest')">最新订单</div>
+      <div class="tab" ng-class="{true: 'active', false: ''}[resolved]" ng-click="selectTab('resolved')">已完成</div>
     </div>
-    <div ng-if="unfinished">
-      <div class="order-item" ng-repeat="order in myOrders">
-        <div class="link" ui-sref="asMyOrderDetail({orderId:order.id})">
-          <div class="theme">{{order.theme}}</div>
-          <div class="detail">
-            <div class="place">{{order.departure}}-{{order.arrival}}</div>
-            <div class="date-title">{{order.date.title}}</div>
-            <div class="date-text">{{order.date.time}}</div>
-          </div>
-        </div>
-        <div class="status" ng-class="{true: 'hasOper', false: 'noOper'}[!!order.oper]">
-          <div class="text">{{order.status}}</div>
-          <div class="oper" ng-if="order.oper" ng-click="order.oper.fn(order.id)" ng-class="order.oper.bgColorClass">
-            {{order.oper.text}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div ng-if="myOrder">
-      我的订单
-    </div>
-    <div ng-if="finished">已完成</div>
+    <div ui-view="unresolved" ng-show="unresolved"></div>
+    <div ui-view="latest" ng-show="latest"></div>
+    <div ui-view="resolved" class="resolved" ng-show="resolved"></div>
   </div>
 </div>

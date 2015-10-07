@@ -1,0 +1,47 @@
+<div class="look-register-page container">
+  <bb-header title="E棒棒-注册会员"></bb-header>
+  <div class="bb-content">
+    <form name="lookRegisterFrm">
+      <div class="field">
+        <div class="left">
+          <div class="label">姓 :</div>
+          <div class="input-c">
+            <input ng-model="user.lastName" placeholder="请填写真实姓名" required/>
+          </div>
+        </div>
+        <div class="right">
+          <div class="label">名 :</div>
+          <div class="input-c">
+            <input ng-model="user.firstName" placeholder="请填写真实姓名" required/>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="separator"></div>
+      <div class="field">
+        <div class="label">手机号 :</div>
+        <div class="input-c">
+          <input ng-model="user.phone" pattern="\d{11}" placeholder="请填写正确手机号，以方便通知到您" required/>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="field">
+        <div class="label">身份证 :</div>
+        <div class="input-c">
+          <input ng-model="user.certificate" pattern="\d{15,18}" placeholder="填写正确的15或18位身份证号" required/>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="field">
+        <div class="label" ng-class="{false: 'notAgreed', true: 'agreed'}[user.agreed]" ng-click="agreeRegisterProtocol()">
+          <span class="text">阅读《用户注册协议》</span>
+        </div>
+        <div class="input-c">
+          <a ui-sref="asRegisterSuccess">
+            <div class="confirm">确认注册</div>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

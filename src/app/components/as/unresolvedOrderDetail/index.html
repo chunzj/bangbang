@@ -1,0 +1,70 @@
+<div class="as-order-detail-page as-my-order-detail-page container">
+  <bb-header title="E棒棒-未完成"></bb-header>
+  <div class="bb-content">
+    <div class="top">
+      <span class="theme">{{orderDetail.theme}}</span>
+      <span class="source">
+        来自<span class="name">{{orderDetail.user.name}}</span>的订单
+      </span>
+      <span ng-if="!!orderDetail.cancel"  class="right cancel" ng-click="orderDetail.cancel.fn(orderDetail.id)">
+        {{orderDetail.cancel.text}}
+      </span>
+      <div class="clear"></div>
+    </div>
+    <div class="separator"></div>
+    <div class="content">
+      <div class="field">
+        <div class="left">服务点 : </div>
+        <div class="rest three">
+          <input ng-readonly="true" ng-model="orderDetail.servicePlace"/>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="field">
+        <div class="left">目的地 : </div>
+        <div class="rest three">
+          <input ng-readonly="true" ng-model="orderDetail.destination"/>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="field">
+        <div class="left">棒棒级别 : </div>
+        <div class="rest four">
+          <input ng-readonly="true" ng-model="orderDetail.bbLevel.name"/>
+        </div>
+        <div class="clear"></div>
+        <div class="comment">*该选项为顾客意向选择，并不影响你接单。</div>
+      </div>
+      <div class="request">
+        <div class="title">需求 : </div>
+        <div class="textarea-c">
+          <textarea ng-readonly="true" ng-model="orderDetail.request">{{orderDetail.request}}</textarea>
+        </div>
+      </div>
+      <div class="service-time">
+        <div class="time">
+          <span class="title">预约时间 : </span>
+          <span class="start">
+            <input ng-readonly="true" ng-model="orderDetail.serviceTime.start"/>
+          </span>
+            ~
+          <span class="end">
+            <input ng-readonly="true" ng-model="orderDetail.serviceTime.end"/>
+          </span>
+        </div>
+        <div class="comment">*这是顾客预约时间和要求完成订单时间，请根据实际情况接单，以避免无法完成订单。</div>
+      </div>
+      <div class="field">
+        <div class="left">预计佣金 : </div>
+        <div class="rest four">
+          <input ng-readonly="true" ng-model="orderDetail.salary"/>
+        </div>
+      </div>
+    </div>
+    <div class="oper">
+      <div class="btn" ng-repeat="oper in orderDetail.oper">
+        <span ng-click="oper.fn(orderDetail.id)" ng-class="oper.bgClass">{{oper.text}}</span>
+      </div>
+    </div>
+  </div>
+</div>

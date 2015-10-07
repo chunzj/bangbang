@@ -1,0 +1,14 @@
+<div class="order-item" ng-repeat="order in resolvedOrders">
+    <div class="link">
+        <div class="theme">{{order.theme}}</div>
+        <div class="detail">
+            <div class="place">{{order.departure}}-{{order.arrival}}</div>
+            <div class="goods">{{order.goods}}</div>
+            <div class="date-time">{{order.dateTime}}</div>
+        </div>
+    </div>
+    <div class="status">
+        <div class="text">{{order.status}}</div>
+        <div class="salary">佣金 : {{order.salary | currencyCn}}</div>
+    </div>
+</div>

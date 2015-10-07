@@ -1,0 +1,82 @@
+.look-register-page {
+  .bb-content {
+    text-align: center;
+    padding: 5.8rem 0 0;
+    font-size: 5rem;
+    min-height: 120rem;
+  }
+
+  .field {
+    padding: 0 7.5rem 0 5.5rem;
+    text-align: left;
+  }
+
+  .field:first-child {
+    .left, .right {
+      width: 45%;
+    }
+  }
+
+  .field:not(:first-child) {
+    margin-top: 3.8rem;
+  }
+
+  .label {
+    margin-bottom: 3rem;
+  }
+
+  input {
+    border: 5px solid #ff9000;
+    border-radius: 6px;
+    font-size: 4.4rem;
+    line-height: 9rem;
+    text-indent: 2rem;
+    width: 100%;
+    color: #000;
+
+    &::-webkit-input-placeholder {
+      color: #787878;
+    }
+  }
+
+  .separator {
+    margin-top: 3.8rem;
+    height: 0.5rem;
+    background-color: #c8c8c8;
+    width: 100%;
+  }
+
+  .field:last-child {
+    text-align: center;
+
+    .label .text{
+      padding-left: 6.8rem;
+      background-repeat: no-repeat;
+      display: inline-block;
+      font-size: 3.864rem;
+      line-height: 6rem;
+      background-position: left center;
+      height: 5.5rem;
+    }
+
+    .notAgreed .text{
+      background-image: url('../../../../assets/images/as/notAgree.png');
+      background-size: 4.6rem auto;
+    }
+
+    .agreed .text{
+      background-image: url('../../../../assets/images/as/agreed.png');
+      background-size: 5.1rem auto;
+    }
+  }
+
+  .confirm {
+    background-color: #fff;
+    color: #ff9000;
+    width: 27rem;
+    margin: 6rem auto 9.5rem;
+    padding: 2rem 3.4rem;
+    border: 5px solid #ff9000;
+    border-radius: 5px;
+  }
+}

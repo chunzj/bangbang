@@ -1,13 +1,13 @@
-<div class="as-my-order-detail-page container">
-  <bb-header title="E棒棒-未完成"></bb-header>
+<div class="as-order-detail-page as-latest-order-detail-page container">
+  <bb-header title="E棒棒-抢单"></bb-header>
   <div class="bb-content">
     <div class="top">
       <span class="theme">{{orderDetail.theme}}</span>
       <span class="source">
         来自<span class="name">{{orderDetail.user.name}}</span>的订单
       </span>
-      <span ng-if="!!orderDetail.cancel"  class="right cancel" ng-click="orderDetail.cancel.fn(orderDetail.id)">
-        {{orderDetail.cancel.text}}
+      <span ng-if="!!orderDetail.back"  class="right cancel" ng-click="orderDetail.back.fn(orderDetail.id)">
+        {{orderDetail.back.text}}
       </span>
       <div class="clear"></div>
     </div>

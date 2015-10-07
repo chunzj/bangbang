@@ -104,16 +104,71 @@
             templateUrl: 'app/components/as/myorders/index.html',
             controller: 'AsMyOrdersController',
             controllerAs: 'asMyOrders'
+          },
+          'unresolved@asMyOrders': {
+            templateUrl: 'app/components/as/myorders/unresolved.html',
+            controller: 'AsMyOrdersUnresolvedController',
+            controllerAs: 'asMyOrdersUnresolved'
+          },
+          'latest@asMyOrders': {
+            templateUrl: 'app/components/as/myorders/latest.html',
+            controller: 'AsMyOrdersLatestController',
+            controllerAs: 'asMyOrdersLatest'
+          },
+          'resolved@asMyOrders': {
+            templateUrl: 'app/components/as/myorders/resolved.html',
+            controller: 'AsMyOrdersResolvedController',
+            controllerAs: 'asMyOrdersResolved'
           }
         }
       }).
-      state('asMyOrderDetail', {
-        url: '/as/myOrderDetail/:orderId',
+      state('asUnresolvedOrderDetail', {
+        url: '/as/unresolvedOrderDetail/:orderId',
         views: {
           '': {
-            templateUrl: 'app/components/as/myOrderDetail/index.html',
-            controller: 'AsMyOrderDetailController',
-            controllerAs: 'asMyOrderDetail'
+            templateUrl: 'app/components/as/unresolvedOrderDetail/index.html',
+            controller: 'AsUnresolvedOrderDetailController',
+            controllerAs: 'asUnresolvedOrderDetail'
+          }
+        }
+      }).
+      state('asLatestOrderDetail', {
+        url: '/as/latestOrderDetail/:orderId',
+        views: {
+          '': {
+            templateUrl: 'app/components/as/latestOrderDetail/index.html',
+            controller: 'AsLatestOrderDetailController',
+            controllerAs: 'asLatestOrderDetail'
+          }
+        }
+      }).
+      state('look', {
+        url: '/look/index',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/home/index.html',
+            controller: 'LookHomeController',
+            controllerAs: 'LookHome'
+          }
+        }
+      }).
+      state('lookMain', {
+        url: '/look/main',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/main/index.html',
+            controller: 'LookMainController',
+            controllerAs: 'LookMain'
+          }
+        }
+      }).
+      state('lookRegister', {
+        url: '/look/register',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/register/index.html',
+            controller: 'LookRegisterController',
+            controllerAs: 'lookRegister'
           }
         }
       });
@@ -137,6 +192,7 @@
       'ngAria',
       'ui.router',
       'toastr',
+      'bb.common.util',
       'bb.common.filter',
       'bb.cp.common'
     ]).constant('moment', moment)

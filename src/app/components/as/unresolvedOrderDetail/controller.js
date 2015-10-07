@@ -4,10 +4,10 @@
 (function () {
   angular
     .module('bb')
-    .controller('AsMyOrderDetailController', AsMyOrderDetailController);
+    .controller('AsUnresolvedOrderDetailController', AsUnresolvedOrderDetailController);
 
   /** @ngInject */
-  function AsMyOrderDetailController($scope, $stateParams, $log) {
+  function AsUnresolvedOrderDetailController($scope, $stateParams, $log) {
     var vm = $scope;
 
     vm.cancelOrder = function (orderId) {
