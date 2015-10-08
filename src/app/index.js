@@ -18,14 +18,18 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+      .state('login', {
+        url: '/login/:source',
+        views: {
+          '': {
+            templateUrl: 'app/components/login/index.html',
+            controller: 'LoginController',
+            controllerAs: 'login'
+          }
+        }
       })
       .state('personalCenter', {
-        url: '/personal/index',
+        url: '/personal/index/:source',
         templateUrl: 'app/components/personal/personalcenter/index.html',
         controller: 'PersonalCenterController',
         controllerAs: 'personal'
@@ -67,16 +71,6 @@
           }
         }
       }).
-      state('asLogin', {
-        url: '/as/login',
-        views: {
-          '': {
-            templateUrl: 'app/components/as/login/index.html',
-            controller: 'AsLoginController',
-            controllerAs: 'asLogin'
-          }
-        }
-      }).
       state('asRegister', {
         url: '/as/register',
         views: {
@@ -84,16 +78,6 @@
             templateUrl: 'app/components/as/register/index.html',
             controller: 'AsRegisterController',
             controllerAs: 'asRegister'
-          }
-        }
-      }).
-      state('asRegisterSuccess', {
-        url: '/as/registerSuccess',
-        views: {
-          '': {
-            templateUrl: 'app/components/as/registerSuccess/index.html',
-            controller: 'AsRegisterSuccessController',
-            controllerAs: 'asRegisterSuccess'
           }
         }
       }).
@@ -171,9 +155,29 @@
             controllerAs: 'lookRegister'
           }
         }
+      }).
+      state('lookMyOrders', {
+        url: '/look/myOrders',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/myorders/index.html',
+            controller: 'LookMyOrdersController',
+            controllerAs: 'lookMyOrders'
+          }
+        }
+      }).
+      state('registerSuccess', {
+        url: '/registerSuccess/:source',
+        views: {
+          '': {
+            templateUrl: 'app/components/registerSuccess/index.html',
+            controller: 'RegisterSuccessController',
+            controllerAs: 'registerSuccess'
+          }
+        }
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/look/index');
   }
 
   /** @ngInject */

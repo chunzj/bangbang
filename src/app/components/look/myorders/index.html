@@ -1,0 +1,19 @@
+<div class="look-my-orders-page container">
+  <bb-header title="E棒棒-我的订单"></bb-header>
+  <div class="bb-content">
+    <div class="order-item" ng-repeat="order in userOrders">
+      <div class="link">
+        <div class="theme">{{order.theme}}</div>
+        <div class="detail">
+          <div class="place">{{order.departure}}-{{order.arrival}}</div>
+          <div class="goods">{{order.goods}}</div>
+          <div class="date-time">{{order.dateTime}}</div>
+        </div>
+      </div>
+      <div class="status" ng-class="order.status.style || ''">
+        <div class="text" ng-click="order.status.fn(order.id)">{{order.status.text}}</div>
+        <div class="salary" ng-if="!!order.salary">佣金 : {{order.salary | currencyCn}}</div>
+      </div>
+    </div>
+  </div>
+</div>

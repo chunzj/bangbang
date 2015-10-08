@@ -1,0 +1,25 @@
+<div class="register-success-page container">
+  <bb-header title="E棒棒-当棒棒"></bb-header>
+  <div class="bb-content">
+    <div class="mark"></div>
+    <div class="success-text">注册成功</div>
+    <div ng-switch="source">
+      <div ng-switch-when="as">
+        <div class="comment">
+          还需1-3天时间验证信息<br>验证通过后你将成为实名认证的“E棒棒”
+        </div>
+        <div class="back">
+          <span class="text" ui-sref="personalCenter({source:source})">返回</span>
+        </div>
+      </div>
+      <div ng-switch-when="look">
+        <div class="comment">
+          感谢你成为“E棒棒”注册会员<br>我们将赠送你<a class="link" ui-sref="personalCenter">“10元棒棒券”</a>奖励
+        </div>
+        <div class="back">
+          <span class="text" ui-sref="personalCenter({source:source})">返回</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

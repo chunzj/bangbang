@@ -12,9 +12,10 @@ html {
 body {
   background: url("../../../assets/images/shared/bg.png") no-repeat;
   background-size: 100% 100%;
-  min-height: 1920px;
   color: #fff;
   overflow-x: hidden;
+  max-height: 1920px;
+  min-height: 1080px;
 }
 
 input, select {

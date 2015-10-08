@@ -4,10 +4,10 @@
 (function () {
   angular
     .module('bb')
-    .controller('PersonalCenterController', PersonalCenterController);
+    .controller('RegisterSuccessController', RegisterSuccessController);
 
   /** @ngInject */
-  function PersonalCenterController($scope, $stateParams, $log) {
+  function RegisterSuccessController($scope, $stateParams, $log) {
     var vm = $scope;
 
     $scope.source = $stateParams.source;

@@ -4,12 +4,12 @@
 (function () {
   angular
     .module('bb')
-    .controller('AsLoginController', AsLoginController);
+    .controller('LoginController', LoginController);
 
   var GETTING_PASSWORD_TIME = 60, gettingPasswordTimer = null; //unit second
 
   /** @ngInject */
-  function AsLoginController($scope, $timeout) {
+  function LoginController($scope, $timeout, $stateParams, $log) {
     var vm = $scope;
 
     vm.user = {
@@ -18,7 +18,7 @@
     };
 
     vm.gettingPasswordText = '获取密码';
-
+    //$log.info($stateParams.source);
     vm.getPassword = function () {
       if (gettingPasswordTimer) {
         return;
