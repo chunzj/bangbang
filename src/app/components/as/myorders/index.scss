@@ -115,4 +115,22 @@
       top: 28%;
     }
   }
+
+  .link-center {
+    position: fixed;
+    left: 0;
+    bottom: 4.2rem;
+    width: 100%;
+    .text {
+      width: 91.02%;
+      margin: 0 auto;
+      border-radius: 5px;
+      background: #ff9000;
+      line-height: 10.6rem;
+      color: #fff;
+      font-size: 5.833rem;
+      text-align: center;
+      display: block;
+    }
+  }
 }
