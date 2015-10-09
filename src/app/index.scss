@@ -7,9 +7,12 @@
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector
+@import "base/styles/base.scss";
+@import "base/styles/common.scss";
 @import "components/login/index.scss";
 @import "components/registerSuccess/index.scss";
 @import "components/as/latestOrderDetail/index.scss";
+@import "components/common/header/index.scss";
 @import "components/as/main/index.scss";
 @import "components/as/myorders/index.scss";
 @import "components/as/register/index.scss";
@@ -20,9 +23,6 @@
 @import "components/look/register/index.scss";
 @import "components/personal/mycash/index.scss";
 @import "components/personal/mywallet/index.scss";
-@import "components/personal/personalcenter/index.scss";
 @import "components/personal/personaledit/index.scss";
-@import "components/common/header/index.scss";
-@import "base/styles/base.scss";
-@import "base/styles/common.scss";
+@import "components/personal/personalcenter/index.scss";
 // endinjector

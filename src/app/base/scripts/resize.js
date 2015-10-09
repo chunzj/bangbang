@@ -14,10 +14,12 @@
   };
 
   function adjustBase() {
-    var clientWidth = document.body.clientWidth;
+    var clientWidth = document.body.clientWidth, winHeight = window.innerHeight;
     if (clientWidth > MAX_WIDTH) {
       clientWidth = MAX_WIDTH;
     }
+
+    document.body.style.minHeight = (winHeight + 280) + 'px';
     document.querySelector('html').style['font-size'] = (clientWidth / 1080) * 62.5 + '%';
     resizing = null;
   }
