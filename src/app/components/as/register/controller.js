@@ -30,7 +30,7 @@
   };
 
   /** @ngInject */
-  function AsRegisterController($scope, $log) {
+  function AsRegisterController($scope, $state, $log) {
     var vm = $scope;
 
     vm.user = {
@@ -60,6 +60,11 @@
 
     vm.agreeRegisterProtocol = function () {
       vm.user.agreed = !vm.user.agreed;
-    }
+    };
+
+    vm.confirmRegister = function () {
+      sessionStorage.setItem('userSource', 'as');
+      $state.go('registerSuccess');
+    };
   }
 })();

@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function AsMyOrdersUnresolvedController($scope, $timeout, $log, bbUtil) {
-    var lastSelectTab = localStorage.getItem('asMyOrder.selectTab');
+    var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;
     }
@@ -48,6 +48,10 @@
               text: '开始处理',
               bgColorClass: 'start-process',
               fn: vm.startProcessOrder
+            },
+            user: {
+              name: 'A先生',
+              phone: '18123235864'
             }
           },
           {
@@ -64,6 +68,10 @@
               text: '完成订单',
               bgColorClass: 'finish-order',
               fn: vm.finishOrder
+            },
+            user: {
+              name: 'A先生',
+              phone: '18123235865'
             }
           },
           {

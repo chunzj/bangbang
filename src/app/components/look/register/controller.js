@@ -7,9 +7,12 @@
     .controller('LookRegisterController', LookRegisterController);
 
   /** @ngInject */
-  function LookRegisterController($scope, $log) {
+  function LookRegisterController($scope, $state, $log) {
     var vm = $scope;
 
-
+    vm.confirmRegister = function () {
+      sessionStorage.setItem('userSource', 'look');
+      $state.go('registerSuccess');
+    };
   }
 })();

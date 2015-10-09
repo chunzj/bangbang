@@ -69,10 +69,11 @@
         font-weight: bold;
       }
 
-      .oper {
+      .oper, .dial {
         font-size: 4.313rem;
         color: #fff;
         padding: 1.6rem 2.4rem;
+        display: inline-block;
       }
 
       .start-process {
@@ -81,6 +82,10 @@
 
       .finish-order {
         background-color: #8fc31f;
+      }
+
+      .dial {
+        background-color: #f8b551;
       }
 
       .salary {

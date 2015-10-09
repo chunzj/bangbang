@@ -1,0 +1,35 @@
+<div class="my-comment-page container">
+  <bb-header title="{{pageTitle}}"></bb-header>
+  <div class="bb-content">
+    <div class="top item-bg row">
+      <div class="title left"><span class="text">我的评论</span></div>
+      <div class="user-info right" ng-if="user">
+        <div class="level">棒棒等级 : {{user.bbLevel.name}}</div>
+        <div class="point">当前积分 : {{user.point}}分</div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="comment-c item-bg">
+      <div class="comment-item border-bottom" ng-repeat="comment in comments">
+        <div class="left">
+          <div>
+            <span class="theme">{{comment.theme}}</span>
+            <span class="name" ng-if="comment.user">{{comment.user.name}}</span>
+          </div>
+          <div class="date">
+            {{comment.date.text}} : {{comment.date.time}}
+          </div>
+        </div>
+        <div class="right">
+          <div class="star-c" ng-class="{true: 'no-point', false: ''}[!comment.point]">
+            <ul><li class="star yellow-star" ng-repeat="i in yellowStarArray(comment.star)"></li></ul>
+            <ul><li class="star default-star" ng-repeat="i in yellowDefaultArray(comment.star)"></li></ul>
+          </div>
+          <div ng-if="comment.point" class="point">{{comment.point}}</div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="back" ng-click="confirmBack()">确认返回</div>
+  </div>
+</div>

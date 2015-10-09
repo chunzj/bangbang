@@ -7,9 +7,9 @@
     .controller('PersonalCenterController', PersonalCenterController);
 
   /** @ngInject */
-  function PersonalCenterController($scope, $stateParams, $log) {
+  function PersonalCenterController($scope, $log) {
     var vm = $scope;
 
-    $scope.source = $stateParams.source;
+    $scope.source = sessionStorage.getItem('userSource');
   }
 })();

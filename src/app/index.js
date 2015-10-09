@@ -19,7 +19,7 @@
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('login', {
-        url: '/login/:source',
+        url: '/login',
         views: {
           '': {
             templateUrl: 'app/components/login/index.html',
@@ -29,7 +29,7 @@
         }
       })
       .state('personalCenter', {
-        url: '/personal/index/:source',
+        url: '/personal/index',
         templateUrl: 'app/components/personal/personalcenter/index.html',
         controller: 'PersonalCenterController',
         controllerAs: 'personal'
@@ -60,6 +60,12 @@
             controllerAs: 'operation'
           }
         }
+      }).
+      state('myComment', {
+        url: '/personal/comment',
+        templateUrl: 'app/components/personal/mycomment/index.html',
+        controller: 'MyCommentController',
+        controllerAs: 'myComment'
       }).
       state('as', {
         url: '/as/index',
@@ -167,7 +173,7 @@
         }
       }).
       state('registerSuccess', {
-        url: '/registerSuccess/:source',
+        url: '/registerSuccess',
         views: {
           '': {
             templateUrl: 'app/components/registerSuccess/index.html',
@@ -198,6 +204,7 @@
       'toastr',
       'bb.common.util',
       'bb.common.filter',
+      'bb.common.constant',
       'bb.cp.common'
     ]).constant('moment', moment)
     .config(baseConfig)

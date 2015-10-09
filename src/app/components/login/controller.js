@@ -18,7 +18,7 @@
     };
 
     vm.gettingPasswordText = '获取密码';
-    //$log.info($stateParams.source);
+    //$log.info($scope.source = sessionStorage.getItem('userSource'));
     vm.getPassword = function () {
       if (gettingPasswordTimer) {
         return;

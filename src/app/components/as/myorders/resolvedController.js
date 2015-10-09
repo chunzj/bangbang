@@ -9,7 +9,7 @@
   var currentTab = 'resolved', resolvedOrders = null;
   /** @ngInject */
   function AsMyOrdersResolvedController($scope, $timeout, $log, bbUtil) {
-    var lastSelectTab = localStorage.getItem('asMyOrder.selectTab');
+    var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;
     }
