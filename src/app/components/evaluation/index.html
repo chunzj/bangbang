@@ -1,0 +1,29 @@
+<div class="evaluation-page container">
+  <bb-header title="E棒棒-找棒棒"></bb-header>
+  <div class="bb-content">
+    <div class="head"><img src="{{user.photo}}"/></div>
+    <div class="name">{{user.name}}</div>
+    <div class="level">棒棒等级 : {{user.bbLevel.text}}</div>
+    <div class="comment">您的评价将是我们做得更好的动力</div>
+    <div class="evaluation" ng-switch="evaluationType">
+      <nav ng-switch-when="star" class="stars">
+        <ul>
+          <li ng-repeat="star in stars"
+              class="star"
+              ng-class="{true:'selected', false:'unselect'}[star.selected]"
+              ng-click="starToggle($index)">
+          </li>
+        </ul>
+      </nav>
+      <div ng-switch-when="goodBad" class="good-bad">
+        <a class="good">好评</a>
+        <a class="bad">差评</a>
+      </div>
+    </div>
+    <div class="attach">
+      <div class="title">评价及建议</div>
+      <textarea></textarea>
+    </div>
+    <div class="commit-evaluation"><span class="text">提交评价</span></div>
+  </div>
+</div>

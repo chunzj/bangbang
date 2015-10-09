@@ -181,6 +181,20 @@
             controllerAs: 'registerSuccess'
           }
         }
+      }).
+      state('evaluation', {
+        url: '/evaluation',
+        views: {
+          '': {
+            templateUrl: 'app/components/evaluation/index.html',
+            controller: 'EvaluationController',
+            controllerAs: 'evaluation'
+          }
+        },
+        params: {
+          orderId: '',
+          type: ''
+        }
       });
 
     $urlRouterProvider.otherwise('/look/index');

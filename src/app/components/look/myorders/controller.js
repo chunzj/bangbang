@@ -8,12 +8,16 @@
 
   var userOrders = null;
   /** @ngInject */
-  function LookMyOrdersController($scope, $timeout, $log, bbUtil) {
+  function LookMyOrdersController($scope, $timeout, $state, $log, bbUtil, bbConstant) {
     var vm = $scope;
     bbUtil.showLoading();
 
     vm.commentOrder = function (orderId) {
       $log.info('Current commenting order ' + orderId);
+      $state.go('evaluation', {
+        type: bbConstant.evaluationType.STAR,
+        orderId: orderId
+      });
     };
 
     if (userOrders) {
