@@ -35,7 +35,7 @@
     vm.pageTitle = '';
     var source = sessionStorage.getItem('userSource');
     if (source === bbConstant.userSource.look) {
-      vm.pageTitle = '找棒棒';
+      vm.pageTitle = 'E棒棒-找棒棒';
 
       vm.comments = [
         {
@@ -88,7 +88,7 @@
         }
       ];
     } else if (source === bbConstant.userSource.as) {
-      vm.pageTitle = '当棒棒';
+      vm.pageTitle = 'E棒棒-当棒棒';
 
       vm.user = {
         bbLevel: {
