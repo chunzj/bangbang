@@ -195,15 +195,31 @@
           orderId: '',
           type: ''
         }
+      }).
+      state('evaluationSuccess', {
+        url: '/evaluationSuccess',
+        views: {
+          '': {
+            templateUrl: 'app/components/evaluationSuccess/index.html',
+            controller: 'EvaluationSuccessController',
+            controllerAs: 'evaluationSuccess'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/look/index');
   }
 
   /** @ngInject */
-  function runBlock($rootScope, $state, $stateParams, $log) {
+  function runBlock($rootScope, $state, $stateParams, $document, $timeout, $log) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+
+    $rootScope.$on('$stateChangeStart', function () {
+      $timeout(function () {
+        $document[0].body.scrollTop = 0;
+      }, 100);
+    });
 
     $log.debug('runBlock end');
   }
