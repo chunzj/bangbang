@@ -182,6 +182,16 @@
           }
         }
       }).
+      state('couponUsage', {
+        url: '/couponUsage',
+        views: {
+          '': {
+            templateUrl: 'app/components/couponUsage/index.html',
+            controller: 'CouponUsageController',
+            controllerAs: 'couponUsage'
+          }
+        }
+      }).
       state('evaluation', {
         url: '/evaluation',
         views: {
