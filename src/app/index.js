@@ -172,6 +172,26 @@
           }
         }
       }).
+      state('lookOrderDetail', {
+        url: '/look/orderDetail/:orderId',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/myOrderDetail/index.html',
+            controller: 'LookOrderDetailController',
+            controllerAs: 'lookOrderDetail'
+          }
+        }
+      }).
+      state('lookDemand', {
+        url: '/look/demand',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/demand/index.html',
+            controller: 'LookDemandController',
+            controllerAs: 'lookDemand'
+          }
+        }
+      }).
       state('registerSuccess', {
         url: '/registerSuccess',
         views: {

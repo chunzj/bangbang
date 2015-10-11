@@ -2,7 +2,7 @@
   <bb-header title="E棒棒-我的订单"></bb-header>
   <div class="bb-content">
     <div class="order-item" ng-repeat="order in userOrders">
-      <div class="link">
+      <div class="link" ui-sref="lookOrderDetail({orderId:order.id})">
         <div class="theme">{{order.theme}}</div>
         <div class="detail">
           <div class="place">{{order.departure}}-{{order.arrival}}</div>

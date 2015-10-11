@@ -17,6 +17,27 @@
 
         return [Number(input), unit].join('');
       };
+    }).filter('dateFormat', function ($log) {
+      return function (date, pattern) {
+        if (!date) {
+          return '';
+        }
+
+        if (!pattern) {
+          pattern = 'hm';
+        }
+
+        var res = [], patternChars = pattern.split('');
+        for (var i = 0; i < patternChars.length; i++) {
+          res.push(date[dateFormatStragety[patternChars[i]]]());
+        }
+
+       return res.join(':');
+      };
     });
 
+    var dateFormatStragety = {
+      h: 'getHours',
+      m: 'getMinutes'
+    };
 })();
