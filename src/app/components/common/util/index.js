@@ -4,8 +4,8 @@
 (function () {
 
   angular
-    .module('bb.common.util', [])
-    .service('bbUtil', function($document) {
+    .module('bb.common.util', ['bb.common.constant'])
+    .service('bbUtil', function($document, bbConstant) {
       var loadingDom = null;
       return {
         showLoading: function () {
@@ -16,6 +16,12 @@
         },
         hideLoading: function () {
           loadingDom.style.display = 'none';
+        },
+        getPageTitle: function (source) {
+          if (!source) {
+            source = sessionStorage.getItem('userSource');
+          }
+          return bbConstant.userSource.as === source ? '当棒棒':'找棒棒';
         }
       };
     });

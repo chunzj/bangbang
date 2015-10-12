@@ -7,7 +7,7 @@
     .controller('LookPaymentController', LookPaymentController);
 
   function countMoney (accruedMoney, discount) {
-    var money = Number(accruedMoney) + Number(discount);
+    var money = Number(accruedMoney) + Number(discount ? discount.value : 0);
     return money < 0 ? 0 : money;
   }
 
@@ -55,12 +55,12 @@
     vm.accruedMoney = 0, vm.discount = 0, vm.realMoney = 0;
     vm.$watch('accruedMoney', function (newValue) {
       vm.accruedMoney = newValue;
-      vm.realMoney = countMoney(newValue, vm.discount);
+      vm.realMoney = countMoney(vm.accruedMoney, vm.discount);
     });
 
     vm.$watch('discount', function (newValue) {
-      vm.discount = newValue || 0;
-      vm.realMoney = countMoney(vm.accruedMoney, newValue ? newValue.value : 0);
+      vm.discount = newValue;
+      vm.realMoney = countMoney(vm.accruedMoney, vm.discount);
     });
 
     vm.confirmPayment = function () {

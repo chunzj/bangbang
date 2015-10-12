@@ -1,37 +1,54 @@
-@mixin look-main-btn-bg ($marginTop, $marginBottom, $bgUrl) {
-
-  text-align: center;
-  width: 83.6rem;
-  height: 34.1rem;
-  margin: $marginTop auto $marginBottom;
-
-  .text {
-    background: url($bgUrl) no-repeat;
-    background-size: 83.6rem auto;
-    line-height: 34.1rem;
-    font-size: 10.427rem;
-    color: #fff;
-    font-weight: bolder;
-  }
-}
-
 .look-main-page {
-  .guest {
-    @include look-main-btn-bg(4.8rem, 11.8rem, "../../../../assets/images/as/apply.png");
+  .bb-content {
+    padding: 0;
   }
 
-  .comment {
-    margin-top: 1.6rem;
-    text-align: left;
-    font-size: 3.773rem;
+  .main {
+    position: relative;
+    .head {
+      width: 14.8rem;
+      height: 11.6rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    nav {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    li {
+      width: 2.3rem;
+      height: 2.3rem;
+      background: #e5e5e5;
+      display: inline-block;
+      border-radius: 2.3rem;
+    }
+
+    li:not(:first-child) {
+      margin-left: 2.3rem;
+    }
   }
 
-  .login {
-    @include look-main-btn-bg(16.8rem, 0, "../../../../assets/images/as/login.png");
+  .row {
+    margin-top: 12px;
+    padding: 0 12px;
   }
 
-  .register {
-    @include look-main-btn-bg(16.8rem, 0, "../../../../assets/images/look/register.png");
-    margin-bottom: 13rem;
+  .col {
+    display: inline-block;
+    width: 49%;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .row:last-child {
+    margin-bottom: 12px;
   }
 }

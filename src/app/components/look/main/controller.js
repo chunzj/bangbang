@@ -1,5 +1,5 @@
 /**
- * Created by chunzj on 2015/10/1.
+ * Created by chunzj on 2015/10/7.
  */
 (function () {
   angular
@@ -9,6 +9,5 @@
   /** @ngInject */
   function LookMainController($scope) {
     var vm = $scope;
-
   }
 })();

@@ -7,11 +7,15 @@
     .controller('AsUnresolvedOrderDetailController', AsUnresolvedOrderDetailController);
 
   /** @ngInject */
-  function AsUnresolvedOrderDetailController($scope, $stateParams, $log) {
+  function AsUnresolvedOrderDetailController($scope, $state, $stateParams, $log, bbConstant) {
     var vm = $scope;
 
     vm.cancelOrder = function (orderId) {
       $log.info('cancel order for ' + orderId);
+      $state.go('evaluation', {
+        type: bbConstant.evaluationType.GB,
+        orderId: orderId
+      });
     };
 
     vm.startProcessOrder = function (orderId) {

@@ -17,8 +17,17 @@
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('login', {
+    $stateProvider.
+      state('main', {
+        url: '/',
+        views: {
+          '': {
+            templateUrl: 'app/main/index.html',
+            controller: 'MainController'
+          }
+        }
+      }).
+      state('login', {
         url: '/login',
         views: {
           '': {
@@ -117,15 +126,6 @@
           }
         }
       }).
-      state('look', {
-        url: '/look/index',
-        views: {
-          '': {
-            templateUrl: 'app/components/look/home/index.html',
-            controller: 'LookHomeController'
-          }
-        }
-      }).
       state('lookMain', {
         url: '/look/main',
         views: {
@@ -180,6 +180,15 @@
           }
         }
       }).
+      state('register', {
+        url: '/register',
+        views: {
+          '': {
+            templateUrl: 'app/components/register/index.html',
+            controller: 'RegisterController'
+          }
+        }
+      }).
       state('registerSuccess', {
         url: '/registerSuccess',
         views: {
@@ -212,7 +221,7 @@
         }
       }).
       state('evaluationSuccess', {
-        url: '/evaluationSuccess',
+        url: '/evaluationSuccess/:type',
         views: {
           '': {
             templateUrl: 'app/components/evaluationSuccess/index.html',
@@ -239,7 +248,7 @@
         }
       });
 
-    $urlRouterProvider.otherwise('/look/index');
+    $urlRouterProvider.otherwise('/');
   }
 
   /** @ngInject */

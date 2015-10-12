@@ -1,5 +1,5 @@
 <div class="evaluation-page container">
-  <bb-header title="E棒棒-找棒棒"></bb-header>
+  <bb-header title="E棒棒-{{pageTitle}}"></bb-header>
   <div class="bb-content">
     <div class="head"><img src="{{user.photo}}"/></div>
     <div class="name">{{user.name}}</div>
@@ -16,14 +16,13 @@
         </ul>
       </nav>
       <div ng-switch-when="goodBad" class="good-bad">
-        <a class="good">好&nbsp;评</a>
-        <a class="bad">差评投诉</a>
+        <a class="{{gd.cls}}" ng-click="checkGB($index)" ng-class="{true: 'active', false: ''}[gd.checked]" ng-repeat="gd in goodbad">{{gd.name}}</a>
       </div>
     </div>
     <div class="attach">
       <div class="title">评价及建议</div>
       <textarea></textarea>
     </div>
-    <div class="commit-evaluation" ui-sref="evaluationSuccess"><span class="text">提交评价</span></div>
+    <div class="commit-evaluation" ui-sref="evaluationSuccess({type:evaluationType})"><span class="text">提交评价</span></div>
   </div>
 </div>

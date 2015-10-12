@@ -1,10 +1,12 @@
 <div class="evaluation-success-page container">
-  <bb-header title="E棒棒-找棒棒"></bb-header>
-  <div class="bb-content">
-    <div class="title">感谢您的评价</div>
-    <div class="comment">我们已将“10元返现”划入你的账号中</div>
+  <bb-header title="E棒棒-{{pageTitle}}"></bb-header>
+  <div class="bb-content" ng-switch="source">
+  <div class="title">感谢您的评价</div>
+    <div ng-if="isReturnCash">
+      <div class="comment">我们已将“10元返现”划入你的账号中</div>
+    </div>
     <div class="oper">
-      <a class="look-cash-back" ui-sref="myWallet">查看返现</a>
+      <a ng-if="isReturnCash" class="look-cash-back" ui-sref="myWallet">查看返现</a>
       <a class="back" ui-sref="lookMyOrders">返回</a>
     </div>
   </div>

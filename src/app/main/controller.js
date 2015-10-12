@@ -4,10 +4,10 @@
 (function () {
   angular
     .module('bb')
-    .controller('AsMainController', AsMainController);
+    .controller('MainController', MainController);
 
   /** @ngInject */
-  function AsMainController($scope) {
+  function MainController($scope) {
     var vm = $scope;
 
   }

@@ -1,23 +1,38 @@
 <div class="look-main-page container">
-  <bb-header title="E棒棒-当棒棒"></bb-header>
-  <div class="bb-content">
-    <div class="guest">
-      <a ui-sref="guestUser">
-        <div class="text">游客使用</div>
-      </a>
-      <div class="comment">*无需注册，直接使用E棒棒的基础功能。游客模式无法获得返利等福利。</div>
+    <bb-header title="E棒棒-找棒棒"></bb-header>
+    <div class="bb-content">
+        <div class="main">
+            <div><img src="../../../../assets/images/look/main.png"/></div>
+            <div class="head" ui-sref="personalCenter"><img src="../../../../assets/images/look/head.png"/></div>
+            <nav><li></li><li></li><li></li></nav>
+        </div>
+        <div class="row">
+            <div class="col left" ui-sref="lookDemand">
+                <img src="../../../../assets/images/look/help_send.png" class="help-send"/>
+            </div>
+            <div class="col right">
+                <img src="../../../../assets/images/look/help_post.png" class="help-post"/>
+                <img src="../../../../assets/images/look/help_row.png" class="help-row"/>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+            <div class="col left">
+                <img src="../../../../assets/images/look/help_buy.png" class="help_buy"/>
+            </div>
+            <div class="col right">
+                <img src="../../../../assets/images/look/help_book.png" class="help_book"/>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+            <div class="col left">
+                <img src="../../../../assets/images/look/help_save.png" class="help_save"/>
+            </div>
+            <div class="col right">
+                <img src="../../../../assets/images/look/help_do.png" class="help_do"/>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
-    <div class="login">
-      <a ui-sref="login">
-        <div class="text">登录</div>
-      </a>
-      <div class="comment">*已经成为E棒棒会员，直接登录开始找棒棒。</div>
-    </div>
-    <div class="register">
-      <a ui-sref="lookRegister">
-        <div class="text">注册</div>
-      </a>
-      <div class="comment">*注册成为E棒棒会员，可以获得现金返利。</div>
-    </div>
-  </div>
 </div>

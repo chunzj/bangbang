@@ -12,12 +12,12 @@
   function LoginController($scope, $timeout, $state, $stateParams, $log, bbConstant) {
 
     var vm = $scope;
-    vm.source = sessionStorage.getItem('userSource');
 
     vm.user = {
-      name: 'asd123',
+      name: '15835626942',
       password: '12345678'
     };
+
     vm.gettingPasswordText = '获取密码';
     vm.getPassword = function () {
       if (gettingPasswordTimer) {
@@ -39,9 +39,11 @@
       }, 1000);
     }
 
+    //Get user source from API
+    vm.source = sessionStorage.getItem('userSource');
     vm.confirmLogin = function () {
       if (vm.source === 'look') {
-        $state.go('look');
+        $state.go('lookMain');
       } else if (vm.source === 'as') {
         $state.go('personalCenter');
       }
