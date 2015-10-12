@@ -82,19 +82,19 @@
         url: '/as/myOrders',
         views: {
           '': {
-            templateUrl: 'app/components/as/myorders/index.html',
+            templateUrl: 'app/components/as/myOrders/index.html',
             controller: 'AsMyOrdersController'
           },
           'unresolved@asMyOrders': {
-            templateUrl: 'app/components/as/myorders/unresolved.html',
+            templateUrl: 'app/components/as/myOrders/unresolved.html',
             controller: 'AsMyOrdersUnresolvedController'
           },
           'latest@asMyOrders': {
-            templateUrl: 'app/components/as/myorders/latest.html',
+            templateUrl: 'app/components/as/myOrders/latest.html',
             controller: 'AsMyOrdersLatestController'
           },
           'resolved@asMyOrders': {
-            templateUrl: 'app/components/as/myorders/resolved.html',
+            templateUrl: 'app/components/as/myOrders/resolved.html',
             controller: 'AsMyOrdersResolvedController'
           }
         }
@@ -148,7 +148,7 @@
         url: '/look/myOrders',
         views: {
           '': {
-            templateUrl: 'app/components/look/myorders/index.html',
+            templateUrl: 'app/components/look/myOrders/index.html',
             controller: 'LookMyOrdersController'
           }
         }
