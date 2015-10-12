@@ -1,0 +1,46 @@
+<div class="look-payment-page container">
+  <bb-header title="E棒棒-找棒棒"></bb-header>
+  <div class="bb-content">
+    <form name="paymentFrm">
+      <div class="page-title">在线支付</div>
+      <div class="money-items">
+        <div class="money-item accrued-money">
+          <div class="title">输入金额</div>
+          <div class="input-c"><input ng-model="accruedMoney"/></div>
+        </div>
+        <div class="money-item discount">
+          <div class="title">折扣优惠</div>
+          <div class="select-c">
+            <select ng-options="discount.name for discount in discountOptions" ng-model="discount">
+              <option value="">选择折扣优惠</option>
+            </select>
+          </div>
+        </div>
+        <div class="money-item real-money">
+          <div class="title">实际支付</div>
+          <div class="input-c"><input ng-readonly="true" ng-model="realMoney"/></div>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="payment-mode">
+        <div class="title">选择支付方式 : </div>
+        <div class="payment-items">
+          <div class="payment-item" ng-repeat="mode in paymentMode">
+            <div ng-click="checkPaymentItem($index)">
+              <div class="icon"></div>
+              <div class="content">
+                <div class="name">{{mode.name}}</div>
+                <div class="comment">{{mode.comment}}</div>
+              </div>
+              <div class="checkbox" ng-click="checkPaymentItem($index)" ng-class="{true: 'checked', false: 'check'}[mode.checked]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="operation">
+        <div class="btn confirm-payment" ng-click="confirmPayment()">确认支付</div>
+        <div class="btn cancel" ng-click="cancelPayment()">取&nbsp;消</div>
+      </div>
+    </form>
+  </div>
+</div>

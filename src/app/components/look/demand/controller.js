@@ -24,10 +24,9 @@
     },{
       id: '3',
       name: '铜棒棒'
+    },{
+      id: '4',
+      name: '木棒棒'
     }];
-
-    vm.$watch('orderDetail.serviceTime', function () {
-      $log.info(arguments);
-    });
   }
 })();

@@ -1,0 +1,74 @@
+.look-payment-page {
+  .bb-content {
+    text-align: center;
+    padding-top: 8.4rem;
+    background-color: #fff;
+    min-height: 1420px;
+  }
+
+  .page-title {
+    font-size: 7.2rem;
+    color: #ff9000;
+    font-weight: bold;
+  }
+
+  .money-items {
+    margin-top: 9.5rem;
+    font-size: 6.773rem;
+    color: #ff9000;
+  }
+
+  input, select {
+    background: inherit;
+    width: 100%;
+    text-indent: 20px;
+    outline: none;
+    color: #000;
+  }
+
+  .input-c, .select-c {
+    padding: 1.8rem 0;
+    border: 3px solid #ff9000;
+    border-radius: 3px;
+    margin: 0 21.2rem;
+  }
+
+  .input-c {
+    position: relative;
+    &:after {
+      content: '元';
+      position: absolute;
+      top: 15%;
+      right: 4rem;
+    }
+  }
+
+  .money-item:not(:first-child) {
+    margin-top: 6.7rem;
+  }
+
+  .separator {
+    margin-top: 7.5rem;
+    height: 5px;
+    width: 100%;
+    background-color: #c8c8c8;
+  }
+
+  .operation {
+    font-size: 5rem;
+    color: #ff9000;
+    margin-top: 5.2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    border-radius: 2px;
+    border: 2px solid #ff9000;
+    padding: 4rem;
+  }
+
+  .cancel {
+    margin-left: 7.8rem;
+    padding: 4rem 8.5rem;
+  }
+}

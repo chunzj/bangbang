@@ -94,4 +94,26 @@
       display: inline-block;
     }
   }
+
+  .good-bad {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 6.684rem;
+
+    a {
+      display: inline-block;
+      color: #fff;
+    }
+  }
+
+  .good {
+    padding: 2.7rem 8.5rem;
+    background-color: #d44e4b;
+  }
+
+  .bad {
+    margin-left: 13.5rem;
+    padding: 2.7rem 4rem;
+    background-color: #b3d465;
+  }
 }

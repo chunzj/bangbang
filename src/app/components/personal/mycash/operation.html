@@ -12,15 +12,19 @@
         </div>
         <div class="caution">充值E棒棒钱包需要支付<span class="amount">{{amount | currencyCn}}</span></div>
         <div class="separator"></div>
-        <div class="payment">
+        <div class="payment-mode">
           <div class="title">支付方式 : </div>
-          <div class="pay-item" ng-repeat="payItem in payItems">
-            <div class="icon"></div>
-            <div class="content">
-              <div class="name">微信钱包支付</div>
-              <div class="comment">使用微信钱包快捷支付</div>
+          <div class="payment-items">
+            <div ng-repeat="mode in paymentMode">
+              <div class="payment-item" ng-click="checkPaymentItem($index)">
+                <div class="icon"></div>
+                <div class="content">
+                  <div class="name">{{mode.name}}</div>
+                  <div class="comment">{{mode.comment}}</div>
+                </div>
+                <div class="checkbox" ng-click="checkPaymentItem($index)" ng-class="{true: 'checked', false: 'check'}[mode.checked]"></div>
+              </div>
             </div>
-            <div class="checkbox" ng-click="checkPayItem($index)" ng-class="{true: 'checked', false: 'check'}[payItem.checked]"></div>
           </div>
         </div>
         <div class="oper">
@@ -38,16 +42,18 @@
         </div>
         <div class="caution">E棒棒钱包将扣除<span class="amount">{{amount | currencyCn}}</span>进行提现</div>
         <div class="separator"></div>
-        <div class="payment">
+        <div class="payment-mode">
           <div class="title">提现平台 : </div>
-          <div ng-repeat="payItem in payItems">
-            <div class="pay-item" ng-click="checkPayItem($index)">
-              <div class="icon"></div>
-              <div class="content">
-                <div class="name">微信钱包支付</div>
-                <div class="comment">提现至微信钱包</div>
+          <div class="payment-items">
+            <div ng-repeat="mode in paymentMode">
+              <div class="payment-item" ng-click="checkPaymentItem($index)">
+                <div class="icon"></div>
+                <div class="content">
+                  <div class="name">{{mode.name}}</div>
+                  <div class="comment">{{mode.comment}}</div>
+                </div>
+                <div class="checkbox" ng-click="checkPaymentItem($index)" ng-class="{true: 'checked', false: 'check'}[mode.checked]"></div>
               </div>
-              <div class="checkbox" ng-click="checkPayItem($index)" ng-class="{true: 'checked', false: 'check'}[payItem.checked]"></div>
             </div>
           </div>
         </div>

@@ -482,3 +482,7 @@ textarea {
   -ms-user-select: text;
   user-select: text;
 }
+
+[role='button'] {
+  outline: none;
+}

@@ -9,16 +9,16 @@
   var GETTING_PASSWORD_TIME = 60, gettingPasswordTimer = null; //unit second
 
   /** @ngInject */
-  function LoginController($scope, $timeout, $stateParams, $log) {
+  function LoginController($scope, $timeout, $state, $stateParams, $log, bbConstant) {
+
     var vm = $scope;
+    vm.source = sessionStorage.getItem('userSource');
 
     vm.user = {
       name: 'asd123',
       password: '12345678'
     };
-
     vm.gettingPasswordText = '获取密码';
-    //$log.info($scope.source = sessionStorage.getItem('userSource'));
     vm.getPassword = function () {
       if (gettingPasswordTimer) {
         return;
@@ -38,5 +38,13 @@
         gettingPasswordTimer = $timeout(arguments.callee, 1000);
       }, 1000);
     }
+
+    vm.confirmLogin = function () {
+      if (vm.source === 'look') {
+        $state.go('look');
+      } else if (vm.source === 'as') {
+        $state.go('personalCenter');
+      }
+    };
   }
 })();

@@ -33,6 +33,19 @@
     ];
     vm.starToggle = function (idx) {
       vm.stars[idx].selected = !vm.stars[idx].selected;
+      if (vm.stars[idx].selected) {
+        vm.stars.forEach(function (item, index) {
+          if (index < idx) {
+            item.selected = true;
+          }
+        });
+      } else {
+        vm.stars.forEach(function (item, index) {
+          if (index > idx) {
+            item.selected = false;
+          }
+        });
+      }
     }
   }
 })();

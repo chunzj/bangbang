@@ -7,15 +7,20 @@
     .controller('LookOrderDetailController', LookOrderDetailController);
 
   /** @ngInject */
-  function LookOrderDetailController($scope, $stateParams, $log) {
+  function LookOrderDetailController($scope, $state, $stateParams, $log, bbConstant) {
     var vm = $scope;
 
     vm.cancelOrder = function (orderId) {
       $log.info('cancel order for ' + orderId);
+      $state.go('evaluation', {
+        type: bbConstant.evaluationType.GB,
+        orderId: orderId
+      });
     };
 
     vm.finishOrder = function (orderId) {
-      $log.info('finishOrder current orderid = ' + orderId);
+      $log.info('finishOrder current orderId = ' + orderId);
+      $state.go('lookFinishOrder', {orderId: orderId});
     };
 
     var orderId = $stateParams.orderId;
@@ -89,6 +94,22 @@
           name: 'C师傅',
           phone: '18627792285'
         },
+        servicePlace: '金港国际2号服务点',
+        destination: '四号桥银山小区',
+        bbLevel: {
+          level: '',
+          name: '金棒棒'
+        },
+        request: '把行李送到XX小区x栋X楼X室A某某手中。',
+        serviceTime: {
+          start: '12:00',
+          end: '13:00'
+        },
+        salary: '40元'
+      },
+      4: {
+        id: 4,
+        theme: '帮你送',
         servicePlace: '金港国际2号服务点',
         destination: '四号桥银山小区',
         bbLevel: {

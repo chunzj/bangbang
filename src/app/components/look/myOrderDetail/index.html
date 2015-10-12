@@ -3,7 +3,7 @@
   <div class="bb-content">
     <div class="top">
       <span class="theme">{{orderDetail.theme}}</span>
-      <span class="source">
+      <span ng-if="!!orderDetail.user" class="source">
         已由<span class="name">{{orderDetail.user.name}}</span>接单
       </span>
       <span ng-if="!!orderDetail.cancel"  class="right cancel" ng-click="orderDetail.cancel.fn(orderDetail.id)">

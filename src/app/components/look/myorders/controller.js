@@ -64,6 +64,18 @@
               text: '已接单',
               style: 'default'
             }
+          },
+          {
+            id: '4',
+            theme: '帮你订',
+            departure: '金港国际',
+            arrival: '四号桥',
+            goods: '帮我去四号桥订一桌晚宴',
+            dateTime: '2015/08/20 15:00',
+            status: {
+              text: '未接单',
+              style: 'default'
+            }
           }
         ];
 

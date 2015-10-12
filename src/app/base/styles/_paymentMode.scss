@@ -1,0 +1,76 @@
+/*
+  @author: chunzj
+  @description: define some styles about payment mode
+*/
+
+.payment-mode {
+  margin: 7rem 5.2rem 0;
+  text-align: left;
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .payment-items {
+    border: 5px solid #c8c8c8;
+  }
+
+  .payment-item:not(:last-child) {
+    border-bottom: 5px solid #c8c8c8;
+  }
+
+  .payment-item {
+    margin: 1.1rem 2.5rem 0;
+    padding: 4.4rem 2.6rem;
+    position: relative;
+    outline: none;
+
+    .icon {
+      background: url("../../../assets/images/wallet/card.png") no-repeat;
+      background-position: left center;
+      background-size: 12.5rem auto;
+      width: 12.5rem;
+      height: 8.7rem;
+      display: inline-block;
+      vertical-align: text-bottom;
+    }
+
+    .content {
+      display: inline-block;
+    }
+
+    .name {
+      font-size: 4rem;
+      color: #000;
+    }
+
+    .comment {
+      color: #c8c8c8;
+      font-size: 3rem;
+    }
+
+    .checkbox {
+      background-size: 3.9rem auto;
+      background-repeat: no-repeat;
+      background-position: left top;
+      width: 3.9rem;
+
+      position: absolute;
+      top: 50%;
+      right: 2.8rem;
+      outline: none;
+    }
+
+    .check {
+      background-image: url("../../../assets/images/shared/check.png");
+      height: 4rem;
+      margin-top: -2rem;
+    }
+
+    .checked {
+      background-image: url("../../../assets/images/shared/checked.png");
+      height: 4.4rem;
+      margin-top: -2.2rem;
+    }
+  }
+}

@@ -23,57 +23,49 @@
         views: {
           '': {
             templateUrl: 'app/components/login/index.html',
-            controller: 'LoginController',
-            controllerAs: 'login'
+            controller: 'LoginController'
           }
         }
       })
       .state('personalCenter', {
         url: '/personal/index',
         templateUrl: 'app/components/personal/personalcenter/index.html',
-        controller: 'PersonalCenterController',
-        controllerAs: 'personal'
+        controller: 'PersonalCenterController'
       })
       .state('personalEdit', {
         url: '/personal/edit',
         templateUrl: 'app/components/personal/personaledit/index.html',
-        controller: 'PersonalEditController',
-        controllerAs: 'personalEdit'
+        controller: 'PersonalEditController'
       })
       .state('myWallet', {
         url: '/personal/wallet',
         templateUrl: 'app/components/personal/mywallet/index.html',
-        controller: 'MyWalletController',
-        controllerAs: 'myWallet'
+        controller: 'MyWalletController'
       })
       .state('myCash', {
         url: '/personal/cash',
         views: {
           '': {
             templateUrl: 'app/components/personal/mycash/index.html',
-            controller: 'MyCashController',
-            controllerAs: 'myCash'
+            controller: 'MyCashController'
           },
           'operation@myCash': {
             templateUrl: 'app/components/personal/mycash/operation.html',
-            controller: 'OperationController',
-            controllerAs: 'operation'
+            controller: 'OperationController'
           }
         }
       }).
       state('myComment', {
         url: '/personal/comment',
         templateUrl: 'app/components/personal/mycomment/index.html',
-        controller: 'MyCommentController',
-        controllerAs: 'myComment'
+        controller: 'MyCommentController'
       }).
       state('as', {
         url: '/as/index',
         views: {
           '': {
             templateUrl: 'app/components/as/main/index.html',
-            controller: 'AsMainController',
-            controllerAs: 'asMain'
+            controller: 'AsMainController'
           }
         }
       }).
@@ -82,8 +74,7 @@
         views: {
           '': {
             templateUrl: 'app/components/as/register/index.html',
-            controller: 'AsRegisterController',
-            controllerAs: 'asRegister'
+            controller: 'AsRegisterController'
           }
         }
       }).
@@ -92,23 +83,19 @@
         views: {
           '': {
             templateUrl: 'app/components/as/myorders/index.html',
-            controller: 'AsMyOrdersController',
-            controllerAs: 'asMyOrders'
+            controller: 'AsMyOrdersController'
           },
           'unresolved@asMyOrders': {
             templateUrl: 'app/components/as/myorders/unresolved.html',
-            controller: 'AsMyOrdersUnresolvedController',
-            controllerAs: 'asMyOrdersUnresolved'
+            controller: 'AsMyOrdersUnresolvedController'
           },
           'latest@asMyOrders': {
             templateUrl: 'app/components/as/myorders/latest.html',
-            controller: 'AsMyOrdersLatestController',
-            controllerAs: 'asMyOrdersLatest'
+            controller: 'AsMyOrdersLatestController'
           },
           'resolved@asMyOrders': {
             templateUrl: 'app/components/as/myorders/resolved.html',
-            controller: 'AsMyOrdersResolvedController',
-            controllerAs: 'asMyOrdersResolved'
+            controller: 'AsMyOrdersResolvedController'
           }
         }
       }).
@@ -117,8 +104,7 @@
         views: {
           '': {
             templateUrl: 'app/components/as/unresolvedOrderDetail/index.html',
-            controller: 'AsUnresolvedOrderDetailController',
-            controllerAs: 'asUnresolvedOrderDetail'
+            controller: 'AsUnresolvedOrderDetailController'
           }
         }
       }).
@@ -127,8 +113,7 @@
         views: {
           '': {
             templateUrl: 'app/components/as/latestOrderDetail/index.html',
-            controller: 'AsLatestOrderDetailController',
-            controllerAs: 'asLatestOrderDetail'
+            controller: 'AsLatestOrderDetailController'
           }
         }
       }).
@@ -137,8 +122,7 @@
         views: {
           '': {
             templateUrl: 'app/components/look/home/index.html',
-            controller: 'LookHomeController',
-            controllerAs: 'LookHome'
+            controller: 'LookHomeController'
           }
         }
       }).
@@ -147,8 +131,7 @@
         views: {
           '': {
             templateUrl: 'app/components/look/main/index.html',
-            controller: 'LookMainController',
-            controllerAs: 'LookMain'
+            controller: 'LookMainController'
           }
         }
       }).
@@ -157,8 +140,7 @@
         views: {
           '': {
             templateUrl: 'app/components/look/register/index.html',
-            controller: 'LookRegisterController',
-            controllerAs: 'lookRegister'
+            controller: 'LookRegisterController'
           }
         }
       }).
@@ -167,8 +149,7 @@
         views: {
           '': {
             templateUrl: 'app/components/look/myorders/index.html',
-            controller: 'LookMyOrdersController',
-            controllerAs: 'lookMyOrders'
+            controller: 'LookMyOrdersController'
           }
         }
       }).
@@ -177,8 +158,7 @@
         views: {
           '': {
             templateUrl: 'app/components/look/myOrderDetail/index.html',
-            controller: 'LookOrderDetailController',
-            controllerAs: 'lookOrderDetail'
+            controller: 'LookOrderDetailController'
           }
         }
       }).
@@ -187,8 +167,16 @@
         views: {
           '': {
             templateUrl: 'app/components/look/demand/index.html',
-            controller: 'LookDemandController',
-            controllerAs: 'lookDemand'
+            controller: 'LookDemandController'
+          }
+        }
+      }).
+      state('lookFinishOrder', {
+        url: '/look/finishOrder/:orderId',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/finishOrder/index.html',
+            controller: 'LookFinishOrderController'
           }
         }
       }).
@@ -197,8 +185,7 @@
         views: {
           '': {
             templateUrl: 'app/components/registerSuccess/index.html',
-            controller: 'RegisterSuccessController',
-            controllerAs: 'registerSuccess'
+            controller: 'RegisterSuccessController'
           }
         }
       }).
@@ -207,8 +194,7 @@
         views: {
           '': {
             templateUrl: 'app/components/couponUsage/index.html',
-            controller: 'CouponUsageController',
-            controllerAs: 'couponUsage'
+            controller: 'CouponUsageController'
           }
         }
       }).
@@ -217,8 +203,7 @@
         views: {
           '': {
             templateUrl: 'app/components/evaluation/index.html',
-            controller: 'EvaluationController',
-            controllerAs: 'evaluation'
+            controller: 'EvaluationController'
           }
         },
         params: {
@@ -231,8 +216,25 @@
         views: {
           '': {
             templateUrl: 'app/components/evaluationSuccess/index.html',
-            controller: 'EvaluationSuccessController',
-            controllerAs: 'evaluationSuccess'
+            controller: 'EvaluationSuccessController'
+          }
+        }
+      }).
+      state('payment', {
+        url: '/payment/:orderId',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/payment/index.html',
+            controller: 'LookPaymentController'
+          }
+        }
+      }).
+      state('finishPayment', {
+        url: '/finishPayment/:orderId',
+        views: {
+          '': {
+            templateUrl: 'app/components/look/finishPayment/index.html',
+            controller: 'LookFinishPaymentController'
           }
         }
       });

@@ -14,24 +14,37 @@
     vm.$on('openCashDialog', function (event, flag) {
       $log.info('Open cash ' + (flag > 0 ? 'charge' : 'withdraw') + ' dialog');
       vm.viewFlag = flag;
+
+      if (flag == -1) {
+        vm.paymentMode = [{
+          id: 'wxWallet',
+          icon: '../../../../assets/images/wallet/card.png',
+          name: '微信钱包支付',
+          comment: '提现至微信钱包',
+          checked: false
+        }];
+      } else if (flag == 1) {
+        vm.paymentMode = [{
+          id: 'wxWallet',
+          icon: '../../../../assets/images/wallet/card.png',
+          name: '微信钱包支付',
+          comment: '使用微信钱包快捷支付',
+          checked: false
+        }];
+      }
     });
 
     vm.cancelDialog = function () {
       this.$emit('closeCashDialog');
     };
 
+    vm.amount = 0;
     vm.saveDialog = function (addMoney) {
       this.$emit('closeCashDialog', Number(addMoney ? this.amount : -this.amount));
     };
 
-    vm.amount = 0;
-    vm.payItems = [{
-      name: '微信',
-      checked: false
-    }];
-
-    vm.checkPayItem = function (idx) {
-      var targetItem = vm.payItems[idx];
+    vm.checkPaymentItem = function (idx) {
+      var targetItem = vm.paymentMode[idx];
       targetItem.checked = !targetItem.checked;
     }
   }

@@ -7,11 +7,12 @@
     .controller('AsLatestOrderDetailController', AsLatestOrderDetailController);
 
   /** @ngInject */
-  function AsLatestOrderDetailController($scope, $stateParams, $log) {
+  function AsLatestOrderDetailController($scope, $state, $stateParams, $log) {
     var vm = $scope;
 
     vm.grabOrder = function (orderId) {
       $log.info('finishOrder current orderid = ' + orderId);
+      $state.go('asMyOrders');
     };
 
     vm.back = function () {

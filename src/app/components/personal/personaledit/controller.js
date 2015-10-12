@@ -7,7 +7,7 @@
     .controller('PersonalEditController', PersonalEditController);
 
   /** @ngInject */
-  function PersonalEditController($scope, $log) {
+  function PersonalEditController($scope, $state, $log) {
     var vm = $scope;
 
     vm.areas = [
@@ -27,5 +27,9 @@
     vm.changeArrow = function () {
       vm.showArrow = !vm.showArrow;
     }
+
+    vm.saveInfo = function () {
+      $state.go('personalCenter');
+    };
   }
 })();
