@@ -12,10 +12,6 @@
 
     vm.cancelOrder = function (orderId) {
       $log.info('cancel order for ' + orderId);
-      $state.go('evaluation', {
-        type: bbConstant.evaluationType.GB,
-        orderId: orderId
-      });
     };
 
     vm.startProcessOrder = function (orderId) {
