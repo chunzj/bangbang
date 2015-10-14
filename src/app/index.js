@@ -9,10 +9,11 @@
 
     // Set options third-party lib
     toastrConfig.allowHtml = true;
-    toastrConfig.timeOut = 3000;
+    toastrConfig.timeOut = 30000;
     toastrConfig.positionClass = 'toast-center-center';
     toastrConfig.preventDuplicates = true;
-    toastrConfig.progressBar = true;
+    toastrConfig.progressBar = false;
+    toastrConfig.closeButton = false;
   }
 
   /** @ngInject */

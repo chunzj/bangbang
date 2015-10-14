@@ -1,0 +1,22 @@
+.toast-center-center {
+  top: 50%;
+  right: 0;
+  width: 100%;
+}
+
+#toast-container.toast-center-center > div {
+  width: 300px;
+  margin: auto;
+}
+
+#toast-container {
+  .toast-title, .toast-message {
+    font-size: 4rem;
+  }
+}
+
+#toast-container > div {
+  padding: 8rem 1.5rem 8rem 8rem;
+  width: 25em;
+}
+
