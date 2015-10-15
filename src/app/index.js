@@ -3,17 +3,10 @@
   'use strict';
 
   /** @ngInject */
-  function baseConfig($logProvider, toastrConfig) {
+  function baseConfig($logProvider) {
+
     // Enable log
     $logProvider.debugEnabled(true);
-
-    // Set options third-party lib
-    toastrConfig.allowHtml = true;
-    toastrConfig.timeOut = 30000;
-    toastrConfig.positionClass = 'toast-center-center';
-    toastrConfig.preventDuplicates = true;
-    toastrConfig.progressBar = false;
-    toastrConfig.closeButton = false;
   }
 
   /** @ngInject */
@@ -257,6 +250,9 @@
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 
+    $rootScope.alertSuccess = '操作成功';
+    $rootScope.alertError = '操作失败';
+
     $rootScope.$on('$stateChangeStart', function () {
       $timeout(function () {
         $document[0].body.scrollTop = 0;
@@ -273,7 +269,6 @@
       'ngMessages',
       'ngAria',
       'ui.router',
-      'toastr',
       'bb.common.util',
       'bb.common.filter',
       'bb.common.constant',
