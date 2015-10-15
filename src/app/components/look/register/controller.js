@@ -7,11 +7,10 @@
     .controller('LookRegisterController', LookRegisterController);
 
   /** @ngInject */
-  function LookRegisterController($scope, $state, $log, toastr) {
+  function LookRegisterController($scope, $state, $log) {
     var vm = $scope;
 
     vm.confirmRegister = function () {
-      toastr.success('操作成功');
       sessionStorage.setItem('userSource', 'look');
       $state.go('registerSuccess');
     };
