@@ -1,194 +1,318 @@
 <!doctype html>
+<script>
+    var apiDatas = [
+        {
+            name: '获取系统初始化数据',
+            url: '/baseData',
+            method: 'GET',
+            auth: false,
+            params: {},
+            instruction: '目前返回的只有棒棒等级，当然可能还会有其他基础数据，目前仅此一项。',
+            data: {
+                code: 1,
+                data: {
+                    bbLevel: [ //表示系统中的棒棒等级
+                        {
+                            id: '1',
+                            name: '金棒棒'
+                        },
+                        {
+                            id: '2',
+                            name: '银棒棒'
+                        },
+                        //...等等
+                    ],
+                    //当然此处可能还会包括其他基础数据, 目前想到的只有这一项
+                }
+            }
+        },
+        {
+            name: '获取登录验证码',
+            url: '/verifyCode',
+            method: 'GET',
+            auth: false,
+            params: {
+                phone: '18627382692'
+            },
+            instruction: '用户获取手机验证码，用于登录。至于返回几位验证码，' +
+            '由后台决定，一般为四位，且验证码一段时间内都是有效的',
+            data: {
+                code: 1,
+                data: {
+                    code: '2334'
+                }
+            }
+        },
+        {
+            name: '登录',
+            url: '/login',
+            method: 'POST',
+            auth: false,
+            params: {
+                phone: '18627382692',
+                code: '2334'
+            },
+            instruction: '根据填写的手机号码和获取的验证码进行登录, 登录成功之后将会获取到authCode，用于唯一标识用户是合法的E棒棒用户，包括棒棒。',
+            data: {
+                code: 1,
+                data: {
+                    authCode: '42daas52324534sad53'
+                }
+            }
+        }
+    ];
+</script>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>E棒棒Api文档</title>
     <style>
-    	* {
-    		padding: 0;
-   			margin: 0;
-    	}
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-   		html {
-   			font-family: "幼圆";
-   			font-size: 125%;
-   		}
+        html {
+            font-family: "幼圆";
+            font-size: 125%;
+        }
 
-      h1 {
-        margin-bottom: 1rem;
-      }
+        h1 {
+            margin-bottom: 1rem;
+        }
 
         header {
-        	padding-top: 5rem;
-        	background: url('bg.jpg') no-repeat;
+            padding-top: 5rem;
+            background: url('bg.jpg') no-repeat;
             background-size: 100% auto;
-        	text-align: center;
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
 
         .search {
-        	line-height: 3rem;
-        	margin-bottom: 2rem;
+            line-height: 3rem;
+            margin-bottom: 2rem;
         }
 
         .search input {
-        	font-size: 1rem;
-		    height: 24px;
-		    line-height: 24px;
-		    padding: 12px;
-		    width: 72%;
-		    color: #000;
-		    margin-right: 10px;
-		    margin-bottom: 0;
+            font-size: 1rem;
+            height: 24px;
+            line-height: 24px;
+            padding: 12px;
+            width: 72%;
+            color: #000;
+            margin-right: 10px;
+            margin-bottom: 0;
         }
 
-        .search a{
-        	display: inline-block;
-        	background-color: #3f4b55;
-		    font-size: 1rem;
-		    height: 28px;
-		    line-height: 28px;
-		    font-weight: 600;
-		    padding: 0.57rem 24px;
-		    color: #fff;
+        .search a {
+            display: inline-block;
+            background-color: #3f4b55;
+            font-size: 1rem;
+            height: 28px;
+            line-height: 28px;
+            font-weight: 600;
+            padding: 0.57rem 24px;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .comment {
-        	margin: 12.22rem auto 0;
-        	background-color: #f2f2f2;
-        	padding: 2rem 20%;
-        	color: #777;
-        	border-bottom: solid 1px #ddd;
+            margin: 12.22rem auto 0;
+            background-color: #f2f2f2;
+            padding: 2rem 20% 2rem 1rem;
+            color: #777;
+            border-bottom: solid 1px #ddd;
         }
 
         .comment .title {
-        	text-align: center;
-        	font-size: 1.5rem;
-        	font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .comment .item {
-        	margin-top: 0.5rem;
-        	line-height: 1.5rem;
+            margin-top: 0.5rem;
+            line-height: 1.5rem;
         }
 
         .api-items {
-        	background-color: #f2f2f2;
-        	padding: 1rem 2rem 0;
+            background-color: #f2f2f2;
+            padding: 0 2rem;
         }
 
         .api-item {
-			border-bottom: solid 1px #ddd;
-			line-height: 2rem;
-			position: relative;
+            border-bottom: solid 1px #ddd;
+            line-height: 2rem;
+            position: relative;
         }
 
         .api-item .no {
-        	position: absolute;
-        	top: 0;
-        	left: -1rem;
+            position: absolute;
+            top: 0.5rem;
+            left: -1rem;
         }
 
         .api-item .name {
-        	font-weight: bold;
-        	border-bottom: solid 1px #ddd;
+            line-height: 3rem;
+            font-weight: bold;
+            border-bottom: solid 1px #ddd;
+        }
+
+        .api-item .label {
+            margin-right: 1rem;
+            text-align: right;
+            width: 10%;
+            display: inline-block;
+        }
+
+        .no-data {
+            display: block;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .expand {
+            margin: 0 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .tip {
+            font-size: 0.9rem;
+            vertical-align: 13%;
+        }
+
+        pre {
+            vertical-align: top;
+            display: inline-block;
+            font-family: '幼圆';
         }
     </style>
-  </head>
-  <body>
-  	<header>
-  		<h1>E棒棒API文档</h1>
-  		<div class="search">
-  			<input placeholder="请输入你想搜索的Api的keywords"/>
-  			<a>搜索</a>
-  		</div>
-  	</header>
-  	<div class="comment">
-  		<p class="title">API说明</p>
-  		<p class="item">
-  			1. 下面的API只会列出正确返回的数据，对于异常情况请按照如下情况返回：
-  			<br>
-  			{<br>
-  			&nbsp;&nbsp;&nbsp;&nbsp;"code": 0,<br>
-  			&nbsp;&nbsp;&nbsp;&nbsp;"msgCode": "10001",//例如：10001表示用户名和密码不一致，这个由后台自己确定。<br>
-  			&nbsp;&nbsp;&nbsp;&nbsp;"msg": "失败消息"//用户名和密码不一致<br>
-  			}<br>
-  		</p>
-  		<p class="item">
-  			2. 对于API中的auth参数，如果为true，表示请求API时需要带上认证参数。目前暂定认证参数通过请求头的Authorization来传递。当用户登录之后，就能获取到此认证参数，我们称作authCode。当前端传递的时候，会先经过Base64编码，后台在获取头信息时，要先解码再验证。
-  		</p>
-  		<p class="item">
-  			3. 对于返回的参数data，可能为JSON对象，也可能为JSON数组。
-  		</p>
-  		<p class="item">
-  			4. 对于API路径，目前列的为相对路径，在具体用的时候还要加上具体域名、端口和项目名称。
-  			例如：http://www.ebb.com/bb/baseData  //此默认为80端口
-  		</p>
-  	</div>
-  	<div class="api-items"></div>
-  	<script>
-  		(function () {
-  			var apiItemTemplate = '<div class="api-item separator">' 
-  				+ '<div class="no">{idx} </div>' 
-  				+ '<div class="name"><span class="label">API名称：</span>{name}</div>'
-  				+ '<div class="url"><span class="label">路径：</span>{url}</div>'
-  				+ '<div class="method"><span class="label">请求形式：</span>{method}</div>'
-  				+ '<div class="params"><span class="label">请求参数：</span>{params}</div>'
-  				+ '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
-  				+ '<div class="data"><span class="label">返回的数据：</span>{data}</div>'
-  				+ '</div>';
+</head>
+<body>
+<header>
+    <h1>E棒棒API文档</h1>
 
-  			var apiDatas = [{
-  				name: '获取系统初始化数据',
-  				url: '/baseData',
-  				method: 'GET',
-  				auth: false,
-  				params: {
+    <div class="search">
+        <input placeholder="请输入你想搜索的Api的keywords"/>
+        <a href="javascript:void(0);" onclick="searchApi();">搜索</a>
+    </div>
+</header>
+<div class="comment">
+    <p class="title">API说明<span class="expand">+</span><span class="tip">可点击展开查看明细</span></p>
 
-  				},
-  				data: {
-  					code : 1,
-  					data : {
-  						bbLevel: [ //表示系统中的棒棒等级
-  							{
-  								id: '1',
-  								name: '金棒棒'
-  							},
-  							{
-  								id: '2',
-  								name: '银棒棒'
-  							},
-  							//...等等
-  						],
-  						//当然此处可能还会包括其他基础数据, 目前想到的只有这一项
-  					} 
-  				}
-  			}];
+    <div class="content hide">
+        <p class="item">
+            1. 下面的API只会列出正确返回的数据，对于异常情况请按照如下情况返回：
+            <br>
+            {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"code": 0,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"msgCode": "10001",//例如：10001表示用户名和密码不一致，这个由后台自己确定。<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"msg": "失败消息"//用户名和密码不一致<br>
+            }<br>
+        </p>
 
-  			var apiItems = [];
-  			apiDatas.reduce(function (result, item, idx) {
-  				var itemHtml = apiItemTemplate;
-  				for (var key in item) {
-  					var value = item[key];
-  					if (typeof value === 'object') {
-  						value = JSON.stringify(value);
-  					} else if (typeof value === 'number') {
-  						value = Number(value).toString();
-  					} else if (typeof value === 'boolean') {
-  						value = value.toString();
-  					}
-  					itemHtml = itemHtml.replace('{' + key + '}', value);
-  				}
-  				result.push(itemHtml.replace('{idx}', idx + 1));
-  				return result;
-  			}, apiItems);
+        <p class="item">
+            2.
+            对于API中的auth参数，如果为true，表示请求API时需要带上认证参数。目前暂定认证参数通过请求头的Authorization来传递。
+            当用户登录之后，就能获取到此认证参数，我们称作authCode。
+            当前端传递的时候，会把authCode经过Base64编码，后台在获取头信息时，要先解码再验证。
+            其中authCode可能是经过手机号码和一些系统标识通过md5加密生成的标识，用于唯一标识某个用户，生成规则由后台决定。
+        </p>
 
-  			document.querySelector('.api-items').innerHTML = apiItems.join('');
-  		})();
-  	</script>
-  </body>
+        <p class="item">
+            3. 对于返回的参数data，可能为JSON对象，也可能为JSON数组。
+        </p>
+
+        <p class="item">
+            4. 对于API路径，目前列的为相对路径，在具体用的时候还要加上具体域名、端口和项目名称。
+            例如：http://www.ebb.com/bb/baseData //此默认为80端口
+        </p>
+    </div>
+</div>
+<div class="api-items"></div>
+<script>
+    (function () {
+        var apiItemTemplate = '<div class="api-item separator">'
+                + '<div class="no">{idx} </div>'
+                + '<div class="name"><span class="label">API名称：</span>{name}</div>'
+                + '<div class="url"><span class="label">路径：</span>{url}</div>'
+                + '<div class="method"><span class="label">请求形式：</span>{method}</div>'
+                + '<div class="params"><span class="label">请求参数：</span><pre>{params}</pre></div>'
+                + '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
+                + '<div class="instruction"><span class="label">说明：</span>{instruction}</div>'
+                + '<div class="data"><span class="label">返回的数据：</span><pre>{data}</pre></div>'
+                + '</div>';
+
+        function parseApiItemsHtml(filterApiDatas) {
+            var apiItems = [];
+            filterApiDatas.reduce(function (result, item, idx) {
+                var itemHtml = apiItemTemplate;
+                for (var key in item) {
+                    var value = item[key];
+                    if (typeof value === 'object') {
+                        value = JSON.stringify(value, null, 2);
+                    } else if (typeof value === 'number') {
+                        value = Number(value).toString();
+                    } else if (typeof value === 'boolean') {
+                        value = value.toString();
+                    }
+                    itemHtml = itemHtml.replace('{' + key + '}', value);
+                }
+                result.push(itemHtml.replace('{idx}', idx + 1));
+                return result;
+            }, apiItems);
+
+            document.querySelector('.api-items').innerHTML = apiItems.length ? apiItems.join('') : '<span class="no-data">没有找到相应的Api!</span>';
+        }
+
+        parseApiItemsHtml(apiDatas);
+
+        function searchApi() {
+            var searchKeywords = document.querySelector('.search input').value.trim();
+            if (searchKeywords.length > 0) {
+                parseApiItemsHtml(apiDatas.filter(function (item) {
+                    return item.name.indexOf(searchKeywords) !== -1;
+                }));
+            }
+        }
+
+        window.searchApi = searchApi;
+
+        //控制API注意事项的开关
+        var commentContent = document.querySelector('.comment .content'),
+                contentClassList = commentContent.classList;
+
+        var expandDom = document.querySelector('.comment .expand');
+        var toggleComment = function () {
+            var open = expandDom.getAttribute('open');
+            if (!open) {
+                expandDom.setAttribute('open', 'false');
+            }
+
+            open = expandDom.getAttribute('open') === 'true';
+            if (!open) {
+                contentClassList.remove('hide');
+                expandDom.innerHTML = '-';
+                expandDom.setAttribute('open', 'true');
+            } else {
+                contentClassList.add('hide');
+                expandDom.innerHTML = '+';
+                expandDom.setAttribute('open', 'false');
+            }
+        };
+        expandDom.onclick = toggleComment;
+        document.querySelector('.comment .tip').onclick = toggleComment;
+    })();
+</script>
+</body>
 </html>
 
