@@ -253,6 +253,9 @@
     $rootScope.alertSuccess = '操作成功';
     $rootScope.alertError = '操作失败';
 
+    //config api environment variables
+    $rootScope.env = 'dev';
+
     $rootScope.$on('$stateChangeStart', function () {
       $timeout(function () {
         $document[0].body.scrollTop = 0;
@@ -263,18 +266,19 @@
   }
 
   angular
-    .module('bb', [
-      'ngCookies',
-      'ngSanitize',
-      'ngMessages',
-      'ngAria',
-      'ui.router',
-      'bb.common.util',
-      'bb.common.filter',
-      'bb.common.constant',
-      'bb.cp.common'
-    ]).constant('moment', moment)
-    .config(baseConfig)
-    .config(routerConfig)
-    .run(runBlock);
+      .module('bb', [
+        'ngCookies',
+        'ngSanitize',
+        'ngMessages',
+        'ngAria',
+        'ui.router',
+        'bb.common.util',
+        'bb.common.filter',
+        'bb.common.constant',
+        'bb.common.service',
+        'bb.cp.common'
+      ]).constant('moment', moment)
+      .config(baseConfig)
+      .config(routerConfig)
+      .run(runBlock);
 })();

@@ -48,19 +48,32 @@
 
   .demo {
     font-size: 4.432rem;
-    background: url("../../../../assets/images/as/demo.png") no-repeat #acd598;
-    background-size: 64.9rem auto;
-    background-position: center 9.8rem;
+    background-color: #acd598;
     width: 100%;
     height: 48.7rem;
-    padding: 2.6rem 0 9rem 2.2rem;
+    padding: 2.6rem 0 14rem 2.2rem;
     margin: 0 auto;
+
+    img {
+      width: 64.9rem;
+      height: 48.7rem;
+      display: block;
+      margin: 2rem auto 0;
+    }
+
+    .hint {
+      font-size: 3.432rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      text-align: center;
+    }
   }
 
   .select-btn {
     text-align: center;
     margin: 6.4rem auto 7rem;
     position: relative;
+    width: 32rem;
     .text {
       color: #ff9000;
       border: 5px solid #ff9000;

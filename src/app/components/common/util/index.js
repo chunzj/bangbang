@@ -23,11 +23,15 @@
             return bbConstant.userSource.as === source ? '当棒棒' : '找棒棒';
           },
           successAlert: function (msg){
-            $rootScope.alertSuccess = msg;
+            $rootScope.$apply(function () {
+              $rootScope.alertSuccess = msg;
+            });
             openDialog(true);
           },
           errorAlert: function (msg){
-            $rootScope.alertError = msg;
+            $rootScope.$apply(function () {
+              $rootScope.alertError = msg;
+            });
             openDialog(false);
           }
         };

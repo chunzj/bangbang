@@ -35,9 +35,13 @@
       <div class="field">
         <div class="label">上传手持身份证的照片 : </div>
         <div class="input-c">
-          <div class="demo">图例：请清晰照出身份证及身份证持有人。</div>
+          <div class="demo">
+            图例：请清晰照出身份证及身份证持有人。<br>
+            <img src="{{user.photoData}}"/>
+            <div class="hint">（当前支持的图片格式有：jpg，png，gif，jpeg）</div>
+          </div>
           <div class="select-btn">
-            <input ng-model="user.photoUrl" type="file" required/>
+            <file-read file-data="user.photoData" file-model="user.photoUrl"></file-read>
             <span class="text">选择照片</span>
           </div>
         </div>

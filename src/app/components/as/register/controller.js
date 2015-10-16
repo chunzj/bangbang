@@ -1,10 +1,10 @@
 /**
  * Created by chunzj on 2015/10/1.
  */
-(function () {
+(function (){
   angular
-    .module('bb')
-    .controller('AsRegisterController', AsRegisterController);
+      .module('bb')
+      .controller('AsRegisterController', AsRegisterController);
 
   var SUB_AREAS = {
     1: [
@@ -30,7 +30,7 @@
   };
 
   /** @ngInject */
-  function AsRegisterController($scope, $state, $log) {
+  function AsRegisterController($scope, $state, $log, $http, ajaxRequest){
     var vm = $scope;
 
     vm.user = {
@@ -38,33 +38,52 @@
       firstName: '',
       phone: '',
       certificate: '',
-      photoUrl: '../../../../ass',
+      photoUrl: '../../../../assets/images/as/demo.png',
+      photoData: '../../../../assets/images/as/demo.png',
       area: '',
       subArea: '',
       agreed: false
     };
 
     vm.areas = [
-      {id:'1',name:'渝中区'},
-      {id:'2',name:'渝北区'},
-      {id:'3',name:'南岸区'},
-      {id:'4',name:'江北区'}
+      {id: '1', name: '渝中区'},
+      {id: '2', name: '渝北区'},
+      {id: '3', name: '南岸区'},
+      {id: '4', name: '江北区'}
     ];
     vm.subAreas = [];
 
-    vm.$watch('user.area', function () {
+    vm.$watch('user.area', function (){
       if (arguments[0]) {
         vm.subAreas = SUB_AREAS[arguments[0].id];
       }
     });
 
-    vm.agreeRegisterProtocol = function () {
+    vm.agreeRegisterProtocol = function (){
       vm.user.agreed = !vm.user.agreed;
     };
 
-    vm.confirmRegister = function () {
+    vm.confirmRegister = function (){
       sessionStorage.setItem('userSource', 'as');
-      $state.go('registerSuccess');
+      //$state.go('registerSuccess');
+
+      var form = document.forms.namedItem("asRegisterFrm");
+     // $log.info(form['user.photoUrl'].files[0]);
+
+      ajaxRequest.fileUpload({
+        name: 'chunzj',
+        age: 123,
+        sex: 232
+      }, 'user.photoUrl', vm.user.photoUrl, 'uploadFile').then(function (data) {
+        $log.info(data);
+      }).catch(function (err) {
+        $log.error(err);
+      });
+
     };
+
+    vm.$watch('user.photoUrl', function (newPhotoFile) {
+      $log.info(newPhotoFile);
+    });
   }
 })();
