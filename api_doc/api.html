@@ -7,7 +7,7 @@
             method: 'GET',
             auth: false,
             params: {},
-            instruction: '目前返回的只有棒棒等级，当然可能还会有其他基础数据，目前仅此一项。',
+            instruction: '目前返回的有棒棒等级和棒棒服务区域',
             data: {
                 code: 1,
                 data: {
@@ -20,9 +20,44 @@
                             id: '2',
                             name: '银棒棒'
                         },
-                        //...等等
+                        {
+                            id: '3',
+                            name: '铜棒棒'
+                        },
+                        {
+                            id: '4',
+                            name: '木棒棒'
+                        }
                     ],
-                    //当然此处可能还会包括其他基础数据, 目前想到的只有这一项
+                    serviceArea: [
+                        {
+                            id: 10,
+                            name: '渝北区',
+                            children: [
+                                {id: '101', name: '两路'},
+                                {id: '102', name: '新牌坊'},
+                                {id: '103', name: '汽博'}
+                            ]
+                        },
+                        {
+                            id: 20,
+                            name: '渝中区',
+                            children: [
+                                {id: '201', name: '大坪'},
+                                {id: '202', name: '解放碑'},
+                                {id: '203', name: '朝天门'}
+                            ]
+                        },
+                        {
+                            id: 30,
+                            name: '南岸区',
+                            children: [
+                                {id: '301', name: '弹子石'},
+                                {id: '302', name: '会展中心'},
+                                {id: '303', name: '四公里'}
+                            ]
+                        }
+                    ]
                 }
             }
         },
@@ -60,6 +95,39 @@
                     identity: 'look(找棒棒)/as(当棒棒)'
                 }
             }
+        },
+        {
+            name: '用户注册',
+            url: '/register/look',
+            method: 'POST',
+            auth: false,
+            params: {
+                firstName: '羊羊',
+                lastName: '喜',
+                phone: '18627382692',
+                idNumber: '4209341199207103694(身份证号码)'
+            },
+            instruction: '无',
+            data: {
+                code: 1
+            }
+        }, {
+            name: '棒棒注册',
+            url: '/register/as',
+            method: 'POST',
+            auth: false,
+            params: {
+                firstName: '羊羊',
+                lastName: '喜',
+                phone: '18627382692',
+                idNumber: '4209341199207103694(身份证号码)',
+                userPhoto: '文件对象(上传的手持证件照照片)',
+                serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)'
+            },
+            instruction: '无',
+            data: {
+                code: 1
+            }
         }
     ];
 </script>
@@ -74,6 +142,7 @@
         }
 
         html {
+            min-width: 1080px;
             font-family: "幼圆";
             font-size: 125%;
         }
@@ -170,16 +239,29 @@
             display: inline-block;
         }
 
+        .api-item .data {
+            position: relative;
+        }
+
+        .expand {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .api-item .expand {
+            position: absolute;
+            right: 5px;
+            top: 0;
+        }
+
         .no-data {
             display: block;
             text-align: center;
             padding-bottom: 20px;
         }
 
-        .expand {
+        .comment .expand {
             margin: 0 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
         }
 
         .hide {
@@ -250,7 +332,9 @@
                 + '<div class="params"><span class="label">请求参数：</span><pre>{params}</pre></div>'
                 + '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
                 + '<div class="instruction"><span class="label">说明：</span>{instruction}</div>'
-                + '<div class="data"><span class="label">返回的数据：</span><pre>{data}</pre></div>'
+                + '<div class="data"><span class="label">返回的数据：</span>'
+                    + '<pre>{data}</pre><span class="expand" title="数据过长，可折叠查看" open="true">-</span>'
+                + '</div>'
                 + '</div>';
 
         function parseApiItemsHtml(filterApiDatas) {
@@ -292,8 +376,8 @@
         var commentContent = document.querySelector('.comment .content'),
                 contentClassList = commentContent.classList;
 
-        var expandDom = document.querySelector('.comment .expand');
-        var toggleComment = function () {
+        var expandDoms = document.querySelectorAll('.expand');
+        var toggleComment = function (expandDom, contentClassList) {
             var open = expandDom.getAttribute('open');
             if (!open) {
                 expandDom.setAttribute('open', 'false');
@@ -310,8 +394,19 @@
                 expandDom.setAttribute('open', 'false');
             }
         };
-        expandDom.onclick = toggleComment;
-        document.querySelector('.comment .tip').onclick = toggleComment;
+
+        Array.prototype.slice.call(expandDoms).forEach(function (item) {
+            (function (dom) {
+                var contentDom = dom.parentNode.querySelector('pre');
+                if (!contentDom) {
+                    contentDom = dom.parentNode.parentNode.querySelector('.content');
+                }
+                dom.onclick = toggleComment.bind(null, dom, contentDom.classList);
+            })(item);
+        });
+
+        document.querySelector('.comment .tip').onclick =
+            toggleComment.bind(null, document.querySelector('.comment .expand'), contentClassList);
     })();
 </script>
 </body>
