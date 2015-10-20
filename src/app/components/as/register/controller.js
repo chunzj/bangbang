@@ -65,20 +65,20 @@
 
     vm.confirmRegister = function (){
       sessionStorage.setItem('userSource', 'as');
-      //$state.go('registerSuccess');
+      $state.go('registerSuccess');
 
       var form = document.forms.namedItem("asRegisterFrm");
      // $log.info(form['user.photoUrl'].files[0]);
 
-      ajaxRequest.fileUpload({
-        name: 'chunzj',
-        age: 123,
-        sex: 232
-      }, 'user.photoUrl', vm.user.photoUrl, 'uploadFile').then(function (data) {
-        $log.info(data);
-      }).catch(function (err) {
-        $log.error(err);
-      });
+//      ajaxRequest.fileUpload({
+//        name: 'chunzj',
+//        age: 123,
+//        sex: 232
+//      }, 'user.photoUrl', vm.user.photoUrl, 'uploadFile').then(function (data) {
+//        $log.info(data);
+//      }).catch(function (err) {
+//        $log.error(err);
+//      });
 
     };
 
