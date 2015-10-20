@@ -1,413 +1,488 @@
 <!doctype html>
 <script>
-    var apiDatas = [
-        {
-            name: '获取系统初始化数据',
-            url: '/baseData',
-            method: 'GET',
-            auth: false,
-            params: {},
-            instruction: '目前返回的有棒棒等级和棒棒服务区域',
-            data: {
-                code: 1,
-                data: {
-                    bbLevel: [ //表示系统中的棒棒等级
-                        {
-                            id: '1',
-                            name: '金棒棒'
-                        },
-                        {
-                            id: '2',
-                            name: '银棒棒'
-                        },
-                        {
-                            id: '3',
-                            name: '铜棒棒'
-                        },
-                        {
-                            id: '4',
-                            name: '木棒棒'
-                        }
-                    ],
-                    serviceArea: [
-                        {
-                            id: 10,
-                            name: '渝北区',
-                            children: [
-                                {id: '101', name: '两路'},
-                                {id: '102', name: '新牌坊'},
-                                {id: '103', name: '汽博'}
-                            ]
-                        },
-                        {
-                            id: 20,
-                            name: '渝中区',
-                            children: [
-                                {id: '201', name: '大坪'},
-                                {id: '202', name: '解放碑'},
-                                {id: '203', name: '朝天门'}
-                            ]
-                        },
-                        {
-                            id: 30,
-                            name: '南岸区',
-                            children: [
-                                {id: '301', name: '弹子石'},
-                                {id: '302', name: '会展中心'},
-                                {id: '303', name: '四公里'}
-                            ]
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            name: '获取登录验证码',
-            url: '/verifyCode',
-            method: 'GET',
-            auth: false,
-            params: {
-                phone: '18627382692'
+  var apiDatas = [
+    {
+      name: '获取系统初始化数据',
+      url: '/baseData',
+      method: 'GET',
+      auth: false,
+      params: {},
+      instruction: '目前返回的有棒棒等级\棒棒服务区域\订单状态。' +
+      '<br>未抢单: 下了单，还未抢单; 待处理: 已有师傅抢单，还未处理; 处理中: 师傅正在处理，还未完成; ' +
+      '<br>完成待支付: 师傅已处理完，待支付; 待评价: 支付完成,等待评价; 已完成: 支付完成,评价完成; 已取消: 订单被取消',
+      data: {
+        code: 1,
+        data: {
+          bbLevel: [ //表示系统中的棒棒等级
+            {
+              id: '1',
+              name: '金棒棒'
             },
-            instruction: '用户获取手机验证码，用于登录。至于返回几位验证码，' +
-            '由后台决定，一般为四位，且验证码一段时间内都是有效的',
-            data: {
-                code: 1,
-                data: {
-                    code: '2334'
-                }
-            }
-        },
-        {
-            name: '登录',
-            url: '/login',
-            method: 'POST',
-            auth: false,
-            params: {
-                phone: '18627382692',
-                code: '2334'
+            {
+              id: '2',
+              name: '银棒棒'
             },
-            instruction: '根据填写的手机号码和获取的验证码进行登录, 登录成功之后将会获取到authCode，用于唯一标识用户是合法的E棒棒用户，包括棒棒。',
-            data: {
-                code: 1,
-                data: {
-                    authCode: '42daas52324534sad53',
-                    identity: 'look(找棒棒)/as(当棒棒)'
-                }
-            }
-        },
-        {
-            name: '用户注册',
-            url: '/register/look',
-            method: 'POST',
-            auth: false,
-            params: {
-                firstName: '羊羊',
-                lastName: '喜',
-                phone: '18627382692',
-                idNumber: '4209341199207103694(身份证号码)'
+            {
+              id: '3',
+              name: '铜棒棒'
             },
-            instruction: '无',
-            data: {
-                code: 1
+            {
+              id: '4',
+              name: '木棒棒'
             }
-        }, {
-            name: '棒棒注册',
-            url: '/register/as',
-            method: 'POST',
-            auth: false,
-            params: {
-                firstName: '羊羊',
-                lastName: '喜',
-                phone: '18627382692',
-                idNumber: '4209341199207103694(身份证号码)',
-                userPhoto: '文件对象(上传的手持证件照照片)',
-                serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)'
+          ],
+          serviceArea: [
+            {
+              id: 10,
+              name: '渝北区',
+              children: [
+                {id: '101', name: '两路'},
+                {id: '102', name: '新牌坊'},
+                {id: '103', name: '汽博'}
+              ]
             },
-            instruction: '无',
-            data: {
-                code: 1
+            {
+              id: 20,
+              name: '渝中区',
+              children: [
+                {id: '201', name: '大坪'},
+                {id: '202', name: '解放碑'},
+                {id: '203', name: '朝天门'}
+              ]
+            },
+            {
+              id: 30,
+              name: '南岸区',
+              children: [
+                {id: '301', name: '弹子石'},
+                {id: '302', name: '会展中心'},
+                {id: '303', name: '四公里'}
+              ]
             }
+          ],
+          orderStatus: {
+            1: '未抢单', //下了单，还未抢单
+            2: '待处理', //已有师傅抢单，还未处理
+            3: '处理中', //师傅正在处理，还未完成
+            4: '完成待支付', //师傅已处理完，待支付
+            5: '待评价', //支付完成,等待评价
+            6: '已完成', //支付完成,评价完成
+            7: '已取消' //订单被取消
+          }
         }
-    ];
+      }
+    },
+    {
+      name: '获取登录验证码',
+      url: '/verifyCode',
+      method: 'GET',
+      auth: false,
+      params: {
+        phone: '18627382692'
+      },
+      instruction: '用户获取手机验证码，用于登录。至于返回几位验证码，' +
+      '由后台决定，一般为四位，且验证码一段时间内都是有效的',
+      data: {
+        code: 1,
+        data: {
+          code: '2334'
+        }
+      }
+    },
+    {
+      name: '登录',
+      url: '/login',
+      method: 'POST',
+      auth: false,
+      params: {
+        phone: '18627382692',
+        code: '2334'
+      },
+      instruction: '根据填写的手机号码和获取的验证码进行登录, 登录成功之后将会获取到authCode，用于唯一标识用户是合法的E棒棒用户，包括棒棒。',
+      data: {
+        code: 1,
+        data: {
+          authCode: '42daas52324534sad53',
+          identity: 'look(找棒棒)/as(当棒棒)'
+        }
+      }
+    },
+    {
+      name: '用户注册',
+      url: '/register/look',
+      method: 'POST',
+      auth: false,
+      params: {
+        firstName: '羊羊',
+        lastName: '喜',
+        phone: '18627382692',
+        idNumber: '4209341199207103694(身份证号码)',
+        readedProtocol: true
+      },
+      instruction: '无',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '棒棒注册',
+      url: '/register/as',
+      method: 'POST',
+      auth: false,
+      params: {
+        firstName: '羊羊',
+        lastName: '喜',
+        phone: '18627382692',
+        idNumber: '4209341199207103694(身份证号码)',
+        userPhoto: '文件对象(上传的手持证件照照片)',
+        serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)',
+        readedProtocol: true
+      },
+      instruction: '无',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '获取棒棒个人信息',
+      url: '/personal/as',
+      method: 'GET',
+      auth: true,
+      params: {},
+      instruction: 'verified,表示是否被验证',
+      data: {
+        code: 1,
+        data: {
+          id: '123131(主键)',
+          name: '喜洋洋',
+          avatar: '头像路径',
+          verified: false,
+          level: {
+            id: '1',
+            name: '金棒棒'
+          },
+          phone: '18627792280',
+          serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)'
+        }
+      }
+    }, {
+      name: '获取用户个人信息',
+      url: '/personal/look',
+      method: 'GET',
+      auth: true,
+      params: {},
+      instruction: 'verified,表示是否被验证',
+      data: {
+        code: 1,
+        data: {
+          id: '123131(主键)',
+          name: '喜洋洋',
+          avatar: '头像路径',
+          verified: false,
+          phone: '18627792280'
+        }
+      }
+    }, {
+      name: '获取用户订单信息',
+      url: '/personal/look/myOrders',
+      method: 'GET',
+      auth: true,
+      params: {},
+      instruction: '无',
+      data: {
+        code: 1,
+        data: {
+          id: '1(订单id)',
+          theme: '帮你送',
+          departure: '金港国际(出发地)',
+          arrival: '四号桥(到达地)',
+          goods: '10斤的行李箱(需求，商品)',
+          dateTime: '2015/08/20 15:00(订单时间)',
+          status: {
+            text: '已完成',
+            code: 6
+          },
+          salary: 10
+        }
+      }
+    }
+  ];
 </script>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>E棒棒Api文档</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
+  <meta charset="utf-8">
+  <title>E棒棒Api文档</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
 
-        html {
-            min-width: 1080px;
-            font-family: "幼圆";
-            font-size: 125%;
-        }
+    html {
+      min-width: 1080px;
+      font-family: "幼圆";
+      font-size: 125%;
+    }
 
-        h1 {
-            margin-bottom: 1rem;
-        }
+    h1 {
+      margin-bottom: 1rem;
+    }
 
-        header {
-            padding-top: 5rem;
-            background: url('bg.jpg') no-repeat;
-            background-size: 100% auto;
-            text-align: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
+    header {
+      padding-top: 5rem;
+      background: url('bg.jpg') no-repeat;
+      background-size: 100% auto;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
 
-        .search {
-            line-height: 3rem;
-            margin-bottom: 2rem;
-        }
+    .search {
+      line-height: 3rem;
+      margin-bottom: 2rem;
+    }
 
-        .search input {
-            font-size: 1rem;
-            height: 24px;
-            line-height: 24px;
-            padding: 12px;
-            width: 72%;
-            color: #000;
-            margin-right: 10px;
-            margin-bottom: 0;
-        }
+    .search input {
+      font-size: 1rem;
+      height: 24px;
+      line-height: 24px;
+      padding: 12px;
+      width: 72%;
+      color: #000;
+      margin-right: 10px;
+      margin-bottom: 0;
+    }
 
-        .search a {
-            display: inline-block;
-            background-color: #3f4b55;
-            font-size: 1rem;
-            height: 28px;
-            line-height: 28px;
-            font-weight: 600;
-            padding: 0.57rem 24px;
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .search a {
+      display: inline-block;
+      background-color: #3f4b55;
+      font-size: 1rem;
+      height: 28px;
+      line-height: 28px;
+      font-weight: 600;
+      padding: 0.57rem 24px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-        .comment {
-            margin: 12.22rem auto 0;
-            background-color: #f2f2f2;
-            padding: 2rem 20% 2rem 1rem;
-            color: #777;
-            border-bottom: solid 1px #ddd;
-        }
+    .comment {
+      margin: 12.22rem auto 0;
+      background-color: #f2f2f2;
+      padding: 2rem 20% 2rem 1rem;
+      color: #777;
+      border-bottom: solid 1px #ddd;
+    }
 
-        .comment .title {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+    .comment .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
 
-        .comment .item {
-            margin-top: 0.5rem;
-            line-height: 1.5rem;
-        }
+    .comment .item {
+      margin-top: 0.5rem;
+      line-height: 1.5rem;
+    }
 
-        .api-items {
-            background-color: #f2f2f2;
-            padding: 0 2rem;
-        }
+    .api-items {
+      background-color: #f2f2f2;
+      padding: 0 2rem;
+    }
 
-        .api-item {
-            border-bottom: solid 1px #ddd;
-            line-height: 2rem;
-            position: relative;
-        }
+    .api-item {
+      border-bottom: solid 1px #ddd;
+      line-height: 2rem;
+      position: relative;
+    }
 
-        .api-item .no {
-            position: absolute;
-            top: 0.5rem;
-            left: -1rem;
-        }
+    .api-item .no {
+      position: absolute;
+      top: 0.5rem;
+      left: -1rem;
+    }
 
-        .api-item .name {
-            line-height: 3rem;
-            font-weight: bold;
-            border-bottom: solid 1px #ddd;
-        }
+    .api-item .name {
+      line-height: 3rem;
+      font-weight: bold;
+      border-bottom: solid 1px #ddd;
+    }
 
-        .api-item .label {
-            margin-right: 1rem;
-            text-align: right;
-            width: 10%;
-            display: inline-block;
-        }
+    .api-item .label {
+      margin-right: 1rem;
+      text-align: right;
+      width: 10%;
+      display: inline-block;
+    }
 
-        .api-item .data {
-            position: relative;
-        }
+    .api-item .data {
+      position: relative;
+    }
 
-        .expand {
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+    .expand {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
 
-        .api-item .expand {
-            position: absolute;
-            right: 5px;
-            top: 0;
-        }
+    .api-item .expand {
+      position: absolute;
+      right: 5px;
+      top: 0;
+    }
 
-        .no-data {
-            display: block;
-            text-align: center;
-            padding-bottom: 20px;
-        }
+    .no-data {
+      display: block;
+      text-align: center;
+      padding-bottom: 20px;
+    }
 
-        .comment .expand {
-            margin: 0 10px;
-        }
+    .comment .expand {
+      margin: 0 10px;
+    }
 
-        .hide {
-            display: none;
-        }
+    .hide {
+      display: none;
+    }
 
-        .tip {
-            font-size: 0.9rem;
-            vertical-align: 13%;
-        }
+    .tip {
+      font-size: 0.9rem;
+      vertical-align: 13%;
+    }
 
-        pre {
-            vertical-align: top;
-            display: inline-block;
-            font-family: '幼圆';
-        }
-    </style>
+    pre {
+      vertical-align: top;
+      display: inline-block;
+      font-family: '幼圆';
+    }
+  </style>
 </head>
 <body>
 <header>
-    <h1>E棒棒API文档</h1>
+  <h1>E棒棒API文档</h1>
 
-    <div class="search">
-        <input placeholder="请输入你想搜索的Api的keywords"/>
-        <a href="javascript:void(0);" onclick="searchApi();">搜索</a>
-    </div>
+  <div class="search">
+    <input placeholder="请输入你想搜索的Api的keywords"/>
+    <a href="javascript:void(0);" onclick="searchApi();">搜索</a>
+  </div>
 </header>
 <div class="comment">
-    <p class="title">API说明<span class="expand">+</span><span class="tip">可点击展开查看明细</span></p>
+  <p class="title">API说明<span title="数据过长，可折叠查看" class="expand">+</span><span class="tip">可点击展开查看明细</span></p>
 
-    <div class="content hide">
-        <p class="item">
-            1. 下面的API只会列出正确返回的数据，对于异常情况请按照如下情况返回：
-            <br>
-            {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;"code": 0,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;"msgCode": "10001",//例如：10001表示用户名和密码不一致，这个由后台自己确定。<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;"msg": "失败消息"//用户名和密码不一致<br>
-            }<br>
-        </p>
+  <div class="content hide">
+    <p class="item">
+      1. 下面的API只会列出正确返回的数据，对于异常情况请按照如下情况返回：
+      <br>
+      {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"code": 0,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"msgCode": "10001",//例如：10001表示用户名和密码不一致，这个由后台自己确定。<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"msg": "失败消息"//用户名和密码不一致<br>
+      }<br>
+    </p>
 
-        <p class="item">
-            2.
-            对于API中的auth参数，如果为true，表示请求API时需要带上认证参数。目前暂定认证参数通过请求头的Authorization来传递。
-            当用户登录之后，就能获取到此认证参数，我们称作authCode。
-            当前端传递的时候，会把authCode经过Base64编码，后台在获取头信息时，要先解码再验证。
-            其中authCode可能是经过手机号码和一些系统标识通过md5加密生成的标识，用于唯一标识某个用户，生成规则由后台决定。
-        </p>
+    <p class="item">
+      2.
+      对于API中的auth参数，如果为true，表示请求API时需要带上认证参数。目前暂定认证参数通过请求头的Authorization来传递。
+      当用户登录之后，就能获取到此认证参数，我们称作authCode。
+      当前端传递的时候，会把authCode经过Base64编码，后台在获取头信息时，要先解码再验证。
+      其中authCode可能是经过手机号码和一些系统标识通过md5加密生成的标识，用于唯一标识某个用户，生成规则由后台决定。
+    </p>
 
-        <p class="item">
-            3. 对于返回的参数data，可能为JSON对象，也可能为JSON数组。
-        </p>
+    <p class="item">
+      3. 对于返回的参数data，可能为JSON对象，也可能为JSON数组。
+    </p>
 
-        <p class="item">
-            4. 对于API路径，目前列的为相对路径，在具体用的时候还要加上具体域名、端口和项目名称。
-            例如：http://www.ebb.com/bb/baseData //此默认为80端口
-        </p>
-    </div>
+    <p class="item">
+      4. 对于API路径，目前列的为相对路径，在具体用的时候还要加上具体域名、端口和项目名称。
+      例如：http://www.ebb.com/bb/baseData //此默认为80端口
+    </p>
+  </div>
 </div>
 <div class="api-items"></div>
 <script>
-    (function () {
-        var apiItemTemplate = '<div class="api-item separator">'
-                + '<div class="no">{idx} </div>'
-                + '<div class="name"><span class="label">API名称：</span>{name}</div>'
-                + '<div class="url"><span class="label">路径：</span>{url}</div>'
-                + '<div class="method"><span class="label">请求形式：</span>{method}</div>'
-                + '<div class="params"><span class="label">请求参数：</span><pre>{params}</pre></div>'
-                + '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
-                + '<div class="instruction"><span class="label">说明：</span>{instruction}</div>'
-                + '<div class="data"><span class="label">返回的数据：</span>'
-                    + '<pre>{data}</pre><span class="expand" title="数据过长，可折叠查看" open="true">-</span>'
-                + '</div>'
-                + '</div>';
+  (function (){
+    var apiItemTemplate = '<div class="api-item separator">'
+        + '<div class="no">{idx} </div>'
+        + '<div class="name"><span class="label">API名称：</span>{name}</div>'
+        + '<div class="url"><span class="label">路径：</span>{url}</div>'
+        + '<div class="method"><span class="label">请求形式：</span>{method}</div>'
+        + '<div class="params"><span class="label">请求参数：</span><pre>{params}</pre></div>'
+        + '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
+        + '<div class="instruction"><span class="label">说明：</span><pre>{instruction}</pre></div>'
+        + '<div class="data"><span class="label">返回的数据：</span>'
+        + '<pre class="hide">{data}</pre><span class="expand" title="数据过长，可折叠查看" open="false">+</span>'
+        + '</div>'
+        + '</div>';
 
-        function parseApiItemsHtml(filterApiDatas) {
-            var apiItems = [];
-            filterApiDatas.reduce(function (result, item, idx) {
-                var itemHtml = apiItemTemplate;
-                for (var key in item) {
-                    var value = item[key];
-                    if (typeof value === 'object') {
-                        value = JSON.stringify(value, null, 2);
-                    } else if (typeof value === 'number') {
-                        value = Number(value).toString();
-                    } else if (typeof value === 'boolean') {
-                        value = value.toString();
-                    }
-                    itemHtml = itemHtml.replace('{' + key + '}', value);
-                }
-                result.push(itemHtml.replace('{idx}', idx + 1));
-                return result;
-            }, apiItems);
-
-            document.querySelector('.api-items').innerHTML = apiItems.length ? apiItems.join('') : '<span class="no-data">没有找到相应的Api!</span>';
+    function parseApiItemsHtml(filterApiDatas){
+      var apiItems = [];
+      filterApiDatas.reduce(function (result, item, idx){
+        var itemHtml = apiItemTemplate;
+        for (var key in item) {
+          var value = item[key];
+          if (typeof value === 'object') {
+            value = JSON.stringify(value, null, 2);
+          } else if (typeof value === 'number') {
+            value = Number(value).toString();
+          } else if (typeof value === 'boolean') {
+            value = value.toString();
+          }
+          itemHtml = itemHtml.replace('{' + key + '}', value);
         }
+        result.push(itemHtml.replace('{idx}', idx + 1));
+        return result;
+      }, apiItems);
 
-        parseApiItemsHtml(apiDatas);
+      document.querySelector('.api-items').innerHTML = apiItems.length ? apiItems.join('') : '<span class="no-data">没有找到相应的Api!</span>';
+    }
 
-        function searchApi() {
-            var searchKeywords = document.querySelector('.search input').value.trim();
-            if (searchKeywords.length > 0) {
-                parseApiItemsHtml(apiDatas.filter(function (item) {
-                    return item.name.indexOf(searchKeywords) !== -1;
-                }));
-            }
+    parseApiItemsHtml(apiDatas);
+
+    function searchApi(){
+      var searchKeywords = document.querySelector('.search input').value.trim();
+      if (searchKeywords.length > 0) {
+        parseApiItemsHtml(apiDatas.filter(function (item){
+          return item.name.indexOf(searchKeywords) !== -1;
+        }));
+      }
+    }
+
+    window.searchApi = searchApi;
+
+    //控制API注意事项的开关
+    var commentContent = document.querySelector('.comment .content'),
+        contentClassList = commentContent.classList;
+
+    var expandDoms = document.querySelectorAll('.expand');
+    var toggleComment = function (expandDom, contentClassList){
+      var open = expandDom.getAttribute('open');
+      if (!open) {
+        expandDom.setAttribute('open', 'false');
+      }
+
+      open = expandDom.getAttribute('open') === 'true';
+      if (!open) {
+        contentClassList.remove('hide');
+        expandDom.innerHTML = '-';
+        expandDom.setAttribute('open', 'true');
+      } else {
+        contentClassList.add('hide');
+        expandDom.innerHTML = '+';
+        expandDom.setAttribute('open', 'false');
+      }
+    };
+
+    Array.prototype.slice.call(expandDoms).forEach(function (item){
+      (function (dom){
+        var contentDom = dom.parentNode.querySelector('pre');
+        if (!contentDom) {
+          contentDom = dom.parentNode.parentNode.querySelector('.content');
         }
+        dom.onclick = toggleComment.bind(null, dom, contentDom.classList);
+      })(item);
+    });
 
-        window.searchApi = searchApi;
-
-        //控制API注意事项的开关
-        var commentContent = document.querySelector('.comment .content'),
-                contentClassList = commentContent.classList;
-
-        var expandDoms = document.querySelectorAll('.expand');
-        var toggleComment = function (expandDom, contentClassList) {
-            var open = expandDom.getAttribute('open');
-            if (!open) {
-                expandDom.setAttribute('open', 'false');
-            }
-
-            open = expandDom.getAttribute('open') === 'true';
-            if (!open) {
-                contentClassList.remove('hide');
-                expandDom.innerHTML = '-';
-                expandDom.setAttribute('open', 'true');
-            } else {
-                contentClassList.add('hide');
-                expandDom.innerHTML = '+';
-                expandDom.setAttribute('open', 'false');
-            }
-        };
-
-        Array.prototype.slice.call(expandDoms).forEach(function (item) {
-            (function (dom) {
-                var contentDom = dom.parentNode.querySelector('pre');
-                if (!contentDom) {
-                    contentDom = dom.parentNode.parentNode.querySelector('.content');
-                }
-                dom.onclick = toggleComment.bind(null, dom, contentDom.classList);
-            })(item);
-        });
-
-        document.querySelector('.comment .tip').onclick =
-            toggleComment.bind(null, document.querySelector('.comment .expand'), contentClassList);
-    })();
+    document.querySelector('.comment .tip').onclick =
+        toggleComment.bind(null, document.querySelector('.comment .expand'), contentClassList);
+  })();
 </script>
 </body>
 </html>

@@ -10,6 +10,14 @@
   function LookRegisterController($scope, $state, $log) {
     var vm = $scope;
 
+    vm.user = {
+      lastName: '',
+      firstName: '',
+      phone: '',
+      certificate: '',
+      agreed: false
+    };
+
     vm.confirmRegister = function () {
       sessionStorage.setItem('userSource', 'look');
       $state.go('registerSuccess');
