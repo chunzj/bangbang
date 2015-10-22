@@ -7,7 +7,7 @@
       method: 'GET',
       auth: false,
       params: {},
-      instruction: '目前返回的有棒棒等级\棒棒服务区域\订单状态。' +
+      instruction: '目前返回的有棒棒等级\棒棒服务区域\订单状态\棒棒券状态。' +
       '<br>未抢单: 下了单，还未抢单; 待处理: 已有师傅抢单，还未处理; 处理中: 师傅正在处理，还未完成; ' +
       '<br>完成待支付: 师傅已处理完，待支付; 待评价: 支付完成,等待评价; 已完成: 支付完成,评价完成; 已取消: 订单被取消',
       data: {
@@ -68,6 +68,11 @@
             5: '待评价', //支付完成,等待评价
             6: '已完成', //支付完成,评价完成
             7: '已取消' //订单被取消
+          },
+          couponStatus: {
+            1: '未使用',
+            2: '已使用',
+            3: '已过期'
           }
         }
       }
@@ -173,8 +178,24 @@
             name: '金棒棒'
           },
           phone: '18627792280',
-          serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)'
+          serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)',
+          cash: '现金余额'
         }
+      }
+    }, {
+      name: '修改棒棒个人信息',
+      url: '/personal/as',
+      method: 'post',
+      auth: true,
+      params: {
+        userId: '用户id',
+        avatar: '头像文件',
+        phone: '手机号码',
+        serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)'
+      },
+      instruction: '这里会有上传头像文件',
+      data: {
+        code: 1
       }
     }, {
       name: '获取用户个人信息',
@@ -192,8 +213,23 @@
           name: '喜洋洋',
           avatar: '头像路径',
           verified: false,
-          phone: '18627792280'
+          phone: '18627792280',
+          cash: '现金余额'
         }
+      }
+    }, {
+      name: '修改用户个人信息',
+      url: '/personal/look',
+      method: 'post',
+      auth: true,
+      params: {
+        userId: '用户id',
+        avatar: '头像文件',
+        phone: '手机号码'
+      },
+      instruction: '这里会有上传头像文件',
+      data: {
+        code: 1
       }
     }, {
       name: '获取用户订单信息',
@@ -203,21 +239,34 @@
       params: {
         userId: '用户id'
       },
-      instruction: '无',
+      instruction: '如果用户的订单被棒棒抢单了，就会返回user信息，所以这里的user指棒棒信息。',
       data: {
         code: 1,
         data: [{
-            orderId: '1(订单id)',
-            theme: '帮你送',
-            departure: '金港国际(出发地)',
-            arrival: '四号桥(到达地)',
-            goods: '10斤的行李箱(需求，商品)',
-            dateTime: '2015/08/20 15:00(订单时间)',
-            status: {
-                text: '已完成',
-                code: 6
-            },
-            salary: 10
+          orderId: '1(订单id)',
+          theme: '帮你送',
+          departure: '金港国际(出发地)',
+          arrival: '四号桥(到达地)',
+          goods: '10斤的行李箱(需求，商品)',
+          dateTime: '2015/08/20 15:00(订单时间)',
+          subscribeTime: {
+            start: '12:00',
+            end: '18:00'
+          },
+          status: {
+            code: 6,
+            text: '已完成'
+          },
+          level: {
+            code: 1,
+            text: '金棒棒'
+          },
+          salary: 10,
+          user: {
+            id: '342423423',
+            name: 'A师傅',
+            phone: '18123235865'
+          }
         }]
       }
     }, {
@@ -228,71 +277,138 @@
       params: {
         userId: '用户id'
       },
-      instruction: '订单状态为未抢单、已取消、已完成以外的都属于未完成订单。返回的数据为json数组',
+      instruction: '订单状态为未抢单、已取消、已完成以外的都属于未完成订单。返回的数据为json数组。这里的user指来自于哪个用户的订单',
       data: {
         code: 1,
         data: [{
-            orderId: '订单id',
-            theme: '帮你送',
-            departure: '金港国际1号服务点(出发地)',
-            arrival: '四号桥金山小区(目的地)',
-            orderDate: {
-                title: '预约开始时间/订单完成时间',
-                time: '2015/08/20 15:00'
-            },
-            status: {
-                code: 2,
-                text: '待处理'
-            },
-            user: {
-                name: 'A先生',
-                phone: '18123235865'
-            }
+          orderId: '订单id',
+          theme: '帮你送',
+          departure: '金港国际1号服务点(出发地)',
+          arrival: '四号桥金山小区(目的地)',
+          goods: '10斤的行李箱(需求，商品)',
+          orderDate: {
+            title: '预约开始时间/订单完成时间',
+            time: '2015/08/20 15:00'
+          },
+          subscribeTime: {
+            start: '12:00',
+            end: '18:00'
+          },
+          status: {
+            code: 2,
+            text: '待处理'
+          },
+          level: {
+            code: 1,
+            text: '金棒棒'
+          },
+          salary: 10,
+          user: {
+            id: '3423423',
+            name: 'A先生',
+            phone: '18123235865'
+          }
         }]
       }
     }, {
-          name: '获取棒棒已完成订单信息',
-          url: '/personal/as/resolvedOrders',
-          method: 'GET',
-          auth: true,
-          params: {
-              userId: '用户id'
+      name: '获取棒棒已完成订单信息',
+      url: '/personal/as/resolvedOrders',
+      method: 'GET',
+      auth: true,
+      params: {
+        userId: '用户id'
+      },
+      instruction: '订单状态为已取消、已完成的都属于已完成订单。返回的数据为json数组',
+      data: {
+        code: 1,
+        data: [{
+          orderId: '订单id',
+          theme: '帮你送',
+          departure: '金港国际1号服务点(出发地)',
+          arrival: '四号桥金山小区(目的地)',
+          goods: '10斤的行李箱',
+          orderDate: '2015/08/20 15:00',
+          status: {
+            code: 6,
+            text: '已完成'
           },
-          instruction: '订单状态为已取消、已完成的都属于已完成订单。返回的数据为json数组',
-          data: {
-              code: 1,
-              data: [{
-                  orderId: '订单id',
-                  theme: '帮你送',
-                  departure: '金港国际1号服务点(出发地)',
-                  arrival: '四号桥金山小区(目的地)',
-                  goods: '10斤的行李箱',
-                  orderDate: '2015/08/20 15:00',
-                  status: {
-                      code: 6,
-                      text: '已完成'
-                  },
-                  salary: 10
-              }]
-          }
-      },{
-          name: '获取推送给棒棒的订单信息',
-          url: '/personal/as/latestOrders',
-          method: 'GET',
-          auth: true,
-          params: {},
-          instruction: '订单状态为未接单的订单信息。返回的数据为json数组',
-          data: {
-              code: 1,
-              data: [{
-                  orderId: '订单id',
-                  theme: '帮你送',
-                  departure: '金港国际',
-                  arrival: '四号桥',
-                  goods: '10斤的行李箱'
-              }]
-          }
+          salary: 10
+        }]
       }
+    }, {
+      name: '获取推送给棒棒的订单信息',
+      url: '/personal/as/latestOrders',
+      method: 'GET',
+      auth: true,
+      params: {},
+      instruction: '订单状态为未接单的订单信息。返回的数据为json数组',
+      data: {
+        code: 1,
+        data: [{
+          orderId: '订单id',
+          theme: '帮你送',
+          departure: '金港国际',
+          arrival: '四号桥',
+          goods: '10斤的行李箱',
+          subscribeTime: {
+            start: '12:00',
+            end: '18:00'
+          },
+          level: {
+            code: 1,
+            text: '金棒棒'
+          },
+          salary: 10,
+          user: {
+            id: '3423423',
+            name: 'A先生',
+            phone: '18123235865'
+          }
+        }]
+      }
+    }, {
+      name: '获取用户的棒棒券记录',
+      url: '/personal/look/bbCoupon',
+      method: 'GET',
+      auth: true,
+      params: {
+        userId: '用户id'
+      },
+      instruction: '这里的status就是表示棒棒券的状态。',
+      data: {
+        code: 1,
+        data: [
+          {
+            quota: 10,
+            date: '2015/01/02',
+            expiredDate: '2015/08/02',
+            status: {
+              code: '1',
+              text: '未使用'
+            }
+          }
+        ]
+      }
+    }, {
+      name: '获取用户的现金记录',
+      url: '/personal/cashRecord',
+      method: 'GET',
+      auth: true,
+      params: {
+        userId: '用户id',
+        identity: 'look(找棒棒)/as(当棒棒)'
+      },
+      instruction: '这里的现金记录包括棒棒和用户的。',
+      data: {
+        code: 1,
+        data: [
+          {theme: '帮你办', dateTitle: '获得时间', quota: '+10', date: '2015/01/02'},
+          {theme: '帮你订', dateTitle: '支出时间', quota: '-10', date: '2015/01/02'},
+          {theme: '帮你订', dateTitle: '获得时间', quota: '+5', date: '2015/01/02'},
+          {theme: '帮你订', dateTitle: '获得时间', quota: '+5', date: '2015/01/02'}
+        ]
+      }
+    }
   ];
 </script>
 <html>
