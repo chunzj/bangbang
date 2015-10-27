@@ -179,7 +179,8 @@
           },
           phone: '18627792280',
           serviceArea: '10(服务大区--例如渝北区)-101(服务小区--例如两路)',
-          cash: '现金余额'
+          cash: '现金余额',
+          point: '积分信息'
         }
       }
     }, {
@@ -408,6 +409,159 @@
           {theme: '帮你订', dateTitle: '获得时间', quota: '+5', date: '2015/01/02'}
         ]
       }
+    }, {
+      name: '获取用户的评论记录',
+      url: '/personal/comment',
+      method: 'GET',
+      auth: true,
+      params: {
+        userId: '用户id',
+        identity: 'look(找棒棒)'
+      },
+      instruction: '这里指用户的我的评价信息',
+      data: {
+        code: 1,
+        data: [
+          {
+            theme: '帮你办',
+            date: {
+              text: '评价时间',
+              time: '2015/01/02'
+            },
+            user: {
+              name: 'A师傅',
+              phone: '18627782281'
+            },
+            star: 3
+          }
+        ]
+      }
+    }, {
+      name: '获取棒棒的评论记录',
+      url: '/personal/comment',
+      method: 'GET',
+      auth: true,
+      params: {
+        userId: '用户id',
+        identity: 'as(当棒棒)'
+      },
+      instruction: '这里指棒棒的我的评价信息',
+      data: {
+        code: 1,
+        data: [
+          {
+            theme: '帮你办',
+            date: {
+              text: '获得时间',
+              time: '2015/01/02'
+            },
+            star: 3,
+            point: '+0分'
+          },{
+            theme: '帮你订',
+            date: {
+              text: '支出时间',
+              time: '2015/01/02'
+            },
+            star: 4,
+            point: '+1分'
+          }
+        ]
+      }
+    }, {
+      name: '用户评价棒棒',
+      url: '/evaluation',
+      method: 'POST',
+      auth: true,
+      params: {
+        userId: '用户id',
+        orderId: '订单id',
+        star: 3,
+        good: true,
+        message: '评价及建议'
+      },
+      instruction: '这里指用户对棒棒的服务进行评价。当前系统中的评价分为两种，一种是对完成订单的评价，评价方式为选择星级；' +
+      '另一种是对取消订单的评价，评价方式为选择好评或者差评。请注意这里对完成订单的评价（也就是星级评价）之后会给用户进行返现',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '棒棒接单',
+      url: '/order/receive',
+      method: 'POST',
+      auth: true,
+      params: {
+        userId: '用户id',
+        orderId: '订单id',
+        identity: 'look(找棒棒)/as(当棒棒)'
+      },
+      instruction: '这里指把订单状态由为接单变为待处理。',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '棒棒开始处理订单',
+      url: '/order/process',
+      method: 'POST',
+      auth: true,
+      params: {
+        userId: '用户id',
+        orderId: '订单id',
+        identity: 'look(找棒棒)/as(当棒棒)'
+      },
+      instruction: '这里指把订单状态由待处理变为处理中。',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '完成订单',
+      url: '/order/finish',
+      method: 'POST',
+      auth: true,
+      params: {
+        userId: '用户id',
+        orderId: '订单id',
+        identity: 'look(找棒棒)/as(当棒棒)'
+      },
+      instruction: '这里的完成订单会有两种情况，一种是棒棒完成，棒棒完成之后会通知用户，完成订单并进行支付；另一种是用户完成，完成之后，就会进行支付。',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '取消订单',
+      url: '/order/cancel',
+      method: 'POST',
+      auth: true,
+      params: {
+        userId: '用户id',
+        orderId: '订单id',
+        identity: 'look(找棒棒)/as(当棒棒)'
+      },
+      instruction: '目前来说只有用户能取消订单，且取消之后需要对棒棒进行评价。',
+      data: {
+        code: 1
+      }
+    }, {
+      name: '发布需求---帮我送',
+      url: '/demand/help_send',
+      method: 'POST',
+      auth: true,
+      params: {
+        userId: '用户id',
+        servicePlace: '服务点',
+        destination: '目的地',
+        bbLevel: '1:金棒棒。棒棒级别',
+        demand: '用户需求',
+        subscribeTime: {
+          start: '预约开始时间',
+          end: '预约结束时间'
+        },
+        salary: '支付薪水'
+      },
+      instruction: '目前只支持帮我送，路径为/demand/help_send，后期增加其他的可能会变成/demand/help_post等等',
+      data: {
+        code: 1
+      }
     }
   ];
 </script>
@@ -424,7 +578,6 @@
     html {
       min-width: 1080px;
       font-family: "幼圆";
-      font-size: 125%;
     }
 
     h1 {
