@@ -21,6 +21,15 @@
           }
         }
       }).
+      state('guestMain', {
+        controller: function ($state, bbConstant) {
+          localStorage.setItem('userInfo', JSON.stringify({
+            identity: bbConstant.userSource.guest
+          }));
+
+          $state.go('lookMain');
+        }
+      }).
       state('login', {
         url: '/login',
         views: {

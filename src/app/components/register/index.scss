@@ -17,7 +17,7 @@
 
 .register-page {
   .apply {
-    @include register-btn-bg(4.8rem, 11.8rem, "../../../../assets/images/as/apply.png");
+    @include register-btn-bg(4.8rem, 11.8rem, "../assets/images/as/apply.png");
   }
 
   .comment {
@@ -27,6 +27,6 @@
   }
 
   .login {
-    @include register-btn-bg(16.8rem, 0, "../../../../assets/images/as/login.png");
+    @include register-btn-bg(16.8rem, 0, "../assets/images/as/login.png");
   }
 }

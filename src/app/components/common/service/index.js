@@ -4,7 +4,7 @@
 (function () {
 
   angular
-    .module('bb.common.service', ['bb.common.config'])
+    .module('bb.common.service', ['bb.common.config', 'bb.common.constant'])
     .service('ajaxRequest', function($rootScope, $http, bbConfig) {
 
         var apiConfig = bbConfig.apiConfig[$rootScope.env || 'dev'];
@@ -86,5 +86,38 @@
         function getApiUrl (apiPath) {
           return ['http://', apiConfig.hostname, ':', apiConfig.port, apiPath].join('');
         }
+    })
+    .service('checker', function ($q, $window, $log, ajaxRequest, bbConstant) {
+      return {
+        isLogin: function () {
+          return $q(function (resolve, reject) {
+            var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if (!userInfo) {
+              resolve(false);
+            } else {
+              if (userInfo.identity === bbConstant.userSource.guest) {
+                resolve(true);
+                return;
+              }
+
+              if (!$window.authCode) {
+                resolve(false);
+                return;
+              }
+
+              ajaxRequest.get({
+                userId: userInfo.userId,
+                identity: userInfo.identity
+              }, 'verifyUser').then(function (data) {
+                $window.authCode = data.authCode;
+                resolve(true);
+              }).catch(function (err) {
+                $log.info('Fail to verify user');
+                resolve(false);
+              });
+            }
+          });
+        }
+      };
     });
 })();

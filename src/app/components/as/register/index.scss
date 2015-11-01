@@ -99,7 +99,7 @@
     font-size: 4rem;
 
     .arrow-down-sm {
-      background-image: url('../../../../assets/images/shared/arrow-down-bk.png');
+      background-image: url('../assets/images/shared/arrow-down-bk.png');
       transform: rotate(0deg);
       width: 3.8rem;
       height: 2.4rem;
@@ -137,12 +137,12 @@
     }
 
     .notAgreed .text{
-      background-image: url('../../../../assets/images/as/notAgree.png');
+      background-image: url('../assets/images/as/notAgree.png');
       background-size: 4.6rem auto;
     }
 
     .agreed .text{
-      background-image: url('../../../../assets/images/as/agreed.png');
+      background-image: url('../assets/images/as/agreed.png');
       background-size: 5.1rem auto;
     }
   }

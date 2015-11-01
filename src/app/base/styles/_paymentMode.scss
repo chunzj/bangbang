@@ -26,7 +26,7 @@
     outline: none;
 
     .icon {
-      background: url("../../../assets/images/wallet/card.png") no-repeat;
+      background: url("../assets/images/wallet/card.png") no-repeat;
       background-position: left center;
       background-size: 12.5rem auto;
       width: 12.5rem;
@@ -62,13 +62,13 @@
     }
 
     .check {
-      background-image: url("../../../assets/images/shared/check.png");
+      background-image: url("../assets/images/shared/check.png");
       height: 4rem;
       margin-top: -2rem;
     }
 
     .checked {
-      background-image: url("../../../assets/images/shared/checked.png");
+      background-image: url("../assets/images/shared/checked.png");
       height: 4.4rem;
       margin-top: -2.2rem;
     }

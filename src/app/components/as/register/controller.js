@@ -38,8 +38,8 @@
       firstName: '',
       phone: '',
       certificate: '',
-      photoUrl: '../../../../assets/images/as/demo.png',
-      photoData: '../../../../assets/images/as/demo.png',
+      photoUrl: './assets/images/as/demo.png',
+      photoData: './assets/images/as/demo.png',
       area: '',
       subArea: '',
       agreed: false

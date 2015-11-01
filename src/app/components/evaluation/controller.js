@@ -16,7 +16,7 @@
     var evaluationType = $stateParams.type, orderId = $stateParams.orderId;
     vm.evaluationType = evaluationType;
     vm.user = {
-      photo: '../../../../assets/images/personal/photo.jpg',
+      photo: './assets/images/personal/photo.jpg',
       bbLevel: {
         level: '',
         text: '金棒棒'

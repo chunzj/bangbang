@@ -19,7 +19,7 @@
     vm.user = {
       phone: '15823456789',
       area: $scope.areas[2],
-      photo: '../../../assets/images/personal/photo.jpg'
+      photo: './assets/images/personal/photo.jpg'
     };
 
     //control arrow direction

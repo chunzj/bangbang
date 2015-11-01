@@ -18,7 +18,7 @@
       if (flag == -1) {
         vm.paymentMode = [{
           id: 'wxWallet',
-          icon: '../../../../assets/images/wallet/card.png',
+          icon: './assets/images/wallet/card.png',
           name: '微信钱包支付',
           comment: '提现至微信钱包',
           checked: false
@@ -26,7 +26,7 @@
       } else if (flag == 1) {
         vm.paymentMode = [{
           id: 'wxWallet',
-          icon: '../../../../assets/images/wallet/card.png',
+          icon: './assets/images/wallet/card.png',
           name: '微信钱包支付',
           comment: '使用微信钱包快捷支付',
           checked: false

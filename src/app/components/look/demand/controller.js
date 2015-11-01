@@ -7,26 +7,32 @@
     .controller('LookDemandController', LookDemandController);
 
   /** @ngInject */
-  function LookDemandController($scope, $state, $log) {
+  function LookDemandController($scope, $state, $log, checker) {
     var vm = $scope;
+    checker.isLogin().then(function (isLogin) {
+      if (!isLogin) {
+        $state.go('main');
+        return;
+      } else {
+        vm.subscribe = function () {
+          $log.info('Subscribe current order');
+          $state.go('lookMyOrders');
+        };
 
-    vm.subscribe = function () {
-      $log.info('Subscribe current order');
-      $state.go('lookMyOrders');
-    };
-
-    vm.bbLevelOptions = [{
-      id: '1',
-      name: '金棒棒'
-    },{
-      id: '2',
-      name: '银棒棒'
-    },{
-      id: '3',
-      name: '铜棒棒'
-    },{
-      id: '4',
-      name: '木棒棒'
-    }];
+        vm.bbLevelOptions = [{
+          id: '1',
+          name: '金棒棒'
+        },{
+          id: '2',
+          name: '银棒棒'
+        },{
+          id: '3',
+          name: '铜棒棒'
+        },{
+          id: '4',
+          name: '木棒棒'
+        }];
+      }
+    });
   }
 })();

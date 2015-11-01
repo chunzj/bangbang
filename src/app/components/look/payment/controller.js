@@ -29,13 +29,13 @@
 
     vm.paymentMode = [{
       id: 'bbWallet',
-      icon: '../../../../assets/images/wallet/card.png',
+      icon: './assets/images/wallet/card.png',
       name: '棒棒钱包支付',
       comment: '通过棒棒钱包的余额支付',
       checked: false
     },{
       id: 'wxWallet',
-      icon: '../../../../assets/images/wallet/card.png',
+      icon: './assets/images/wallet/card.png',
       name: '微信钱包支付',
       comment: '通过微信钱包快捷支付',
       checked: false

@@ -7,7 +7,12 @@
     .controller('LookMainController', LookMainController);
 
   /** @ngInject */
-  function LookMainController($scope) {
-    var vm = $scope;
+  function LookMainController($state, checker) {
+    checker.isLogin().then(function (isLogin) {
+      if (!isLogin) {
+        $state.go('main');
+        return;
+      }
+    });
   }
 })();

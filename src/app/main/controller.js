@@ -7,7 +7,5 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, bbUtil) {
-    var vm = $scope;
-  }
+  function MainController($scope) {}
 })();

@@ -12,7 +12,7 @@
     var orderId = $stateParams.orderId;
 
     vm.user = {
-      photo: '../../../../assets/images/personal/photo.jpg'
+      photo: './assets/images/personal/photo.jpg'
     };
 
     vm.serviceEvaluation = function () {

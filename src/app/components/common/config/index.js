@@ -9,8 +9,8 @@
       .constant('bbConfig', {
         apiConfig: {
           dev: {
-            hostname: 'localhost',
-            port: 4001
+            hostname: 'http://211.149.247.18',
+            port: 8080
           },
           prod: {
             hostname: 'www.bb.com',
@@ -19,6 +19,7 @@
         },
         apiPath: {
           baseData: '/baseData',
+          verifyUser: '/verifyUser',
           uploadFile: '/test/update-file'
         }
       });

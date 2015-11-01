@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  background: url("../../../assets/images/shared/bg.png") no-repeat;
+  background: url("../assets/images/shared/bg.png") no-repeat;
   background-size: 100% 100%;
   color: #fff;
   overflow-x: hidden;
@@ -66,15 +66,15 @@ input, select {
   line-height: 13.4rem;
   position: relative;
   .arrow-right {
-    @include arrow-style(5.3rem, 6.7rem, 5.7rem, "../../../assets/images/shared/right-arrow.png");
+    @include arrow-style(5.3rem, 6.7rem, 5.7rem, "../assets/images/shared/right-arrow.png");
   }
 
   .arrow-right-sm {
-    @include arrow-style(3.3rem, 5.2rem, 2.2rem, "../../../assets/images/shared/right-arrow-small.png");
+    @include arrow-style(3.3rem, 5.2rem, 2.2rem, "../assets/images/shared/right-arrow-small.png");
   }
 
   .arrow-down-sm {
-    @include arrow-style(3.3rem, 5.2rem, 2.2rem, "../../../assets/images/shared/right-arrow-small.png");
+    @include arrow-style(3.3rem, 5.2rem, 2.2rem, "../assets/images/shared/right-arrow-small.png");
     transform: rotate(90deg);
   }
 }
@@ -96,7 +96,7 @@ input, select {
 }
 
 .wallet {
-  background: url("../../../assets/images/personal/wallet.png") no-repeat left center/6.3rem 8.2rem;
+  background: url("../assets/images/personal/wallet.png") no-repeat left center/6.3rem 8.2rem;
 }
 
 .dialog {
