@@ -96,6 +96,7 @@
               resolve(false);
             } else {
               if (userInfo.identity === bbConstant.userSource.guest) {
+                $window.isGuest = true;
                 resolve(true);
                 return;
               }
@@ -110,6 +111,8 @@
                 identity: userInfo.identity
               }, 'verifyUser').then(function (data) {
                 $window.authCode = data.authCode;
+                $window.isGuest = true;
+
                 resolve(true);
               }).catch(function (err) {
                 $log.info('Fail to verify user');

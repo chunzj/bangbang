@@ -22,15 +22,21 @@
             }
             return bbConstant.userSource.as === source ? '当棒棒' : '找棒棒';
           },
-          successAlert: function (msg){
+          successAlert: function (msg, callback){
             $rootScope.$apply(function () {
               $rootScope.alertSuccess = msg;
+              if (typeof callback === 'function') {
+                $rootScope.alertCallback = callback.toString();
+              }
             });
             openDialog(true);
           },
-          errorAlert: function (msg){
+          errorAlert: function (msg, callback){
             $rootScope.$apply(function () {
               $rootScope.alertError = msg;
+              if (typeof callback === 'function') {
+                $rootScope.alertCallback = callback;
+              }
             });
             openDialog(false);
           },

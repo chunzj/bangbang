@@ -255,7 +255,7 @@
   }
 
   /** @ngInject */
-  function runBlock($rootScope, $state, $stateParams, $document, $timeout, $log) {
+  function runBlock($rootScope, $state, $stateParams, $window, $document, $timeout, $log, bbUtil) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 
@@ -265,7 +265,17 @@
     //config api environment variables
     $rootScope.env = 'dev';
 
-    $rootScope.$on('$stateChangeStart', function () {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      if (toState.name === 'lookDemand' || toState.name === 'personalCenter') {
+        if ($window.isGuest) {
+          bbUtil.successAlert('当前身份为guest用户，请先登录或注册！', function ($state) {
+            $state.go('main');
+          });
+          event.preventDefault();
+          return;
+        }
+      }
+
       $timeout(function () {
         $document[0].body.scrollTop = 0;
       }, 100);

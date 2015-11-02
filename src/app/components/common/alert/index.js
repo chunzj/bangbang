@@ -8,7 +8,7 @@
     .directive('bbAlert', bbAlert);
 
   /** @ngInject */
-  function bbAlert ($log) {
+  function bbAlert ($state, $log) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/common/alert/index.html',
@@ -20,6 +20,9 @@
       link: function (scope, element, attrs) {
         element[0].querySelector('.close').onclick = function () {
           element.addClass('hide');
+          if (attrs.fn) {
+            eval("(" + attrs.fn + ")")($state);
+          }
         }
       }
     };
