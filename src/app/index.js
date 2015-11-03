@@ -17,7 +17,12 @@
         views: {
           '': {
             templateUrl: 'app/main/index.html',
-            controller: 'MainController'
+            controller: 'MainController',
+            resolve: {
+              baseData: function (apiService) {
+                return apiService.getBaseData();
+              }
+            }
           }
         }
       }).

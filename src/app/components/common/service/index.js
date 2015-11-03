@@ -5,7 +5,7 @@
 
   angular
     .module('bb.common.service', ['bb.common.config', 'bb.common.constant'])
-    .service('ajaxRequest', function($rootScope, $http, bbConfig) {
+    .service('ajaxRequest', function($rootScope, $http, $log, bbConfig) {
 
         var apiConfig = bbConfig.apiConfig[$rootScope.env || 'dev'];
 
@@ -18,7 +18,11 @@
           var defaultOptions = {
             url: getApiUrl(bbConfig.apiPath[apiPath]),
             responseType: 'json',
-            timeout: 2000
+            timeout: 2000,
+            transformResponse: function (data, headersGetter) {
+              $log.info(data);
+              $log.info(headersGetter);
+            }
           };
 
           angular.extend(options, defaultOptions);
@@ -31,7 +35,7 @@
             method: 'POST',
             data: formData,
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json;charset=utf-8'
             }
           }, apiPath);
         }
@@ -72,7 +76,7 @@
             method: 'GET',
             params: queryData,
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
+              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
           }, apiPath);
         }
@@ -84,7 +88,7 @@
         };
 
         function getApiUrl (apiPath) {
-          return ['http://', apiConfig.hostname, ':', apiConfig.port, apiPath].join('');
+          return ['http://', apiConfig.hostname, ':', apiConfig.port, bbConfig.apiBase, apiPath].join('');
         }
     })
     .service('checker', function ($q, $window, $log, ajaxRequest, bbConstant) {
@@ -101,7 +105,9 @@
                 return;
               }
 
+              $window.isGuest = false;
               if (!$window.authCode) {
+                localStorage.removeItem('userInfo');
                 resolve(false);
                 return;
               }
@@ -110,17 +116,35 @@
                 userId: userInfo.userId,
                 identity: userInfo.identity
               }, 'verifyUser').then(function (data) {
-                $window.authCode = data.authCode;
-                $window.isGuest = true;
 
+                $window.authCode = data.authCode;
                 resolve(true);
+
               }).catch(function (err) {
-                $log.info('Fail to verify user');
+
+                delete $window.authCode;
+                localStorage.removeItem('userInfo');
+
+                $log.info('Fail to verify user' + err);
                 resolve(false);
               });
             }
           });
         }
       };
-    });
+    }).service('apiService', function ($q, $log, ajaxRequest, bbConfig) {
+        return {
+          getBaseData: function () {
+            return $q(function (resolve, reject) {
+              ajaxRequest.get({}, 'baseData').then(function (result) {
+                $log.info('@@@@@@@@@@@@@@');
+                $log.info(result);
+              }).catch(function (error) {
+                $log.info('##############');
+                $log.info(error);
+              });
+            });
+          }
+        };
+      });
 })();

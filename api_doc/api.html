@@ -114,6 +114,23 @@
       }
     },
     {
+      name: '验证用户是否需要重新登录',
+      url: '/verifyUser',
+      method: 'GET',
+      auth: false,
+      params: {
+        userId: '用户id',
+        identity: '用户身份（as/棒棒、look/用户）'
+      },
+      instruction: '只要用户上次登录之后，如果再进入，在session有效期内不需要重复登录。',
+      data: {
+        code: 1,
+        data: {
+          authCode: '42daas52324534sad53'
+        }
+      }
+    },
+    {
       name: '用户注册',
       url: '/register/look',
       method: 'POST',

@@ -7,9 +7,10 @@
   angular
       .module('bb.common.config', [])
       .constant('bbConfig', {
+        apiBase: '/e-work',
         apiConfig: {
           dev: {
-            hostname: 'http://211.149.247.18',
+            hostname: '211.149.247.18',
             port: 8080
           },
           prod: {
