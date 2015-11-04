@@ -7,7 +7,5 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, baseData) {
-    $scope.baseData = baseData;
-  }
+  function MainController($scope) {}
 })();

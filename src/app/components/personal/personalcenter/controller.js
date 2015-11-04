@@ -7,9 +7,14 @@
     .controller('PersonalCenterController', PersonalCenterController);
 
   /** @ngInject */
-  function PersonalCenterController($scope, $log) {
-    var vm = $scope;
+  function PersonalCenterController($scope, $state, $log, isLogin) {
 
+    if (!isLogin || $window.isGuest) {
+      $state.go('main');
+      return;
+    }
+
+    var vm = $scope;
     $scope.source = sessionStorage.getItem('userSource');
   }
 })();

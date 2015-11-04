@@ -5,7 +5,7 @@
 
   angular
     .module('bb.common.service', ['bb.common.config', 'bb.common.constant'])
-    .service('ajaxRequest', function ($rootScope, $http, $log, bbConfig) {
+    .service('ajaxRequest', function ($rootScope, $http, $q, $log, bbConfig) {
 
       var apiConfig = bbConfig.apiConfig[$rootScope.env || 'dev'];
 
@@ -157,7 +157,7 @@
           });
         }
       };
-    }).service('apiService', function ($window, $q, $log, ajaxRequest, bbConfig) {
+    }).service('apiService', function ($window, $q, $log, ajaxRequest) {
       return {
         getBaseData: function () {
           return $q(function (resolve, reject) {

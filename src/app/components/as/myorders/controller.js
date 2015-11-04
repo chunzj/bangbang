@@ -7,7 +7,13 @@
     .controller('AsMyOrdersController', AsMyOrdersController);
 
   /** @ngInject */
-  function AsMyOrdersController($scope, $state, $log) {
+  function AsMyOrdersController($scope, $state, $window, $log, isLogin) {
+
+    if (!isLogin || $window.isGuest) {
+      $state.go('main');
+      return;
+    }
+
     var vm = $scope;
 
     vm.selectTab = function (tab) {

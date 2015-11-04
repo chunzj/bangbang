@@ -7,12 +7,10 @@
     .controller('LookMainController', LookMainController);
 
   /** @ngInject */
-  function LookMainController($state, checker) {
-    checker.isLogin().then(function (isLogin) {
-      if (!isLogin) {
-        $state.go('main');
-        return;
-      }
-    });
+  function LookMainController($state, isLogin) {
+    if (!isLogin || $window.isGuest) {
+      $state.go('main');
+      return;
+    }
   }
 })();
