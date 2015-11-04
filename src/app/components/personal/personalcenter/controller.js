@@ -7,7 +7,7 @@
     .controller('PersonalCenterController', PersonalCenterController);
 
   /** @ngInject */
-  function PersonalCenterController($scope, $state, $log, isLogin) {
+  function PersonalCenterController($scope, $state, $window, $log, isLogin) {
 
     if (!isLogin || $window.isGuest) {
       $state.go('main');

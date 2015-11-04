@@ -171,7 +171,7 @@
               $window.baseData = result;
               resolve();
             }).catch(function (error) {
-              $log.info('Fail to get base data ' + error);
+              $log.info('Fail to get base data ' + JSON.stringify(error));
               reject();
             });
           });

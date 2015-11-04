@@ -8,7 +8,7 @@
 
   /** @ngInject */
   function LookMainController($state, isLogin) {
-    if (!isLogin || $window.isGuest) {
+    if (!isLogin) {
       $state.go('main');
       return;
     }

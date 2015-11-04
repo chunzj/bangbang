@@ -2,6 +2,10 @@
 (function (){
   'use strict';
 
+  var excludeAccessState = ['personalCenter', 'asMyOrders', 'lookMain',
+    'main', 'guestMain', 'login', 'asRegister', 'lookRegister', 'register'];
+  var excludeGuestAccessState = ['lookDemand', 'personalCenter'];
+
   /** @ngInject */
   function baseConfig($logProvider){
 
@@ -16,8 +20,12 @@
       isLogin: function (checker) {
         return checker.isLogin();
       },
-      baseData: function (apiService){
-        return apiService.getBaseData();
+      baseData: function (apiService, bbUtil){
+        bbUtil.showLoading();
+        return apiService.getBaseData().then(function () {
+          console.log('Success to load base data!');
+          bbUtil.hideLoading();
+        }).catch(function () {bbUtil.hideLoading();});
       }
     };
 
@@ -29,9 +37,7 @@
               templateUrl: 'app/main/index.html',
               controller: 'MainController',
               resolve: {
-                baseData: function (apiService){
-                  return apiService.getBaseData();
-                }
+                baseData: readyResolve.baseData
               }
             }
           }
@@ -276,16 +282,17 @@
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams){
       var toStateName = toState.name;
-      if (toStateName === 'lookDemand' || toStateName === 'personalCenter') { //这个主要是针对guest用户的判断
+      if (excludeGuestAccessState.indexOf(toStateName) !== -1) { //这个主要是针对guest用户的判断
         if ($window.isGuest) {
-          bbUtil.successAlert('当前身份为guest用户，请先登录或注册！', function ($state){
+          bbUtil.successAlert('当前身份为guest用户，请先登录或注册！', function ($state, $window){
+            $window.isGuest = false;
             $state.go('main');
           });
           event.preventDefault();
           return;
         }
-      } else if (toStateName !== 'personalCenter' && toStateName !== 'asMyOrders' &&
-          toStateName !== 'lookMain' && toStateName !== 'main') { //这个主要是控制页面的访问权限
+      } else if (excludeAccessState.indexOf(toStateName) === -1) {
+          //这个主要是控制页面的访问权限
         if ($window.isGuest || !$window.authCode) {
           $state.go('main');
           event.preventDefault();
