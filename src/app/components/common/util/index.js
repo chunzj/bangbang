@@ -19,7 +19,8 @@
         },
         getPageTitle: function (source) {
           if (!source) {
-            source = sessionStorage.getItem('userSource');
+            var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            source = userInfo ? userInfo.identity : '';
           }
           return bbConstant.userSource.as === source ? '当棒棒' : '找棒棒';
         },
@@ -44,38 +45,7 @@
           return new RegExp(PHONE_PATTERN, 'g').test(phone.trim());
         },
         validateIdCard: function (idCard) {
-          if (CERTIFICATE_PATTERN.test(idCard)) {
-            if (idCard.length === 18) {
-              var idCardWi = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); //将前17位加权因子保存在数组里
-              var idCardY = new Array(1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2); //这是除以11后，可能产生的11位余数、验证码，也保存成数组
-              var idCardWiSum = 0; //用来保存前17位各自乘以加权因子后的总和
-              for (var i = 0; i < 17; i++) {
-                idCardWiSum += idCard.substring(i, i + 1) * idCardWi[i];
-                return true;
-              }
-            } else {
-              return false;
-            }
-
-            var idCardMod = idCardWiSum % 11;//计算出校验码所在数组的位置
-            var idCardLast = idCard.substring(17);//得到最后一位身份证号码
-
-            //如果等于2，则说明校验码是10，身份证号码最后一位应该是X
-            if (idCardMod === 2) {
-              if (idCardLast === "X" || idCardLast === "x") {
-                return true;
-              } else {
-                //用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
-                if (idCardLast === idCardY[idCardMod]) {
-                  return true;
-                } else {
-                  return false;
-                }
-              }
-            }
-          } else {
-            return false;
-          }
+          return /(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(idCard);
         },
         base64: function (string) {
           var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

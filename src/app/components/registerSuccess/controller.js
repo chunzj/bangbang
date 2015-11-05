@@ -10,6 +10,7 @@
   function RegisterSuccessController($scope, $stateParams, $log) {
     var vm = $scope;
 
-    $scope.source = sessionStorage.getItem('userSource');
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    vm.source = userInfo.identity;
   }
 })();

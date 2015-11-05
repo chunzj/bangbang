@@ -33,7 +33,9 @@
     };
 
     vm.pageTitle = '';
-    var source = sessionStorage.getItem('userSource');
+
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    var source = userInfo.identity;
     if (source === bbConstant.userSource.look) {
       vm.pageTitle = 'E棒棒-找棒棒';
 

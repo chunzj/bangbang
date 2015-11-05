@@ -2,55 +2,24 @@
  * Created by chunzj on 2015/10/1.
  */
 (function (){
+
   angular
       .module('bb')
       .controller('AsRegisterController', AsRegisterController);
 
-  var SUB_AREAS = {
-    1: [
-      {id: '11', name: '大坪'},
-      {id: '12', name: '解放碑'},
-      {id: '13', name: '朝天门'}
-    ],
-    2: [
-      {id: '21', name: '两路'},
-      {id: '22', name: '新牌坊'},
-      {id: '23', name: '汽博'}
-    ],
-    3: [
-      {id: '31', name: '弹子石'},
-      {id: '32', name: '会展中心'},
-      {id: '33', name: '四公里'}
-    ],
-    4: [
-      {id: '41', name: '观音桥'},
-      {id: '42', name: '读书郎'},
-      {id: '43', name: '龙头寺'}
-    ]
-  };
+  var SUB_AREAS = {};
 
   /** @ngInject */
-  function AsRegisterController($scope, $state, $log, $http, ajaxRequest){
+  function AsRegisterController($scope, $state, $log, $window, ajaxRequest, bbUtil){
     var vm = $scope;
 
     vm.user = {
-      lastName: '',
-      firstName: '',
-      phone: '',
-      certificate: '',
       photoUrl: './assets/images/as/demo.png',
       photoData: './assets/images/as/demo.png',
-      area: '',
-      subArea: '',
-      agreed: false
+      readedProtocol: false
     };
 
-    vm.areas = [
-      {id: '1', name: '渝中区'},
-      {id: '2', name: '渝北区'},
-      {id: '3', name: '南岸区'},
-      {id: '4', name: '江北区'}
-    ];
+    vm.areas = formatAreas($window.baseData.serviceArea);
     vm.subAreas = [];
 
     vm.$watch('user.area', function (){
@@ -60,30 +29,93 @@
     });
 
     vm.agreeRegisterProtocol = function (){
-      vm.user.agreed = !vm.user.agreed;
+      vm.user.readedProtocol = !vm.user.readedProtocol;
     };
 
     vm.confirmRegister = function (){
-      sessionStorage.setItem('userSource', 'as');
-      $state.go('registerSuccess');
+      if (!vm.user.lastName) {
+        bbUtil.errorAlert('请输入您的姓！');
+        return;
+      }
 
-      var form = document.forms.namedItem("asRegisterFrm");
-     // $log.info(form['user.photoUrl'].files[0]);
+      if (!vm.user.firstName) {
+        bbUtil.errorAlert('请输入您的名！');
+        return;
+      }
 
-//      ajaxRequest.fileUpload({
-//        name: 'chunzj',
-//        age: 123,
-//        sex: 232
-//      }, 'user.photoUrl', vm.user.photoUrl, 'uploadFile').then(function (data) {
-//        $log.info(data);
-//      }).catch(function (err) {
-//        $log.error(err);
-//      });
+      if (!vm.user.phone) {
+        bbUtil.errorAlert('请输入您的手机号码！');
+        return;
+      } else if (!bbUtil.validatePhone(vm.user.phone)) {
+        bbUtil.errorAlert('请输入有效的手机号码！');
+        return;
+      }
 
+      if (!vm.user.idNumber) {
+        bbUtil.errorAlert('请输入您的身份证号码！');
+        return;
+      } else if (!bbUtil.validateIdCard(vm.user.idNumber)) {
+        bbUtil.errorAlert('请输入有效的身份证号码！');
+        return;
+      }
+
+      if (!(vm.user.photoUrl instanceof File)) {
+        bbUtil.errorAlert('请选择您的手持身份证照片！');
+        return;
+      }
+
+      if (!vm.user.subArea) {
+        bbUtil.errorAlert('请选择您的服务区域！');
+        return;
+      }
+
+      if (!vm.user.readedProtocol) {
+        bbUtil.errorAlert('请选择用户注册协议！');
+        return;
+      }
+
+      ajaxRequest.fileUpload({
+        firstName: vm.user.firstName,
+        lastName: vm.user.lastName,
+        phone: vm.user.phone,
+        idNumber: vm.user.idNumber,
+        serviceArea: vm.user.subArea.id,
+        readedProtocol: vm.user.readedProtocol
+      }, 'userPhoto', vm.user.photoUrl, 'asRegister').then(function (data) {
+        $log.info('as register success');
+
+        $window.authCode = data.authCode;
+        localStorage.setItem('userInfo', JSON.stringify({
+          userId: data.userId,
+          identity: data.identity
+        }));
+
+        $state.go('registerSuccess');
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
     };
+  }
 
-    vm.$watch('user.photoUrl', function (newPhotoFile) {
-      $log.info(newPhotoFile);
+  function formatAreas (serviceArea) {
+    var areas = [];
+    serviceArea.forEach(function (area) {
+      areas.push({
+        id: area.bh,
+        name: area.name
+      });
+
+      var children = area.children;
+      if (children) {
+        SUB_AREAS[area.bh] = [];
+        children.forEach(function (child) {
+          SUB_AREAS[area.bh].push({
+            id: child.bh,
+            name: child.name
+          });
+        });
+      }
     });
+    return areas;
   }
 })();

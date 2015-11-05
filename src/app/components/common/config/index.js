@@ -21,7 +21,8 @@
         apiPath: {
           baseData: '/baseData',
           verifyUser: '/verifyUser',
-          uploadFile: '/test/update-file'
+          asRegister: '/register/as',
+          lookRegister: '/register/look'
         }
       });
 })();

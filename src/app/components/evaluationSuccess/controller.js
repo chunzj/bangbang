@@ -12,7 +12,9 @@
 
     var evaluationType = $stateParams.type;
 
-    vm.source = sessionStorage.getItem('userSource');
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    vm.source = userInfo.identity;
+
     vm.pageTitle = bbUtil.getPageTitle(vm.source);
 
     vm.isReturnCash = bbConstant.userSource.look === vm.source &&

@@ -28,12 +28,12 @@
       <div class="field">
         <div class="label">身份证 :</div>
         <div class="input-c">
-          <input ng-model="user.certificate" maxlength="18" minlength="15" placeholder="填写正确的15或18位身份证号" required/>
+          <input ng-model="user.idNumber" maxlength="18" placeholder="填写正确的15或18位身份证号" required/>
         </div>
       </div>
       <div class="separator"></div>
       <div class="field">
-        <div class="label" ng-class="{false: 'notAgreed', true: 'agreed'}[user.agreed]" ng-click="agreeRegisterProtocol()">
+        <div class="label" ng-class="{false: 'notAgreed', true: 'agreed'}[user.readedProtocol]" ng-click="agreeRegisterProtocol()">
           <span class="text">阅读《用户注册协议》</span>
         </div>
         <div class="input-c">

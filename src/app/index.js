@@ -23,7 +23,6 @@
       baseData: function (apiService, bbUtil){
         bbUtil.showLoading();
         return apiService.getBaseData().then(function () {
-          console.log('Success to load base data!');
           bbUtil.hideLoading();
         }).catch(function () {bbUtil.hideLoading();});
       }
@@ -37,7 +36,9 @@
               templateUrl: 'app/main/index.html',
               controller: 'MainController',
               resolve: {
-                baseData: readyResolve.baseData
+                baseData: function (apiService, bbUtil){
+                  return readyResolve.baseData(apiService, bbUtil);
+                }
               }
             }
           }
@@ -64,7 +65,14 @@
           url: '/personal/index',
           templateUrl: 'app/components/personal/personalcenter/index.html',
           controller: 'PersonalCenterController',
-          resolve: readyResolve
+          resolve: {
+            isLogin: function (checker) {
+              return readyResolve.isLogin(checker);
+            },
+            baseData: function (apiService, bbUtil){
+              return readyResolve.baseData(apiService, bbUtil);
+            }
+          }
         })
         .state('personalEdit', {
           url: '/personal/edit',
@@ -109,7 +117,14 @@
             '': {
               templateUrl: 'app/components/as/myOrders/index.html',
               controller: 'AsMyOrdersController',
-              resolve: readyResolve
+              resolve: {
+                isLogin: function (checker) {
+                  return readyResolve.isLogin(checker);
+                },
+                baseData: function (apiService, bbUtil){
+                  return readyResolve.baseData(apiService, bbUtil);
+                }
+              }
             },
             'unresolved@asMyOrders': {
               templateUrl: 'app/components/as/myOrders/unresolved.html',
@@ -149,7 +164,14 @@
             '': {
               templateUrl: 'app/components/look/main/index.html',
               controller: 'LookMainController',
-              resolve: readyResolve
+              resolve: {
+                isLogin: function (checker) {
+                  return readyResolve.isLogin(checker);
+                },
+                baseData: function (apiService, bbUtil){
+                  return readyResolve.baseData(apiService, bbUtil);
+                }
+              }
             }
           }
         }).

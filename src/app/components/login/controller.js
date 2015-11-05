@@ -40,7 +40,9 @@
     }
 
     //Get user source from API
-    vm.source = sessionStorage.getItem('userSource');
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    vm.source = userInfo.identity;
+
     vm.confirmLogin = function () {
       if (vm.source === 'look') {
         $state.go('lookMain');
