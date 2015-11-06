@@ -22,7 +22,9 @@
           baseData: '/baseData',
           verifyUser: '/verifyUser',
           asRegister: '/register/as',
-          lookRegister: '/register/look'
+          lookRegister: '/register/look',
+          verifyCode: '/verifyCode',
+          login: '/login'
         }
       });
 })();

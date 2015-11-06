@@ -5,7 +5,7 @@
 
   angular
     .module('bb.common.service', ['bb.common.config', 'bb.common.constant'])
-    .service('ajaxRequest', function ($rootScope, $http, $q, $log, bbConfig) {
+    .service('ajaxRequest', function ($rootScope, $http, $window, $q, $log, bbConfig, bbUtil) {
 
       var apiConfig = bbConfig.apiConfig[$rootScope.env || 'dev'];
 
@@ -22,6 +22,20 @@
         };
 
         angular.extend(options, defaultOptions);
+
+        var params = options.data || options.params;
+        if (typeof params.auth !== 'undefined' && params.auth) {
+
+          if (!$window.authCode) {
+            $log.info('Not found auth code');
+            return $q(function (resolve, reject) {
+              reject({msg: '无效的请求'});
+            });
+          }
+          options.headers['Authorization'] = bbUtil.base64($window.authCode);
+
+          delete params.auth;
+        }
 
         return $http(options);
       }
@@ -99,7 +113,7 @@
             }).catch(function (error) {
               $log.info(error);
               reject({
-                msg: '网络异常，请稍候重试！'
+                msg: error && error.msg ? error.msg : '网络异常，请稍候重试！'
               });
             });
           });

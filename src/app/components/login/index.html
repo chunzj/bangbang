@@ -4,12 +4,12 @@
     <form name="asLoginFrm">
       <div class="field">
         <div class="left">登录账号 : </div>
-        <div class="rest"><input ng-model="user.name"/></div>
+        <div class="rest"><input ng-model="user.phone" placeholder="请输入手机号码" maxlength="11"/></div>
         <div class="clear"></div>
       </div>
       <div class="field password">
         <div class="left">随机密码 : </div>
-        <div class="rest"><input type="password" ng-model="user.password"/></div>
+        <div class="rest"><input placeholder="请输入随机密码" ng-model="user.code" maxlength="11"/></div>
         <div class="clear"></div>
         <div class="comment">如未收到密码短信请点击下方重新获取</div>
         <div class="pass-btn" ng-click="getPassword()">{{gettingPasswordText}}</div>

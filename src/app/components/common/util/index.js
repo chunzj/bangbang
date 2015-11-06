@@ -82,9 +82,16 @@
 
       function alertDialog(msg, callback, isSuccess) {
         var fn = function () {
-          $rootScope.alertError = msg;
+          if (isSuccess) {
+            $rootScope.alertSuccess = msg;
+          } else {
+            $rootScope.alertError = msg;
+          }
+
           if (typeof callback === 'function') {
             $rootScope.alertCallback = callback.toString();
+          } else {
+            $rootScope.alertCallback = '';
           }
         };
 
