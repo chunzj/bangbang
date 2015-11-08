@@ -48,10 +48,6 @@
       }, 1000);
     }
 
-    //Get user source from API
-    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    vm.source = userInfo.identity;
-
     vm.confirmLogin = function () {
 
       if (!validateForm(vm.user.phone, bbUtil, function () {

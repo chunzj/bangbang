@@ -1,30 +1,38 @@
 <div class="personal-edit-page container">
-  <bb-header title="E棒棒-当棒棒"></bb-header>
+  <bb-header title="E棒棒-{{pageTitle}}"></bb-header>
   <form name="personalEditFrm">
     <div class="bb-content">
       <div class="item-bg row photo">
         <span class="left">头像</span>
-        <span class="right"><img src="{{user.photo}}"></span>
+        <span class="right"><img src="{{user.avatar}}"></span>
         <span class="arrow-right-sm"></span>
-        <input type="file" ng-model="user.photo" class="photo-file"/>
+        <file-read file-data="user.avatar" file-model="user.photoUrl"></file-read>
+        <input type="file" ng-model="user.avatar" class="photo-file"/>
         <div class="clear"></div>
       </div>
       <div class="item-bg exclude-photo">
         <div class="row phone border-bottom">
           <span class="left">手机号</span>
           <div class="right">
-            <input type="text" name="userPhone" ng-model="user.phone" required ngPattern="\d{11}"></div>
+            <input type="text" name="userPhone" ng-model="user.phone" required maxlength="11"></div>
           <div class="clear"></div>
         </div>
-        <div class="row area border-bottom">
-          <span ng-class="{true: 'arrow-down-sm', false: 'arrow-right-sm'}[showArrow]"></span>
-          <span class="left">服务区域</span>
-          <span class="right">
-            <select ng-model="user.area" required ng-change="changeArrow()" ng-click="changeArrow()" ng-options="area.name for area in areas">
-              <option value="">选择区域</option>
-            </select>
-          </span>
-          <div class="clear"></div>
+        <div ng-if="isBangBang" class="row area border-bottom">
+          <div class="label">选择服务区域</div>
+          <div class="input-c">
+            <div class="select-c row">
+              <select ng-model="user.area" ng-options="area.name for area in areas">
+                <option value="">选择区域</option>
+              </select>
+              <span class="arrow-down-sm"></span>
+            </div>
+            <div class="select-c row">
+              <select ng-model="user.subArea" ng-options="subArea.name for subArea in subAreas">
+                <option value="">选择区域</option>
+              </select>
+              <span class="arrow-down-sm"></span>
+            </div>
+          </div>
         </div>
         <div class="oper">
           <div class="btn">

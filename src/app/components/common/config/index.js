@@ -24,7 +24,9 @@
           asRegister: '/register/as',
           lookRegister: '/register/look',
           verifyCode: '/verifyCode',
-          login: '/login'
+          login: '/login',
+          asPersonal: '/personal/as',
+          lookPersonal: '/personal/look'
         }
       });
 })();

@@ -4,9 +4,9 @@
 (function () {
   angular
     .module('bb.common.util', ['bb.common.constant'])
-    .service('bbUtil', function ($document, $rootScope, bbConstant) {
+    .service('bbUtil', function ($window, $document, $rootScope, bbConstant) {
       var loadingDom = null, PHONE_PATTERN = '^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\\d{4,8}$',
-      CERTIFICATE_PATTERN = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+        CERTIFICATE_PATTERN = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
       return {
         showLoading: function () {
           if (!loadingDom) {
@@ -46,6 +46,31 @@
         },
         validateIdCard: function (idCard) {
           return /(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(idCard);
+        },
+        formatAreas: function () {
+          var areas = [], subAreas = {};
+          $window.baseData.serviceArea.forEach(function (area) {
+            areas.push({
+              id: area.bh,
+              name: area.name
+            });
+
+            var children = area.children;
+            if (children) {
+              subAreas[area.bh] = [];
+              children.forEach(function (child) {
+                subAreas[area.bh].push({
+                  id: child.bh,
+                  name: child.name
+                });
+              });
+            }
+          });
+
+          return {
+            areas: areas,
+            subAreas: subAreas
+          };
         },
         base64: function (string) {
           var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';

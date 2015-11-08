@@ -37,6 +37,8 @@
           delete params.auth;
         }
 
+        $log.info('http request options', JSON.stringify(options));
+
         return $http(options);
       }
 
@@ -45,7 +47,7 @@
           method: 'POST',
           data: formData,
           headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
           }
         }, apiPath);
       }

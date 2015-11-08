@@ -7,8 +7,6 @@
       .module('bb')
       .controller('AsRegisterController', AsRegisterController);
 
-  var SUB_AREAS = {};
-
   /** @ngInject */
   function AsRegisterController($scope, $state, $log, $window, ajaxRequest, bbUtil){
     var vm = $scope;
@@ -19,12 +17,13 @@
       readedProtocol: false
     };
 
-    vm.areas = formatAreas($window.baseData.serviceArea);
+    var areasObj = bbUtil.formatAreas(), subAreas = areasObj.subAreas;
+    vm.areas = areasObj.areas;
     vm.subAreas = [];
 
     vm.$watch('user.area', function (){
       if (arguments[0]) {
-        vm.subAreas = SUB_AREAS[arguments[0].id];
+        vm.subAreas = subAreas[arguments[0].id];
       }
     });
 
@@ -95,27 +94,5 @@
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
       });
     };
-  }
-
-  function formatAreas (serviceArea) {
-    var areas = [];
-    serviceArea.forEach(function (area) {
-      areas.push({
-        id: area.bh,
-        name: area.name
-      });
-
-      var children = area.children;
-      if (children) {
-        SUB_AREAS[area.bh] = [];
-        children.forEach(function (child) {
-          SUB_AREAS[area.bh].push({
-            id: child.bh,
-            name: child.name
-          });
-        });
-      }
-    });
-    return areas;
   }
 })();
