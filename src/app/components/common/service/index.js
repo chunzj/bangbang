@@ -32,7 +32,7 @@
               reject({msg: '无效的请求'});
             });
           }
-          options.headers['Authorization'] = bbUtil.base64($window.authCode);
+          options.headers['Authorization'] = $window.authCode;
 
           delete params.auth;
         }
@@ -166,7 +166,7 @@
                 delete $window.authCode;
                 localStorage.removeItem('userInfo');
 
-                $log.info('Fail to verify user' + err);
+                $log.info('Fail to verify user ' + JSON.stringify(err));
                 resolve(false);
               });
             }
