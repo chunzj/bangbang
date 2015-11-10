@@ -72,6 +72,22 @@
             subAreas: subAreas
           };
         },
+        formatLevel: function () {
+          var resultLevel = [], levelPoint = {};
+          $window.baseData.bbLevel.reduce(function (res, level) {
+            res.push({
+              id: level.bh,
+              name: level.name
+            });
+            levelPoint[level.bh] = level.jf;
+            return res;
+          }, resultLevel);
+
+          return {
+            levels: resultLevel,
+            levelPoint: levelPoint
+          };
+        },
         base64: function (string) {
           var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
           var i = 0,

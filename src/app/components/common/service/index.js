@@ -45,6 +45,7 @@
       function ajaxPost(formData, apiPath) {
         return _ajaxRequest({
           method: 'POST',
+          params: formData,
           data: formData,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'

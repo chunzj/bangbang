@@ -28,7 +28,10 @@
       ajaxRequest.get({
         phone: vm.user.phone
       }, 'verifyCode').then(function (data) {
+
+        vm.user.code = data.code;
         $log.info('获取登录验证码成功！');
+
       }).catch(function (err) {
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
       });

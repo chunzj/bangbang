@@ -26,7 +26,9 @@
           verifyCode: '/verifyCode',
           login: '/login',
           asPersonal: '/personal/as',
-          lookPersonal: '/personal/look'
+          lookPersonal: '/personal/look',
+          demandHelpSend: '/demand/help_send',
+          lookMyOrders: '/personal/look/myOrders'
         }
       });
 })();

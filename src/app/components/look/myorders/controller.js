@@ -8,8 +8,15 @@
 
   var userOrders = null;
   /** @ngInject */
-  function LookMyOrdersController($scope, $timeout, $state, $log, bbUtil, bbConstant) {
-    var vm = $scope;
+  function LookMyOrdersController($scope, $state, $window, $log, ajaxRequest, bbUtil, bbConstant) {
+
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
+
+    var vm = $scope, orderStatus = $window.orderStatus;
     bbUtil.showLoading();
 
     vm.commentOrder = function (orderId) {
@@ -21,66 +28,39 @@
     };
 
     if (userOrders) {
+
       $log.info('Get user orders from cache');
       vm.userOrders = userOrders;
       bbUtil.hideLoading();
+
     } else {
-      $timeout(function () {
-        vm.userOrders = userOrders = [
-          {
-            id: '1',
-            theme: '帮你送',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '10斤的行李箱',
-            dateTime: '2015/08/20 15:00',
-            status: {
-              text: '已完成',
-              style: 'has-salary'
-            },
-            salary: 10
-          },
-          {
-            id: '2',
-            theme: '帮你办',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '去市政帮我交费',
-            dateTime: '2015/08/20 15:00',
-            status: {
-              text: '待评价',
-              fn: vm.commentOrder,
-              style: 'wait-comment'
-            }
-          },
-          {
-            id: '3',
-            theme: '帮你订',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '帮我去四号桥订一个蛋糕',
-            dateTime: '2015/08/20 15:00',
-            status: {
-              text: '已接单',
-              style: 'default'
-            }
-          },
-          {
-            id: '4',
-            theme: '帮你订',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '帮我去四号桥订一桌晚宴',
-            dateTime: '2015/08/20 15:00',
-            status: {
-              text: '未接单',
-              style: 'default'
-            }
+
+      ajaxRequest.get({
+        userId: userInfo.userId
+      }, 'lookMyOrders').then(function (data) {
+
+        data = data.forEach(function (item) {
+          var status = item.status;
+          if (orderStatus[status.code] === '已完成') {
+            status.style = 'has-salary';
+          } else if (orderStatus[status.code] === '待评价') {
+            status.style = 'wait-comment';
+            status.fn = vm.commentOrder;
+          } else {
+            status.style = 'default';
           }
-        ];
+          return item;
+        });
+        vm.userOrders = userOrders = data;
+        bbUtil.hideLoading();
+
+      }).catch(function (err) {
 
         bbUtil.hideLoading();
-      }, 100);
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+          $state.go('personalCenter');
+        });
+      });
     }
   }
 })();
