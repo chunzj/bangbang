@@ -3,6 +3,10 @@
     font-size: 5rem;
   }
 
+  input[type='file'] {
+    opacity: 0;
+  }
+
   .photo {
     line-height: 22.5rem;
 

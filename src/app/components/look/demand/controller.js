@@ -48,6 +48,11 @@
         return;
       }
 
+      if (orderDetail.serviceStartTime.getTime() >= orderDetail.serviceEndTime.getTime()) {
+        bbUtil.errorAlert('服务开始时间不能晚于或等于服务结束时间!');
+        return;
+      }
+
       if (!orderDetail.salary) {
         bbUtil.errorAlert('请输入您愿意付出的薪水!');
         return;
@@ -58,6 +63,9 @@
 
       orderDetail.userId = userInfo.userId;
       orderDetail.auth = true;
+      orderDetail.bbLevel = orderDetail.bbLevel.id;
+      orderDetail.serviceStartTime = bbUtil.addCurrentYear(orderDetail.serviceStartTime);
+      orderDetail.serviceEndTime = bbUtil.addCurrentYear(orderDetail.serviceEndTime);
 
 
       ajaxRequest.post(orderDetail, 'demandHelpSend').then(function (data) {

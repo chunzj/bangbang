@@ -72,6 +72,34 @@
             subAreas: subAreas
           };
         },
+        addCurrentYear: function (date) {
+          var hours = date.getHours(), minutes = date.getMinutes(), seconds = date.getSeconds();
+          var now = new Date(), currentYear = now.getFullYear(), currentMonth = now.getMonth() + 1,
+            currentDays = now.getDate();
+
+          if (currentMonth < 10) {
+            currentMonth = '0' + currentMonth;
+          }
+
+          if (currentDays < 10) {
+            currentDays = '0' + currentDays;
+          }
+
+          if (hours < 10) {
+            hours = '0' + hours;
+          }
+
+          if (minutes < 10) {
+            minutes = '0' + minutes;
+          }
+
+          if (seconds < 10) {
+            seconds = '0' + seconds;
+          }
+
+          return [currentYear, currentMonth, currentDays].join('-') + ' ' +
+            [hours, minutes, seconds].join(':');
+        },
         formatLevel: function () {
           var resultLevel = [], levelPoint = {};
           $window.baseData.bbLevel.reduce(function (res, level) {

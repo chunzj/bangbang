@@ -73,7 +73,18 @@
             1: '未使用',
             2: '已使用',
             3: '已过期'
+          },
+          discountInfo: [{
+            value: -9,
+            name: '首付礼包 : -9元'
+          }, {
+            value: -11,
+            name: '新人礼包 : -11元'
+          }, {
+            value: -50,
+            name: '新年礼包 : -50元'
           }
+          ]
         }
       }
     },
@@ -472,7 +483,7 @@
             },
             star: 3,
             point: '+0分'
-          },{
+          }, {
             theme: '帮你订',
             date: {
               text: '支出时间',
@@ -771,23 +782,23 @@
 </div>
 <div class="api-items"></div>
 <script>
-  (function (){
+  (function () {
     var apiItemTemplate = '<div class="api-item separator">'
-        + '<div class="no">{idx} </div>'
-        + '<div class="name"><span class="label">API名称：</span>{name}</div>'
-        + '<div class="url"><span class="label">路径：</span>{url}</div>'
-        + '<div class="method"><span class="label">请求形式：</span>{method}</div>'
-        + '<div class="params"><span class="label">请求参数：</span><pre>{params}</pre></div>'
-        + '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
-        + '<div class="instruction"><span class="label">说明：</span><pre>{instruction}</pre></div>'
-        + '<div class="data"><span class="label">返回的数据：</span>'
-        + '<pre class="hide">{data}</pre><span class="expand" title="数据过长，可折叠查看" open="false">+</span>'
-        + '</div>'
-        + '</div>';
+      + '<div class="no">{idx} </div>'
+      + '<div class="name"><span class="label">API名称：</span>{name}</div>'
+      + '<div class="url"><span class="label">路径：</span>{url}</div>'
+      + '<div class="method"><span class="label">请求形式：</span>{method}</div>'
+      + '<div class="params"><span class="label">请求参数：</span><pre>{params}</pre></div>'
+      + '<div class="auth"><span class="label">是否需要认证：</span>{auth}</div>'
+      + '<div class="instruction"><span class="label">说明：</span><pre>{instruction}</pre></div>'
+      + '<div class="data"><span class="label">返回的数据：</span>'
+      + '<pre class="hide">{data}</pre><span class="expand" title="数据过长，可折叠查看" open="false">+</span>'
+      + '</div>'
+      + '</div>';
 
-    function parseApiItemsHtml(filterApiDatas){
+    function parseApiItemsHtml(filterApiDatas) {
       var apiItems = [];
-      filterApiDatas.reduce(function (result, item, idx){
+      filterApiDatas.reduce(function (result, item, idx) {
         var itemHtml = apiItemTemplate;
         for (var key in item) {
           var value = item[key];
@@ -809,10 +820,10 @@
 
     parseApiItemsHtml(apiDatas);
 
-    function searchApi(){
+    function searchApi() {
       var searchKeywords = document.querySelector('.search input').value.trim();
       if (searchKeywords.length > 0) {
-        parseApiItemsHtml(apiDatas.filter(function (item){
+        parseApiItemsHtml(apiDatas.filter(function (item) {
           return item.name.indexOf(searchKeywords) !== -1;
         }));
       }
@@ -822,10 +833,10 @@
 
     //控制API注意事项的开关
     var commentContent = document.querySelector('.comment .content'),
-        contentClassList = commentContent.classList;
+      contentClassList = commentContent.classList;
 
     var expandDoms = document.querySelectorAll('.expand');
-    var toggleComment = function (expandDom, contentClassList){
+    var toggleComment = function (expandDom, contentClassList) {
       var open = expandDom.getAttribute('open');
       if (!open) {
         expandDom.setAttribute('open', 'false');
@@ -843,8 +854,8 @@
       }
     };
 
-    Array.prototype.slice.call(expandDoms).forEach(function (item){
-      (function (dom){
+    Array.prototype.slice.call(expandDoms).forEach(function (item) {
+      (function (dom) {
         var contentDom = dom.parentNode.querySelector('pre');
         if (!contentDom) {
           contentDom = dom.parentNode.parentNode.querySelector('.content');
@@ -854,7 +865,7 @@
     });
 
     document.querySelector('.comment .tip').onclick =
-        toggleComment.bind(null, document.querySelector('.comment .expand'), contentClassList);
+      toggleComment.bind(null, document.querySelector('.comment .expand'), contentClassList);
   })();
 </script>
 </body>

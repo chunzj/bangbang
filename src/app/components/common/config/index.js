@@ -28,7 +28,8 @@
           asPersonal: '/personal/as',
           lookPersonal: '/personal/look',
           demandHelpSend: '/demand/help_send',
-          lookMyOrders: '/personal/look/myOrders'
+          lookMyOrders: '/personal/look/myOrders',
+          evaluation: '/evaluation'
         }
       });
 })();

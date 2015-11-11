@@ -1,9 +1,9 @@
 <div class="evaluation-page container">
   <bb-header title="E棒棒-{{pageTitle}}"></bb-header>
   <div class="bb-content">
-    <div class="head"><img src="{{user.photo}}"/></div>
-    <div class="name">{{user.name}}</div>
-    <div class="level">棒棒等级 : {{user.bbLevel.text}}</div>
+    <div class="head"><img src="{{bangbang.avatar}}"/></div>
+    <div class="name">{{bangbang.name}}</div>
+    <div class="level">棒棒等级 : {{bangbang.level}}</div>
     <div class="comment">您的评价将是我们做得更好的动力</div>
     <div class="evaluation" ng-switch="evaluationType">
       <nav ng-switch-when="star" class="stars">
@@ -21,8 +21,8 @@
     </div>
     <div class="attach">
       <div class="title">评价及建议</div>
-      <textarea></textarea>
+      <textarea required ng-model="construction" maxlength="500">{{construction}}</textarea>
     </div>
-    <div class="commit-evaluation" ui-sref="evaluationSuccess({type:evaluationType})"><span class="text">提交评价</span></div>
+    <div class="commit-evaluation" ng-click="commitEvaluation(); "><span class="text">提交评价</span></div>
   </div>
 </div>

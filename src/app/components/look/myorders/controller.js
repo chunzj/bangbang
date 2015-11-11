@@ -39,7 +39,9 @@
         userId: userInfo.userId
       }, 'lookMyOrders').then(function (data) {
 
+        var codeOrders = {};
         data = data.forEach(function (item) {
+
           var status = item.status;
           if (orderStatus[status.code] === '已完成') {
             status.style = 'has-salary';
@@ -49,9 +51,14 @@
           } else {
             status.style = 'default';
           }
+
+          codeOrders[item.orderId] = item;
           return item;
         });
+
         vm.userOrders = userOrders = data;
+        $window.codeOrders = codeOrders;
+
         bbUtil.hideLoading();
 
       }).catch(function (err) {

@@ -6,7 +6,7 @@
       <span ng-if="!!orderDetail.user" class="source">
         已由<span class="name">{{orderDetail.user.name}}</span>接单
       </span>
-      <span ng-if="!!orderDetail.cancel"  class="right cancel" ng-click="orderDetail.cancel.fn(orderDetail.id)">
+      <span ng-if="!!orderDetail.cancel"  class="right cancel" ng-click="orderDetail.cancel.fn(orderDetail.orderId)">
         {{orderDetail.cancel.text}}
       </span>
       <div class="clear"></div>
@@ -16,21 +16,21 @@
       <div class="field">
         <div class="left">服务点 : </div>
         <div class="rest three">
-          <input ng-readonly="true" ng-model="orderDetail.servicePlace"/>
+          <input ng-readonly="true" ng-model="orderDetail.departure"/>
         </div>
         <div class="clear"></div>
       </div>
       <div class="field">
         <div class="left">目的地 : </div>
         <div class="rest three">
-          <input ng-readonly="true" ng-model="orderDetail.destination"/>
+          <input ng-readonly="true" ng-model="orderDetail.arrival"/>
         </div>
         <div class="clear"></div>
       </div>
       <div class="field">
         <div class="left">棒棒级别 : </div>
         <div class="rest four">
-          <input ng-readonly="true" ng-model="orderDetail.bbLevel.name"/>
+          <input ng-readonly="true" ng-model="orderDetail.bbLevel.text"/>
         </div>
         <div class="clear"></div>
         <div class="comment">*该选项为顾客意向选择，并不影响你接单。</div>
@@ -38,18 +38,18 @@
       <div class="request">
         <div class="title">需求 : </div>
         <div class="textarea-c">
-          <textarea ng-readonly="true" ng-model="orderDetail.request">{{orderDetail.request}}</textarea>
+          <textarea ng-readonly="true" ng-model="orderDetail.goods">{{orderDetail.goods}}</textarea>
         </div>
       </div>
       <div class="service-time">
         <div class="time">
           <span class="title">预约时间 : </span>
           <span class="start">
-            <input ng-readonly="true" ng-model="orderDetail.serviceTime.start"/>
+            <input ng-readonly="true" ng-model="orderDetail.subscribeTime.start"/>
           </span>
             ~
           <span class="end">
-            <input ng-readonly="true" ng-model="orderDetail.serviceTime.end"/>
+            <input ng-readonly="true" ng-model="orderDetail.subscribeTime.end"/>
           </span>
         </div>
         <div class="comment">*这是顾客预约时间和要求完成订单时间，请根据实际情况接单，以避免无法完成订单。</div>
@@ -63,7 +63,7 @@
     </div>
     <div class="oper">
       <div class="btn" ng-repeat="oper in orderDetail.oper">
-        <span ng-click="oper.fn(orderDetail.id)" ng-class="oper.bgClass">{{oper.text}}</span>
+        <span ng-click="oper.fn(orderDetail.orderId)" ng-class="oper.bgClass">{{oper.text}}</span>
       </div>
     </div>
   </div>

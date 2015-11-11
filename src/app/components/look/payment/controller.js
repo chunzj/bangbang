@@ -12,21 +12,12 @@
   }
 
   /** @ngInject */
-  function LookPaymentController($scope, $state, $stateParams, $log) {
+  function LookPaymentController($scope, $state, $stateParams, $window, $log) {
+
     var vm = $scope;
-
     var orderId = $stateParams.orderId;
-    vm.discountOptions = [{
-      value: -9,
-      name: '首付礼包 : -9元'
-    },{
-      value: -11,
-      name: '新人礼包 : -11元'
-    },{
-      value: -50,
-      name: '新年礼包 : -50元'
-    }];
 
+    vm.discountOptions = $window.discountInfo || [];
     vm.paymentMode = [{
       id: 'bbWallet',
       icon: './assets/images/wallet/card.png',
