@@ -1,16 +1,16 @@
 <div class="order-item" ng-repeat="order in unresolvedOrders">
-    <div class="link" ui-sref="asUnresolvedOrderDetail({orderId:order.id})">
+    <div class="link" ui-sref="asUnresolvedOrderDetail({orderId:order.orderId})">
         <div class="theme">{{order.theme}}</div>
         <div class="detail">
             <div class="place">{{order.departure}}-{{order.arrival}}</div>
-            <div class="date-title">{{order.date.title}}</div>
-            <div class="date-text">{{order.date.time}}</div>
+            <div class="date-title">{{order.orderDate.title}}</div>
+            <div class="date-text">{{order.orderDate.time}}</div>
         </div>
     </div>
     <div class="status" ng-class="{true: 'hasOper', false: 'noOper'}[!!order.oper]">
-        <div class="text">{{order.status}}</div>
+        <div class="text">{{order.status.text}}</div>
         <a class="dial" ng-if="order.user" href="tel:{{order.user.phone}}">联系客户</a>
-        <div class="oper" ng-if="order.oper" ng-click="order.oper.fn(order.id)" ng-class="order.oper.bgColorClass">
+        <div class="oper" ng-if="order.oper" ng-click="order.oper.fn(order.orderId)" ng-class="order.oper.bgColorClass">
             {{order.oper.text}}
         </div>
     </div>

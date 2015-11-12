@@ -8,48 +8,50 @@
 
   var currentTab = 'latest', latestOrders = null;
   /** @ngInject */
-  function AsMyOrdersLatestController($scope, $timeout, $log, bbUtil) {
+  function AsMyOrdersLatestController($scope, $state, $window, $log, bbUtil) {
     var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;
     }
 
-    $log.info('Latest');
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
+
     bbUtil.showLoading();
 
     var vm = $scope;
     if (latestOrders) {
-      $log.info('Get latest orders from cache');
+
+      $log.info('Get user latest orders from cache');
       vm.latestOrders = latestOrders;
       bbUtil.hideLoading();
+
     } else {
-      $timeout(function () {
-        vm.latestOrders = latestOrders = [
-          {
-            id: '1',
-            theme: '帮你送',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '10斤的行李箱'
-          },
-          {
-            id: '2',
-            theme: '帮你办',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '去市政帮我交费'
-          },
-          {
-            id: '3',
-            theme: '帮你订',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '帮我去四号桥顶一个蛋糕'
-          }
-        ];
+
+      ajaxRequest.get({
+        userId: userInfo.userId
+      }, 'asLatestOrders').then(function (data) {
+
+        var codeOrders = {};
+        data.forEach(function (item) {
+          codeOrders[item.orderId] = item;
+        });
+
+        vm.latestOrders = latestOrders = data;
+        $window.latestCodeOrders = codeOrders;
 
         bbUtil.hideLoading();
-      }, 100);
+
+      }).catch(function (err) {
+
+        bbUtil.hideLoading();
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+          $state.go('personalCenter');
+        });
+      });
     }
   }
 })();

@@ -29,7 +29,17 @@
           lookPersonal: '/personal/look',
           demandHelpSend: '/demand/help_send',
           lookMyOrders: '/personal/look/myOrders',
-          evaluation: '/evaluation'
+          evaluation: '/evaluation',
+          asUnresolvedOrders: '/personal/as/unresolvedOrders',
+          asResolvedOrders: '/personal/as/resolvedOrders',
+          asLatestOrders: '/personal/as/latestOrders',
+          lookCoupon: '/personal/look/bbCoupon',
+          cashRecords: '/personal/cashRecord',
+          comment: '/personal/comment',
+          receiveOrder: '/order/receive',
+          processOrder: '/order/process',
+          finishOrder: '/order/finish',
+          cancelOrder: '/order/cancel'
         }
       });
 })();

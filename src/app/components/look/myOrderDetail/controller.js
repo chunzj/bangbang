@@ -6,7 +6,13 @@
     .module('bb')
     .controller('LookOrderDetailController', LookOrderDetailController);
 
-  function LookOrderDetailController($scope, $state, $stateParams, $window, $log, bbConstant) {
+  function LookOrderDetailController($scope, $state, $stateParams, $window, $log, ajaxRequest, bbConstant) {
+
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
 
     var orderId = $stateParams.orderId;
 
@@ -20,16 +26,35 @@
 
     var vm = $scope;
     vm.cancelOrder = function (orderId) {
-      $log.info('cancel order for ' + orderId);
-      $state.go('evaluation', {
-        type: bbConstant.evaluationType.GB,
-        orderId: orderId
+      $log.info('cancel current order of ' + orderId);
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'cancelOrder').then(function (data) {
+        $log.info('Success to cancel current orderId = ' + orderId);
+        $state.go('evaluation', {
+          type: bbConstant.evaluationType.GB,
+          orderId: orderId
+        });
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
       });
     };
 
     vm.finishOrder = function (orderId) {
       $log.info('finishOrder current orderId = ' + orderId);
-      $state.go('lookFinishOrder', {orderId: orderId});
+
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'finishOrder').then(function (data) {
+        $log.info('Success to finishOrder current orderId = ' + orderId);
+        $state.go('lookFinishOrder', {orderId: orderId});
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
     };
 
     if(orderDetail.status.code < 3) { //表示订单还未开始处理

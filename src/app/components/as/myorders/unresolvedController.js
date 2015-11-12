@@ -9,91 +9,120 @@
   var currentTab = 'unresolved', unresolvedOrders = null;
 
   /** @ngInject */
-  function AsMyOrdersUnresolvedController($scope, $timeout, $log, bbUtil) {
+  function AsMyOrdersUnresolvedController($scope, $state, $window, $log, ajaxRequest, bbUtil) {
     var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;
     }
 
-    $log.info('Unresolved');
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
+
     bbUtil.showLoading();
 
-    var vm = $scope;
+    var vm = $scope, orderStatus = $window.orderStatus;
     vm.startProcessOrder = function (orderId) {
-      $log.info('startProcessOrder current orderid = ' + orderId);
-    };
+      $log.info('startProcessOrder current orderId = ' + orderId);
 
-    vm.finishOrder = function (orderId) {
-      $log.info('finishOrder current orderid = ' + orderId);
-    };
-
-    if (unresolvedOrders) {
-      $log.info('Get unresolved orders from cache');
-      vm.unresolvedOrders = unresolvedOrders;
-      bbUtil.hideLoading();
-    } else {
-      $timeout(function () {
-        vm.unresolvedOrders = unresolvedOrders = [
-          {
-            id: '1',
-            theme: '帮你送',
-            departure: '金港国际',
-            arrival: '四号桥',
-            date: {
-              title: '预约开始时间',
-              time: '2015/08/20 15:00'
-            },
-            status: '待处理',
-            oper: {
-              text: '开始处理',
-              bgColorClass: 'start-process',
-              fn: vm.startProcessOrder
-            },
-            user: {
-              name: 'A先生',
-              phone: '18123235864'
-            }
-          },
-          {
-            id: '2',
-            theme: '帮你办',
-            departure: '金港国际',
-            arrival: '四号桥',
-            date: {
-              title: '预约开始时间',
-              time: '2015/08/20 15:00'
-            },
-            status: '处理中',
-            oper: {
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'processOrder').then(function (data) {
+        $log.info('Success to start process current orderId = ' + orderId);
+        vm.unresolvedOrders = unresolvedOrders = unresolvedOrders.map(function (item) { //转换成处理中
+          if (item.orderId == orderId) {
+            item.status = {
+              code: 3,
+              text: '处理中'
+            };
+            item.oper = {
               text: '完成订单',
               bgColorClass: 'finish-order',
               fn: vm.finishOrder
-            },
-            user: {
-              name: 'A先生',
-              phone: '18123235865'
-            }
-          },
-          {
-            id: '3',
-            theme: '帮你订',
-            departure: '金港国际',
-            arrival: '四号桥',
-            date: {
-              title: '订单完成时间',
-              time: '2015/08/20 15:00'
-            },
-            status: '已完成,待支付',
-            oper: {},
-            user: {
-              name: 'A先生',
-              phone: '18123235865'
-            }
+            };
+            $window.unresolvedCodeOrders[orderId] = item;
           }
-        ];
+
+          return item;
+        });
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
+    };
+
+    vm.finishOrder = function (orderId) {
+      $log.info('finishOrder current orderId = ' + orderId);
+
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'finishOrder').then(function (data) {
+        $log.info('Success to finishOrder current orderId = ' + orderId);
+        vm.unresolvedOrders = unresolvedOrders = unresolvedOrders.map(function (item) { //从未完成中删除
+          if (item.orderId == orderId) {
+            delete $window.unresolvedCodeOrders[orderId];
+            return null;
+          }
+          return item;
+        });
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
+    };
+
+    if (unresolvedOrders) {
+
+      $log.info('Get user unresolved orders from cache');
+      vm.unresolvedOrders = unresolvedOrders;
+      bbUtil.hideLoading();
+
+    } else {
+
+      ajaxRequest.get({
+        userId: userInfo.userId
+      }, 'asUnresolvedOrders').then(function (data) {
+
+        var codeOrders = {};
+        data = data.map(function (item) {
+
+          var status = item.status;
+          if (orderStatus[status.code] === '待处理') {
+            item.oper = {
+              text: '开始处理',
+              bgColorClass: 'start-process',
+              fn: vm.startProcessOrder
+            };
+          } else if (orderStatus[status.code] === '处理中') {
+            item.oper = {
+              text: '完成订单',
+              bgColorClass: 'finish-order',
+              fn: vm.finishOrder
+            };
+          } else {
+            item.oper = {};
+          }
+
+          codeOrders[item.orderId] = item;
+          return item;
+        });
+
+        vm.unresolvedOrders = unresolvedOrders = data;
+        $window.unresolvedCodeOrders = codeOrders;
 
         bbUtil.hideLoading();
-      }, 200);
+
+      }).catch(function (err) {
+
+        bbUtil.hideLoading();
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+          $state.go('personalCenter');
+        });
+      });
     }
   }
 })();

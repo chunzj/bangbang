@@ -7,119 +7,53 @@
     .controller('AsUnresolvedOrderDetailController', AsUnresolvedOrderDetailController);
 
   /** @ngInject */
-  function AsUnresolvedOrderDetailController($scope, $state, $stateParams, $log, bbConstant) {
+  function AsUnresolvedOrderDetailController($scope, $state, $stateParams, $window, $log, bbUtil) {
     var vm = $scope;
 
-    vm.cancelOrder = function (orderId) {
-      $log.info('cancel order for ' + orderId);
-    };
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
 
     vm.startProcessOrder = function (orderId) {
-      $log.info('startProcessOrder current orderid = ' + orderId);
+      $log.info('startProcessOrder current orderId = ' + orderId);
+
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'processOrder').then(function (data) {
+        $log.info('Success to start process current orderId = ' + orderId);
+        $state.go('asMyOrders');
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
     };
+
     vm.finishOrder = function (orderId) {
-      $log.info('finishOrder current orderid = ' + orderId);
+      $log.info('finishOrder current orderId = ' + orderId);
+
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'finishOrder').then(function (data) {
+        $log.info('Success to finishOrder current orderId = ' + orderId);
+        $state.go('asMyOrders');
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
     };
 
     var orderId = $stateParams.orderId;
-    var ordersDetail = {
-      1: {
-        id: 1,
-        theme: '帮你送',
-        user: {
-          name: 'A先生',
-          phone: '18627792280'
-        },
-        cancel: {
-          text: '取消订单',
-          fn: vm.cancelOrder
-        },
-        servicePlace: '金港国际1号服务点',
-        destination: '四号桥金山小区',
-        bbLevel: {
-          level: '',
-          name: '银棒棒'
-        },
-        request: '把行李送到XX小区x栋X楼X室A某某手中。',
-        serviceTime: {
-          start: '12:00',
-          end: '13:00'
-        },
-        salary: '20元',
-        oper: [
-          {
-            text:'开始处理',
-            bgClass: 'start-process',
-            fn: vm.startProcessOrder
-          },
-          {
-            text:'订单完成',
-            bgClass: 'finish-order',
-            fn: vm.finishOrder
-          }
-        ]
-      },
-      2: {
-        id: 2,
-        theme: '帮你送',
-        user: {
-          name: 'B先生',
-          phone: '18627792284'
-        },
-        cancel: {
-          text: '取消订单',
-          fn: vm.cancelOrder
-        },
-        servicePlace: '金港国际2号服务点',
-        destination: '四号桥银山小区',
-        bbLevel: {
-          level: '',
-          name: '金棒棒'
-        },
-        request: '把行李送到XX小区x栋X楼X室A某某手中。',
-        serviceTime: {
-          start: '12:00',
-          end: '13:00'
-        },
-        salary: '40元',
-        oper: [
-          {
-            text:'开始处理',
-            bgClass: 'start-process',
-            fn: vm.startProcessOrder
-          },
-          {
-            text:'订单完成',
-            bgClass: 'finish-order',
-            fn: vm.finishOrder
-          }
-        ]
-      },
-      3: {
-        id: 3,
-        theme: '帮你送',
-        user: {
-          name: 'C先生',
-          phone: '18627792285'
-        },
-        servicePlace: '金港国际2号服务点',
-        destination: '四号桥银山小区',
-        bbLevel: {
-          level: '',
-          name: '金棒棒'
-        },
-        request: '把行李送到XX小区x栋X楼X室A某某手中。',
-        serviceTime: {
-          start: '12:00',
-          end: '13:00'
-        },
-        salary: '40元'
-      }
-    };
-
-    vm.orderDetail = ordersDetail[orderId];
-    if (!vm.orderDetail) {
-      $log.error('未找到该订单的详情');
+    if (!$window.unresolvedCodeOrders || !$window.unresolvedCodeOrders[orderId]) {
+      bbUtil.errorAlert('未找到该订单的详情!', function () {
+        history.back();
+      });
+      return;
     }
+
+    vm.orderDetail = $window.unresolvedCodeOrders[orderId];
   }
 })();

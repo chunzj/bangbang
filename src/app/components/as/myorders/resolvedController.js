@@ -8,57 +8,50 @@
 
   var currentTab = 'resolved', resolvedOrders = null;
   /** @ngInject */
-  function AsMyOrdersResolvedController($scope, $timeout, $log, bbUtil) {
+  function AsMyOrdersResolvedController($scope, $state, $window, $log, bbUtil) {
     var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;
     }
 
-    $log.info('Resolved');
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
+
     bbUtil.showLoading();
 
     var vm = $scope;
     if (resolvedOrders) {
-      $log.info('Get resolved orders from cache');
+
+      $log.info('Get user resolved orders from cache');
       vm.resolvedOrders = resolvedOrders;
       bbUtil.hideLoading();
+
     } else {
-      $timeout(function () {
-        vm.resolvedOrders = resolvedOrders = [
-          {
-            id: '1',
-            theme: '帮你送',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '10斤的行李箱',
-            dateTime: '2015/08/20 15:00',
-            status: '已完成',
-            salary: 10
-          },
-          {
-            id: '2',
-            theme: '帮你办',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '去市政帮我交费',
-            dateTime: '2015/08/20 15:00',
-            status: '已完成',
-            salary: 10
-          },
-          {
-            id: '3',
-            theme: '帮你订',
-            departure: '金港国际',
-            arrival: '四号桥',
-            goods: '帮我去四号桥订一个蛋糕',
-            dateTime: '2015/08/20 15:00',
-            status: '已完成',
-            salary: 10
-          }
-        ];
+
+      ajaxRequest.get({
+        userId: userInfo.userId
+      }, 'asResolvedOrders').then(function (data) {
+
+        var codeOrders = {};
+        data.forEach(function (item) {
+          codeOrders[item.orderId] = item;
+        });
+
+        vm.resolvedOrders = resolvedOrders = data;
+        $window.resolvedCodeOrders = codeOrders;
 
         bbUtil.hideLoading();
-      }, 100);
+
+      }).catch(function (err) {
+
+        bbUtil.hideLoading();
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+          $state.go('personalCenter');
+        });
+      });
     }
   }
 })();

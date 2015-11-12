@@ -40,7 +40,7 @@
       }, 'lookMyOrders').then(function (data) {
 
         var codeOrders = {};
-        data = data.forEach(function (item) {
+        data = data.map(function (item) {
 
           var status = item.status;
           if (orderStatus[status.code] === '已完成') {

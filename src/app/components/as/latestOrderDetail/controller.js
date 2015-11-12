@@ -7,12 +7,34 @@
     .controller('AsLatestOrderDetailController', AsLatestOrderDetailController);
 
   /** @ngInject */
-  function AsLatestOrderDetailController($scope, $state, $stateParams, $log) {
+  function AsLatestOrderDetailController($scope, $state, $stateParams, $window, $log) {
     var vm = $scope;
 
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || !userInfo.userId) {
+      $state.go('main');
+      return;
+    }
+
     vm.grabOrder = function (orderId) {
-      $log.info('finishOrder current orderid = ' + orderId);
-      $state.go('asMyOrders');
+      $log.info('grade current orderId = ' + orderId);
+
+      ajaxRequest.post({
+        userId: userInfo.userId,
+        orderId: orderId,
+        identity: userInfo.identity
+      }, 'receiveOrder').then(function (data) {
+        $log.info('Success to grab current orderId = ' + orderId);
+        $window.latestCodeOrders = $window.latestCodeOrders.map(function (item) { //从未完成中删除
+          if (item.orderId == orderId) {
+            return null;
+          }
+          return item;
+        });
+        $state.go('asMyOrders');
+      }).catch(function (err) {
+        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
+      });
     };
 
     vm.back = function () {
@@ -20,105 +42,25 @@
     };
 
     var orderId = $stateParams.orderId;
-    var ordersDetail = {
-      1: {
-        id: 1,
-        theme: '帮你送',
-        user: {
-          name: 'A先生',
-          phone: '18627792280'
-        },
-        back: {
-          text: '返回',
-          fn: vm.back
-        },
-        servicePlace: '金港国际1号服务点',
-        destination: '四号桥金山小区',
-        bbLevel: {
-          level: '',
-          name: '银棒棒'
-        },
-        request: '把行李送到XX小区x栋X楼X室A某某手中',
-        serviceTime: {
-          start: '12:00',
-          end: '13:00'
-        },
-        salary: '20元',
-        oper: [
-          {
-            text:'抢单',
-            bgClass: 'grab-order',
-            fn: vm.grabOrder
-          }
-        ]
-      },
-      2: {
-        id: 2,
-        theme: '帮你办',
-        user: {
-          name: 'B先生',
-          phone: '18627792284'
-        },
-        back: {
-          text: '返回',
-          fn: vm.back
-        },
-        servicePlace: '金港国际2号服务点',
-        destination: '四号桥银山小区',
-        bbLevel: {
-          level: '',
-          name: '金棒棒'
-        },
-        request: '去市政帮我交费',
-        serviceTime: {
-          start: '12:00',
-          end: '13:00'
-        },
-        salary: '40元',
-        oper: [
-          {
-            text:'抢单',
-            bgClass: 'grab-order',
-            fn: vm.grabOrder
-          }
-        ]
-      },
-      3: {
-        id: 3,
-        theme: '帮你订',
-        user: {
-          name: 'C先生',
-          phone: '18627792285'
-        },
-        back: {
-          text: '返回',
-          fn: vm.back
-        },
-        servicePlace: '金港国际2号服务点',
-        destination: '四号桥银山小区',
-        bbLevel: {
-          level: '',
-          name: '金棒棒'
-        },
-        request: '帮我去四号桥订一个蛋糕',
-        serviceTime: {
-          start: '12:00',
-          end: '13:00'
-        },
-        salary: '40元',
-        oper: [
-          {
-            text:'抢单',
-            bgClass: 'grab-order',
-            fn: vm.grabOrder
-          }
-        ]
-      }
+    if (!$window.latestCodeOrders || !$window.latestCodeOrders[orderId]) {
+      bbUtil.errorAlert('未找到该订单的详情!', function () {
+        history.back();
+      });
+      return;
+    }
+
+    vm.orderDetail = $window.latestCodeOrders[orderId];
+    vm.orderDetail.back = {
+      text: '返回',
+      fn: vm.back
     };
 
-    vm.orderDetail = ordersDetail[orderId];
-    if (!vm.orderDetail) {
-      $log.error('未找到该订单的详情');
-    }
+    vm.orderDetail.oper = [
+      {
+        text:'抢单',
+        bgClass: 'grab-order',
+        fn: vm.grabOrder
+      }
+    ];
   }
 })();
