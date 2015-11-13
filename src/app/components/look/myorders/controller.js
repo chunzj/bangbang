@@ -17,8 +17,6 @@
     }
 
     var vm = $scope, orderStatus = $window.orderStatus;
-    bbUtil.showLoading();
-
     vm.commentOrder = function (orderId) {
       $log.info('Current commenting order ' + orderId);
       $state.go('evaluation', {
@@ -28,15 +26,12 @@
     };
 
     if (userOrders) {
-
       $log.info('Get user orders from cache');
       vm.userOrders = userOrders;
-      bbUtil.hideLoading();
-
     } else {
-
       ajaxRequest.get({
-        userId: userInfo.userId
+        userId: userInfo.userId,
+        auth: true
       }, 'lookMyOrders').then(function (data) {
 
         var codeOrders = {};
@@ -58,12 +53,7 @@
 
         vm.userOrders = userOrders = data;
         $window.codeOrders = codeOrders;
-
-        bbUtil.hideLoading();
-
       }).catch(function (err) {
-
-        bbUtil.hideLoading();
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
           $state.go('personalCenter');
         });

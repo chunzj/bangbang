@@ -22,7 +22,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'receiveOrder').then(function (data) {
         $log.info('Success to grab current orderId = ' + orderId);
         $window.latestCodeOrders = $window.latestCodeOrders.map(function (item) { //从未完成中删除

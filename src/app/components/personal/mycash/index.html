@@ -1,5 +1,5 @@
 <div class="my-cash-page container">
-  <bb-header title="E棒棒-当棒棒"></bb-header>
+  <bb-header title="E棒棒-{{pageTitle}}"></bb-header>
   <div class="bb-content">
     <div class="item-bg row">
       <div class="cash">
@@ -10,7 +10,7 @@
     </div>
     <div class="item-bg records">
       <div class="row border-bottom record" ng-repeat="record in records">
-        <div class="cause">{{record.cause}}</div>
+        <div class="cause">{{record.theme}}</div>
         <div class="date">{{record.dateTitle}} : {{record.date}}</div>
         <div class="quota">{{record.quota | currencyCn}}</div>
       </div>

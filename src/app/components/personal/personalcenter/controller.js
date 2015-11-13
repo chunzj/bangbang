@@ -14,7 +14,6 @@
       return;
     }
 
-
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (!userInfo || (!userInfo.identity || !userInfo.userId)) {
       $state.go('main');

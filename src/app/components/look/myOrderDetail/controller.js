@@ -30,7 +30,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'cancelOrder').then(function (data) {
         $log.info('Success to cancel current orderId = ' + orderId);
         $state.go('evaluation', {
@@ -48,7 +49,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'finishOrder').then(function (data) {
         $log.info('Success to finishOrder current orderId = ' + orderId);
         $state.go('lookFinishOrder', {orderId: orderId});

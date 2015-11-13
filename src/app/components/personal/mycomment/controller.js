@@ -7,8 +7,14 @@
     .controller('MyCommentController', MyCommentController);
 
   /** @ngInject */
-  function MyCommentController($scope, $log, bbConstant) {
+  function MyCommentController($scope, $log, ajaxRequest, bbUtil) {
     var vm = $scope;
+
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || (!userInfo.identity || !userInfo.userId)) {
+      $state.go('main');
+      return;
+    }
 
     vm.yellowStarArray = function (starNum) {
       starNum = Number(starNum);
@@ -32,113 +38,26 @@
       history.back();
     };
 
-    vm.pageTitle = '';
-
-    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    var source = userInfo.identity;
-    if (source === bbConstant.userSource.look) {
-      vm.pageTitle = 'E棒棒-找棒棒';
-
-      vm.comments = [
-        {
-          theme: '帮你办',
-          date: {
-            text: '评价时间',
-            time: '2015/01/02'
-          },
-          user: {
-            name: 'A师傅',
-            phone: '18627782281'
-          },
-          star: 3
-        },
-        {
-          theme: '帮你订',
-          date: {
-            text: '评价时间',
-            time: '2015/01/02'
-          },
-          user: {
-            name: 'A师傅',
-            phone: '18627782281'
-          },
-          star: 4
-        },
-        {
-          theme: '帮你订',
-          date: {
-            text: '评价时间',
-            time: '2015/01/02'
-          },
-          user: {
-            name: 'A师傅',
-            phone: '18627782281'
-          },
-          star: 4
-        },
-        {
-          theme: '帮你订',
-          date: {
-            text: '评价时间',
-            time: '2015/01/02'
-          },
-          user: {
-            name: 'A师傅',
-            phone: '18627782281'
-          },
-          star: 2
-        }
-      ];
-    } else if (source === bbConstant.userSource.as) {
-      vm.pageTitle = 'E棒棒-当棒棒';
-
+    vm.pageTitle = bbUtil.getPageTitle();
+    if (userInfo.level) {
       vm.user = {
-        bbLevel: {
-          level: '',
-          name: '金棒棒'
-        },
-        point: 50
+        level: userInfo.level,
+        point: userInfo.point
       };
-
-      vm.comments = [
-        {
-          theme: '帮你办',
-          date: {
-            text: '获得时间',
-            time: '2015/01/02'
-          },
-          star: 3,
-          point: '+0分'
-        },
-        {
-          theme: '帮你订',
-          date: {
-            text: '支出时间',
-            time: '2015/01/02'
-          },
-          star: 4,
-          point: '+1分'
-        },
-        {
-          theme: '帮你订',
-          date: {
-            text: '获得时间',
-            time: '2015/01/02'
-          },
-          star: 4,
-          point: '+1分'
-        },
-        {
-          theme: '帮你订',
-          date: {
-            text: '获得时间',
-            time: '2015/01/02'
-          },
-          star: 2,
-          point: '-1分'
-        }
-      ];
     }
+
+    ajaxRequest.get({
+      userId: userInfo.userId,
+      identity: userInfo.identity,
+      auth: true
+    }, 'comment').then(function (data) {
+      $log.info('Success to get user comment records for ' + userInfo.identity);
+      vm.comments = data;
+    }).catch(function (err) {
+      bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+        history.back();
+      });
+    });
   }
 })();
 

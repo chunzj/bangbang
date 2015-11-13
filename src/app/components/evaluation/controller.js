@@ -76,7 +76,8 @@
       var options = {
         userId: userInfo.userId,
         orderId: orderId,
-        message: vm.construction || ''
+        message: vm.construction || '',
+        auth: true
       };
 
       if (evaluationType == bbConstant.evaluationType.GB) {

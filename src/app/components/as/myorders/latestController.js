@@ -20,19 +20,16 @@
       return;
     }
 
-    bbUtil.showLoading();
-
     var vm = $scope;
     if (latestOrders) {
 
       $log.info('Get user latest orders from cache');
       vm.latestOrders = latestOrders;
-      bbUtil.hideLoading();
-
     } else {
 
       ajaxRequest.get({
-        userId: userInfo.userId
+        userId: userInfo.userId,
+        auth: true
       }, 'asLatestOrders').then(function (data) {
 
         var codeOrders = {};
@@ -43,11 +40,7 @@
         vm.latestOrders = latestOrders = data;
         $window.latestCodeOrders = codeOrders;
 
-        bbUtil.hideLoading();
-
       }).catch(function (err) {
-
-        bbUtil.hideLoading();
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
           $state.go('personalCenter');
         });

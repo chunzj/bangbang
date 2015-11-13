@@ -21,8 +21,6 @@
       return;
     }
 
-    bbUtil.showLoading();
-
     var vm = $scope, orderStatus = $window.orderStatus;
     vm.startProcessOrder = function (orderId) {
       $log.info('startProcessOrder current orderId = ' + orderId);
@@ -30,7 +28,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'processOrder').then(function (data) {
         $log.info('Success to start process current orderId = ' + orderId);
         vm.unresolvedOrders = unresolvedOrders = unresolvedOrders.map(function (item) { //转换成处理中
@@ -60,7 +59,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'finishOrder').then(function (data) {
         $log.info('Success to finishOrder current orderId = ' + orderId);
         vm.unresolvedOrders = unresolvedOrders = unresolvedOrders.map(function (item) { //从未完成中删除
@@ -76,15 +76,12 @@
     };
 
     if (unresolvedOrders) {
-
       $log.info('Get user unresolved orders from cache');
       vm.unresolvedOrders = unresolvedOrders;
-      bbUtil.hideLoading();
-
     } else {
-
       ajaxRequest.get({
-        userId: userInfo.userId
+        userId: userInfo.userId,
+        auth: true
       }, 'asUnresolvedOrders').then(function (data) {
 
         var codeOrders = {};
@@ -114,11 +111,7 @@
         vm.unresolvedOrders = unresolvedOrders = data;
         $window.unresolvedCodeOrders = codeOrders;
 
-        bbUtil.hideLoading();
-
       }).catch(function (err) {
-
-        bbUtil.hideLoading();
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
           $state.go('personalCenter');
         });

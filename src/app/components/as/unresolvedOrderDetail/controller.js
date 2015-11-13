@@ -22,7 +22,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'processOrder').then(function (data) {
         $log.info('Success to start process current orderId = ' + orderId);
         $state.go('asMyOrders');
@@ -37,7 +38,8 @@
       ajaxRequest.post({
         userId: userInfo.userId,
         orderId: orderId,
-        identity: userInfo.identity
+        identity: userInfo.identity,
+        auth: true
       }, 'finishOrder').then(function (data) {
         $log.info('Success to finishOrder current orderId = ' + orderId);
         $state.go('asMyOrders');

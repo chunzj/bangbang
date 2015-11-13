@@ -8,15 +8,22 @@
     .service('ajaxRequest', function ($rootScope, $http, $window, $q, $log, bbConfig, bbUtil) {
 
       var apiConfig = bbConfig.apiConfig[$rootScope.env || 'dev'];
+      var noShowLoadingWhiteList = [bbConfig.apiPath.baseData, bbConfig.apiPath.verifyCode,
+        bbConfig.apiPath.verifyUser];
 
       function _ajaxRequest(options, apiPath) {
 
-        if (!bbConfig.apiPath[apiPath]) {
+        var _apiPath = bbConfig.apiPath[apiPath];
+        if (!_apiPath) {
           throw new Error('找不到您要访问的api,请检查模块bb.common.config中的apiPath是否配置。');
         }
 
+        if(noShowLoadingWhiteList.indexOf(_apiPath) === -1) {
+          bbUtil.showLoading();
+        }
+
         var defaultOptions = {
-          url: getApiUrl(bbConfig.apiPath[apiPath]),
+          url: getApiUrl(_apiPath),
           responseType: 'json',
           timeout: 2000
         };
@@ -99,6 +106,7 @@
           var args = arguments;
           return $q(function (resolve, reject) {
             processFn.apply(null, Array.prototype.slice.call(args)).then(function (result) {
+              bbUtil.hideLoading();
               var realData = result.data;
               if (realData.code == 1) {
                 resolve(realData.data);
@@ -115,6 +123,7 @@
               }
             }).catch(function (error) {
               $log.info(error);
+              bbUtil.hideLoading();
               reject({
                 msg: error && error.msg ? error.msg : '网络异常，请稍候重试！'
               });

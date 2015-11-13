@@ -20,19 +20,17 @@
       return;
     }
 
-    bbUtil.showLoading();
-
     var vm = $scope;
     if (resolvedOrders) {
 
       $log.info('Get user resolved orders from cache');
       vm.resolvedOrders = resolvedOrders;
-      bbUtil.hideLoading();
 
     } else {
 
       ajaxRequest.get({
-        userId: userInfo.userId
+        userId: userInfo.userId,
+        auth: true
       }, 'asResolvedOrders').then(function (data) {
 
         var codeOrders = {};
@@ -43,11 +41,7 @@
         vm.resolvedOrders = resolvedOrders = data;
         $window.resolvedCodeOrders = codeOrders;
 
-        bbUtil.hideLoading();
-
       }).catch(function (err) {
-
-        bbUtil.hideLoading();
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
           $state.go('personalCenter');
         });

@@ -60,7 +60,8 @@
       var changedUserInfo = {
         userId: userInfo.userId,
         phone: vm.user.phone,
-        avatar: vm.user.photoUrl
+        avatar: vm.user.photoUrl,
+        auth: true
       }, isChangedAvatar = vm.user.photoUrl instanceof File;
 
       if (vm.isBangBang) {
@@ -103,7 +104,7 @@
       var options = {
         userId: changedUserInfo.userId,
         phone: changedUserInfo.phone,
-        auth: true
+        auth: changedUserInfo.auth
       };
 
       if (changedUserInfo.serviceArea) {

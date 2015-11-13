@@ -7,16 +7,30 @@
     .controller('MyCashController', MyCashController);
 
   /** @ngInject */
-  function MyCashController($scope, $log) {
+  function MyCashController($scope, $log, ajaxRequest, bbUtil) {
     var vm = $scope;
 
-    vm.cash = 10;
-    vm.records = [
-      {cause: '帮你办', dateTitle: '获得时间', quota: '+10', date: '2015/01/02'},
-      {cause: '帮你订', dateTitle: '支出时间', quota: '-10', date: '2015/01/02'},
-      {cause: '帮你订', dateTitle: '获得时间', quota: '+5', date: '2015/01/02'},
-      {cause: '帮你订', dateTitle: '获得时间', quota: '+5', date: '2015/01/02'}
-    ];
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo || (!userInfo.identity || !userInfo.userId)) {
+      $state.go('main');
+      return;
+    }
+
+    vm.cash = userInfo.cash || 0;
+    vm.pageTitle = bbUtil.getPageTitle(userInfo.identity);
+
+    ajaxRequest.get({
+      userId: userInfo.userId,
+      identity: userInfo.identity,
+      auth: true
+    }, 'cashRecords').then(function (data) {
+      $log.info('Success to get user cash records for ' + userInfo.identity);
+      vm.records = data;
+    }).catch(function (err) {
+      bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+        history.back();
+      });
+    });
 
     //控制充值和提现的页面
     vm.showDialog = false;
