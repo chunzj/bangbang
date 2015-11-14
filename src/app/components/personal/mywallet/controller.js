@@ -26,9 +26,9 @@
       }, 'lookCoupon').then(function (data) {
         $log.info('Success to get user wallet records for ' + userInfo.identity);
         vm.records = data.map(function (item) {
-          if ($window.couponStatus[item.status.code] == '未使用') {
+          if ($window.baseData.couponStatus[item.status.code] == '未使用') {
             item.fontStyle = 'not-used';
-          } else if ($window.couponStatus[item.status.code] == '已过期') {
+          } else if ($window.baseData.couponStatus[item.status.code] == '已过期') {
             item.fontStyle = 'expired';
           } else {
             item.fontStyle = 'default';

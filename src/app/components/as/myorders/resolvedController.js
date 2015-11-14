@@ -8,7 +8,7 @@
 
   var currentTab = 'resolved', resolvedOrders = null;
   /** @ngInject */
-  function AsMyOrdersResolvedController($scope, $state, $window, $log, bbUtil) {
+  function AsMyOrdersResolvedController($scope, $state, $window, $log, ajaxRequest, bbUtil) {
     var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;

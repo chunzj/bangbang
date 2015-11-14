@@ -6,7 +6,7 @@
     .module('bb')
     .controller('LookOrderDetailController', LookOrderDetailController);
 
-  function LookOrderDetailController($scope, $state, $stateParams, $window, $log, ajaxRequest, bbConstant) {
+  function LookOrderDetailController($scope, $state, $stateParams, $window, $log, ajaxRequest, bbUtil, bbConstant) {
 
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (!userInfo || !userInfo.userId) {
@@ -18,7 +18,7 @@
 
     var codeOrders = $window.codeOrders, orderDetail = codeOrders[orderId];
     if (!codeOrders || !orderDetail) {
-      util.errorAlert('未找到相应的订单信息!', function () {
+      bbUtil.errorAlert('未找到相应的订单信息!', function () {
         history.back();
       });
       return;

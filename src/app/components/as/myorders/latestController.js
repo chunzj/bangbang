@@ -8,7 +8,7 @@
 
   var currentTab = 'latest', latestOrders = null;
   /** @ngInject */
-  function AsMyOrdersLatestController($scope, $state, $window, $log, bbUtil) {
+  function AsMyOrdersLatestController($scope, $state, $window, $log, ajaxRequest, bbUtil) {
     var lastSelectTab = sessionStorage.getItem('asMyOrder.selectTab');
     if (lastSelectTab && lastSelectTab !== currentTab) {
       return;

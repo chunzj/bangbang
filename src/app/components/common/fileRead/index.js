@@ -19,7 +19,7 @@
         fileModel: '='
       },
       replace: true,
-      template: '<input type="file" fileData="fileData" fileModel="fileModel">',
+      template: '<input type="file" class="photo-file" fileData="fileData" fileModel="fileModel">',
       link: function (scope, element, attributes) {
         element.bind("change", function (changeEvent) {
           scope.fileModel = changeEvent.target.files[0];

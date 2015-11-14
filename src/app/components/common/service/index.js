@@ -74,6 +74,26 @@
           throw new TypeError('无效的文件对象');
         }
 
+        var options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': undefined
+          }
+        };
+
+        if (typeof formData.auth !== 'undefined' && formData.auth) {
+
+          if (!$window.authCode) {
+            $log.info('Not found auth code');
+            return $q(function (resolve, reject) {
+              reject({msg: '无效的请求'});
+            });
+          }
+          options.headers['Authorization'] = $window.authCode;
+
+          delete formData.auth;
+        }
+
         var _formData = new FormData();
         if (formData) {
           for (var key in formData) {
@@ -82,13 +102,9 @@
         }
         _formData.append(fileKey, fileObject);
 
-        return _ajaxRequest({
-          method: 'POST',
-          data: _formData,
-          headers: {
-            'Content-Type': undefined
-          }
-        }, apiPath);
+        options.data = _formData;
+
+        return _ajaxRequest(options, apiPath);
       }
 
       function ajaxGet(queryData, apiPath) {

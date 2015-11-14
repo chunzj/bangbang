@@ -21,7 +21,7 @@
       return;
     }
 
-    var vm = $scope, orderStatus = $window.orderStatus;
+    var vm = $scope, orderStatus = $window.baseData.orderStatus;
     vm.startProcessOrder = function (orderId) {
       $log.info('startProcessOrder current orderId = ' + orderId);
 

@@ -7,7 +7,7 @@
     .controller('AsLatestOrderDetailController', AsLatestOrderDetailController);
 
   /** @ngInject */
-  function AsLatestOrderDetailController($scope, $state, $stateParams, $window, $log) {
+  function AsLatestOrderDetailController($scope, $state, $stateParams, $window, $log, bbUtil) {
     var vm = $scope;
 
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));

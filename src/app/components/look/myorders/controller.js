@@ -16,7 +16,7 @@
       return;
     }
 
-    var vm = $scope, orderStatus = $window.orderStatus;
+    var vm = $scope, orderStatus = $window.baseData.orderStatus;
     vm.commentOrder = function (orderId) {
       $log.info('Current commenting order ' + orderId);
       $state.go('evaluation', {

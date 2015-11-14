@@ -2,7 +2,7 @@
   <bb-header title="E棒棒-{{pageTitle}}"></bb-header>
   <div class="bb-content">
     <div class="user-info row item-bg">
-      <div class="photo left"><img src="{{user.avatar}}"></div>
+      <div class="photo left"><img ng-if="user.avatar" src="{{user.avatar}}"></div>
       <div class="detail left">
         <div class="detail-wz">
           <span class="name">{{user.name}}</span>
