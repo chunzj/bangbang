@@ -77,6 +77,20 @@ gulp.task('fonts', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
+// Copy and Compressed images
+gulp.task('images', function () {
+  return gulp.src(path.join(conf.paths.src, 'assets/images/**'))
+    .pipe($.cache($.imagemin({ //缓存图片,只处理修改过的,包括新增的
+      optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+      progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+      interlaced: true //类型：Boolean 默认：false 隔行扫描gif进行渲染
+    })))
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/assets/images/')))
+    .pipe($.size({
+      title: 'images'
+    }));
+});
+
 gulp.task('other', function () {
   var fileFilter = $.filter(function (file) {
     return file.stat.isFile();
@@ -84,7 +98,8 @@ gulp.task('other', function () {
 
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
+    path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}'),
+    path.join('!' + conf.paths.src, '/assets/images/**/*.{png,gif,jpg,jpeg}')
   ])
     .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
@@ -94,4 +109,4 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['html', 'fonts', 'images', 'other']);

@@ -7,7 +7,7 @@
     .controller('AsUnresolvedOrderDetailController', AsUnresolvedOrderDetailController);
 
   /** @ngInject */
-  function AsUnresolvedOrderDetailController($scope, $state, $stateParams, $window, $log, bbUtil) {
+  function AsUnresolvedOrderDetailController($scope, $state, $stateParams, $window, $log, ajaxRequest, bbUtil) {
     var vm = $scope;
 
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -42,6 +42,14 @@
         auth: true
       }, 'finishOrder').then(function (data) {
         $log.info('Success to finishOrder current orderId = ' + orderId);
+
+        delete $window.unresolvedCodeOrders[orderId];
+        if (!$window.resolvedCodeOrders) {
+          $window.resolvedCodeOrders = {};
+        }
+        $window.resolvedCodeOrders[orderId] = vm.orderDetail;
+
+        sessionStorage.setItem('asMyOrder.selectTab', 'resolved');
         $state.go('asMyOrders');
       }).catch(function (err) {
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
@@ -57,5 +65,9 @@
     }
 
     vm.orderDetail = $window.unresolvedCodeOrders[orderId];
+    vm.orderDetail.subscribeTime.start =
+      bbUtil.removeCurrentYear(vm.orderDetail.subscribeTime.start);
+    vm.orderDetail.subscribeTime.end =
+      bbUtil.removeCurrentYear(vm.orderDetail.subscribeTime.end);
   }
 })();

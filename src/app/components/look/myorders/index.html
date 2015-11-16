@@ -2,18 +2,19 @@
   <bb-header title="E棒棒-我的订单"></bb-header>
   <div class="bb-content">
     <div class="order-item" ng-repeat="order in userOrders">
-      <div class="link" ui-sref="lookOrderDetail({orderId:order.id})">
+      <div class="link" ui-sref="lookOrderDetail({orderId:order.orderId})">
         <div class="theme">{{order.theme}}</div>
         <div class="detail">
-          <div class="place">{{order.departure}}-{{order.arrival}}</div>
-          <div class="goods">{{order.goods}}</div>
+          <div class="place">{{order.departure | truncateStr:'4'}}-{{order.arrival | truncateStr:'4'}}</div>
+          <div class="goods">{{order.goods | truncateStr:'9'}}</div>
           <div class="date-time">{{order.dateTime}}</div>
         </div>
       </div>
       <div class="status" ng-class="order.status.style || ''">
-        <div class="text" ng-click="order.status.fn(order.id)">{{order.status.text}}</div>
+        <div class="text" ng-click="order.status.fn(order.orderId)">{{order.status.text}}</div>
         <div class="salary" ng-if="!!order.salary">佣金 : {{order.salary | currencyCn}}</div>
       </div>
     </div>
+    <div ng-if="!userOrders" class="no-data">未查询到相应的记录</div>
   </div>
 </div>

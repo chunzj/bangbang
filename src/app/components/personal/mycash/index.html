@@ -14,6 +14,7 @@
         <div class="date">{{record.dateTitle}} : {{record.date}}</div>
         <div class="quota">{{record.quota | currencyCn}}</div>
       </div>
+      <div ng-if="!records">未找到相应的记录</div>
     </div>
   </div>
   <div ui-view="operation" class="operation" ng-show="showDialog"></div>

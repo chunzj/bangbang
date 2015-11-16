@@ -7,28 +7,23 @@
     .controller('LookFinishOrderController', LookFinishOrderController);
 
   /** @ngInject */
-  function LookFinishOrderController($scope, $state, $stateParams, bbConstant) {
+  function LookFinishOrderController($scope, $state, $stateParams, $window) {
     var vm = $scope;
 
-    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    if (userInfo && userInfo.avatar) {
-      vm.user = {
-        photo: userInfo.avatar
-      };
-    }
-
-    //vm.serviceEvaluation = function () {
-    //  $state.go('evaluation', {orderId: orderId, type: bbConstant.evaluationType.STAR});
-    //};
-
-
-    var orderId = $stateParams.orderId;
+    var orderId = $stateParams.orderId, orderDetail = $window.codeOrders[orderId];
     vm.onlinePayment = function () {
       $state.go('payment', {orderId: orderId});
     }
 
+    //to do by api
     vm.offlinePayment = function () {
       $state.go('finishPayment', {orderId: orderId});
+    }
+
+    if (orderDetail) {
+      vm.bangbang = {
+        avatar: orderDetail.user.avatar || ''
+      };
     }
   }
 })();

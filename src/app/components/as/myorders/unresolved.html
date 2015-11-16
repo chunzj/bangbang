@@ -2,7 +2,7 @@
     <div class="link" ui-sref="asUnresolvedOrderDetail({orderId:order.orderId})">
         <div class="theme">{{order.theme}}</div>
         <div class="detail">
-            <div class="place">{{order.departure}}-{{order.arrival}}</div>
+            <div class="place">{{order.departure | truncateStr:'4'}}-{{order.arrival | truncateStr:'4'}}</div>
             <div class="date-title">{{order.orderDate.title}}</div>
             <div class="date-text">{{order.orderDate.time}}</div>
         </div>
@@ -15,3 +15,4 @@
         </div>
     </div>
 </div>
+<div ng-if="!unresolvedOrders" class="no-data">未查询到相应的记录</div>

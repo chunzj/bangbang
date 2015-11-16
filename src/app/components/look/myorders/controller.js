@@ -25,16 +25,13 @@
       });
     };
 
-    if (userOrders) {
-      $log.info('Get user orders from cache');
-      vm.userOrders = userOrders;
-    } else {
-      ajaxRequest.get({
-        userId: userInfo.userId,
-        auth: true
-      }, 'lookMyOrders').then(function (data) {
+    ajaxRequest.get({
+      userId: userInfo.userId,
+      auth: true
+    }, 'lookMyOrders').then(function (data) {
 
-        var codeOrders = {};
+      var codeOrders = {};
+      if (data && Array.isArray(data)) {
         data = data.map(function (item) {
 
           var status = item.status;
@@ -50,14 +47,14 @@
           codeOrders[item.orderId] = item;
           return item;
         });
+      }
 
-        vm.userOrders = userOrders = data;
-        $window.codeOrders = codeOrders;
-      }).catch(function (err) {
-        bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
-          $state.go('personalCenter');
-        });
+      vm.userOrders = userOrders = data;
+      $window.codeOrders = codeOrders;
+    }).catch(function (err) {
+      bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!', function () {
+        $state.go('personalCenter');
       });
-    }
+    });
   }
 })();

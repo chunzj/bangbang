@@ -7,7 +7,7 @@
     .controller('AsLatestOrderDetailController', AsLatestOrderDetailController);
 
   /** @ngInject */
-  function AsLatestOrderDetailController($scope, $state, $stateParams, $window, $log, bbUtil) {
+  function AsLatestOrderDetailController($scope, $state, $stateParams, $window, $log, ajaxRequest, bbUtil) {
     var vm = $scope;
 
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -26,12 +26,17 @@
         auth: true
       }, 'receiveOrder').then(function (data) {
         $log.info('Success to grab current orderId = ' + orderId);
-        $window.latestCodeOrders = $window.latestCodeOrders.map(function (item) { //从未完成中删除
-          if (item.orderId == orderId) {
-            return null;
-          }
-          return item;
-        });
+
+        if ($window.latestCodeOrders[orderId]) {
+          delete $window.latestCodeOrders[orderId];
+        }
+
+        if (!$window.unresolvedCodeOrders) {
+          $window.unresolvedCodeOrders = {};
+        }
+        $window.unresolvedCodeOrders[orderId] = vm.orderDetail;
+
+        sessionStorage.setItem('asMyOrder.selectTab', 'unresolved');
         $state.go('asMyOrders');
       }).catch(function (err) {
         bbUtil.errorAlert(err && err.msg ? err.msg : '网络异常，请稍候重试!');
@@ -63,5 +68,10 @@
         fn: vm.grabOrder
       }
     ];
+
+    vm.orderDetail.subscribeTime.start =
+      bbUtil.removeCurrentYear(vm.orderDetail.subscribeTime.start);
+    vm.orderDetail.subscribeTime.end =
+      bbUtil.removeCurrentYear(vm.orderDetail.subscribeTime.end);
   }
 })();

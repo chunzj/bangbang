@@ -17,7 +17,7 @@
 
         return [Number(input), unit].join('');
       };
-    }).filter('dateFormat', function ($log) {
+    }).filter('dateFormat', function () {
       return function (date, pattern) {
         if (!date) {
           return '';
@@ -34,7 +34,20 @@
 
        return res.join(':');
       };
-    });
+    }).filter('truncateStr', function () {
+      return function (str, len) {
+        if (!str || str.trim().length === 0) {
+          return '';
+        }
+
+        len = Number(len);
+        if (isNaN(len)) {
+          return '';
+        }
+
+        return str.length <= len ? str : str.substring(0, len) + '...';
+      }
+  });
 
     var dateFormatStragety = {
       h: 'getHours',

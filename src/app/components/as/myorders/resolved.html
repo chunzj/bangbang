@@ -2,8 +2,8 @@
     <div class="link">
         <div class="theme">{{order.theme}}</div>
         <div class="detail">
-            <div class="place">{{order.departure}}-{{order.arrival}}</div>
-            <div class="goods">{{order.goods}}</div>
+            <div class="place">{{order.departure | truncateStr:'4'}}-{{order.arrival | truncateStr:'4'}}</div>
+            <div class="goods">{{order.goods | truncateStr:'9'}}</div>
             <div class="date-time">{{order.orderDate}}</div>
         </div>
     </div>
@@ -12,3 +12,4 @@
         <div class="salary">佣金 : {{order.salary | currencyCn}}</div>
     </div>
 </div>
+<div ng-if="!resolvedOrders" class="no-data">未查询到相应的记录</div>

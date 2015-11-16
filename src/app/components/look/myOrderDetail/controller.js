@@ -64,13 +64,20 @@
         text: '取消订单',
         fn: vm.cancelOrder
       };
-    } else if (order.status.code == 4) { //表示完成待支付
+    } else if (orderDetail.status.code == 4) { //表示完成待支付
       orderDetail.oper = [];
       orderDetail.oper.push({
         text:'订单完成',
         bgClass: 'finish-order',
         fn: vm.finishOrder
       })
-    };
+    }
+
+    orderDetail.subscribeTime.start =
+      bbUtil.removeCurrentYear(orderDetail.subscribeTime.start);
+    orderDetail.subscribeTime.end =
+      bbUtil.removeCurrentYear(orderDetail.subscribeTime.end);
+
+    $scope.orderDetail = orderDetail;
   }
 })();

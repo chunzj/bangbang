@@ -26,10 +26,12 @@
       var serviceArea = userInfo.serviceArea,
         serviceAreaData = serviceArea.split('-');
 
-      angular.extend(vm.user, {
-        area: serviceAreaData[0],
-        subArea: serviceAreaData[1]
-      });
+      if(serviceAreaData) {
+        angular.extend(vm.user, {
+          area: serviceAreaData[0],
+          subArea: serviceAreaData[1]
+        });
+      }
     }
 
     var areasObj = bbUtil.formatAreas(), subAreas = areasObj.subAreas;
@@ -52,9 +54,14 @@
         return;
       }
 
-      if (vm.isBangBang && !vm.user.subArea) {
-        bbUtil.errorAlert('请选择您的服务区域！');
-        return;
+      if (vm.isBangBang) {
+        if(!vm.user.subArea) {
+          bbUtil.errorAlert('请选择您的服务区域！');
+          return;
+        } else if (angular.isString(vm.user.subArea) && angular.isObject(vm.user.area)) {
+          bbUtil.errorAlert('请选择您的服务区域！');
+          return;
+        }
       }
 
       var changedUserInfo = {
@@ -65,7 +72,11 @@
       }, isChangedAvatar = vm.user.photoUrl instanceof File;
 
       if (vm.isBangBang) {
-        changedUserInfo.serviceArea = vm.user.subArea.id;
+        if (angular.isString(vm.user.subArea)) {
+          changedUserInfo.serviceArea = vm.user.area + '-' + vm.user.subArea;
+        } else if (angular.isObject(vm.user.subArea)) {
+          changedUserInfo.serviceArea = vm.user.subArea.id;
+        }
       }
 
       doModify(ajaxRequest, changedUserInfo, isChangedAvatar, vm.source + 'Personal').then(function(data) {

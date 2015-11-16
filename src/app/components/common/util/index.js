@@ -15,7 +15,9 @@
           loadingDom.style.display = 'block';
         },
         hideLoading: function () {
-          loadingDom.style.display = 'none';
+          if(loadingDom) {
+            loadingDom.style.display = 'none';
+          }
         },
         getPageTitle: function (source) {
           if (!source) {
@@ -99,6 +101,18 @@
 
           return [currentYear, currentMonth, currentDays].join('-') + ' ' +
             [hours, minutes, seconds].join(':');
+        },
+        removeCurrentYear: function (timeStr) {
+          if (!timeStr) {
+            return '';
+          }
+
+          var strArray = timeStr.split(' ');
+          if (!strArray.length) {
+            return '';
+          }
+
+          return strArray.length === 1 ? strArray[0] : strArray[1];
         },
         formatLevel: function () {
           var resultLevel = [], levelPoint = {};
