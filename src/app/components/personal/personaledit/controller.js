@@ -29,18 +29,24 @@
       if(serviceAreaData) {
         angular.extend(vm.user, {
           area: serviceAreaData[0],
-          subArea: serviceAreaData[1]
+          subArea: serviceArea
         });
       }
     }
 
     var areasObj = bbUtil.formatAreas(), subAreas = areasObj.subAreas;
     vm.areas = areasObj.areas;
+
     vm.subAreas = [];
+    if (vm.user.area) {
+      vm.subAreas = subAreas[vm.user.area];
+    }
 
     vm.$watch('user.area', function (){
       if (arguments[0]) {
-        vm.subAreas = subAreas[arguments[0].id];
+        vm.subAreas = subAreas[arguments[0]];
+      } else {
+        vm.subAreas = [];
       }
     });
 
@@ -58,9 +64,6 @@
         if(!vm.user.subArea) {
           bbUtil.errorAlert('请选择您的服务区域！');
           return;
-        } else if (angular.isString(vm.user.subArea) && angular.isObject(vm.user.area)) {
-          bbUtil.errorAlert('请选择您的服务区域！');
-          return;
         }
       }
 
@@ -73,7 +76,11 @@
 
       if (vm.isBangBang) {
         if (angular.isString(vm.user.subArea)) {
-          changedUserInfo.serviceArea = vm.user.area + '-' + vm.user.subArea;
+          if (vm.user.subArea.indexOf('-') !== -1) {
+            changedUserInfo.serviceArea = vm.user.subArea;
+          } else {
+            changedUserInfo.serviceArea = vm.user.area + '-' + vm.user.subArea;
+          }
         } else if (angular.isObject(vm.user.subArea)) {
           changedUserInfo.serviceArea = vm.user.subArea.id;
         }

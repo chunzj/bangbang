@@ -28,11 +28,6 @@
         return;
       }
 
-      if (!orderDetail.bbLevel) {
-        bbUtil.errorAlert('请选择您要服务的棒棒级别!');
-        return;
-      }
-
       if (!orderDetail.demand) {
         bbUtil.errorAlert('请填写您的需求信息!');
         return;
@@ -63,7 +58,7 @@
 
       orderDetail.userId = userInfo.userId;
       orderDetail.auth = true;
-      orderDetail.bbLevel = orderDetail.bbLevel.id;
+      orderDetail.bbLevel = orderDetail.bbLevel ? orderDetail.bbLevel.id : '';
       orderDetail.serviceStartTime = bbUtil.addCurrentYear(orderDetail.serviceStartTime);
       orderDetail.serviceEndTime = bbUtil.addCurrentYear(orderDetail.serviceEndTime);
 

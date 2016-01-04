@@ -4,7 +4,7 @@
     <div class="bb-content">
       <div class="item-bg row photo">
         <span class="left">头像</span>
-        <span class="right"><img ng-if="user.avatar" src="{{user.avatar}}"></span>
+        <span class="right"><img ng-src="{{user.avatar}}"></span>
         <span class="arrow-right-sm"></span>
         <file-read file-data="user.avatar" file-model="user.photoUrl"></file-read>
         <div class="clear"></div>
@@ -19,13 +19,13 @@
         <div ng-if="isBangBang" class="row area border-bottom">
           <div class="input-c">
             <div class="select-c row">
-              <select ng-model="user.area" ng-options="area.name for area in areas">
+              <select ng-model="user.area" ng-options="area.id as area.name for area in areas">
                 <option value="">选择区域</option>
               </select>
               <span class="arrow-down-sm"></span>
             </div>
             <div class="select-c row">
-              <select ng-model="user.subArea" ng-options="subArea.name for subArea in subAreas">
+              <select ng-model="user.subArea" ng-options="subArea.id as subArea.name for subArea in subAreas">
                 <option value="">选择区域</option>
               </select>
               <span class="arrow-down-sm"></span>
